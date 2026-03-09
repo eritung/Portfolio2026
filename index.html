@@ -382,9 +382,138 @@ footer a { color:var(--blue-main); text-decoration:none; }
 @media(hover:none){
   .reveal{opacity:1!important;transform:none!important;transition:none!important}
 }
+
+/* ══════════════════════════════
+   LOADER
+══════════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 9000;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--cream-0);
+  transition: opacity .55s ease, visibility .55s ease;
+}
+#loader.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Ripple rings */
+.loader-rings {
+  position: relative;
+  width: 120px; height: 120px;
+  display: flex; align-items: center; justify-content: center;
+}
+.loader-ring {
+  position: absolute;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid transparent;
+  animation: ringPulse 2s ease-out infinite;
+}
+.loader-ring:nth-child(1) {
+  width: 40px; height: 40px;
+  background: var(--blue-grad);
+  border: none;
+  animation: coreBreath 2s ease-in-out infinite;
+}
+.loader-ring:nth-child(2) {
+  width: 70px; height: 70px;
+  border-color: rgba(110,163,247,.5);
+  animation-delay: 0s;
+}
+.loader-ring:nth-child(3) {
+  width: 100px; height: 100px;
+  border-color: rgba(110,163,247,.3);
+  animation-delay: .35s;
+}
+.loader-ring:nth-child(4) {
+  width: 130px; height: 130px;
+  border-color: rgba(110,163,247,.15);
+  animation-delay: .7s;
+}
+
+@keyframes coreBreath {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.15); opacity: .85; }
+}
+@keyframes ringPulse {
+  0%   { transform: scale(.6); opacity: .8; }
+  80%  { opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* Logo text under rings */
+.loader-logo {
+  position: absolute;
+  bottom: -38px; left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 500; letter-spacing: .12em;
+  background: var(--blue-grad);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: logoPulse 2s ease-in-out infinite;
+}
+@keyframes logoPulse {
+  0%, 100% { opacity: .5; }
+  50%       { opacity: 1; }
+}
+
+/* Burst overlay — the "爆開" part */
+.loader-burst {
+  position: fixed; inset: 0; z-index: 8999;
+  pointer-events: none;
+  overflow: hidden;
+}
+.burst-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  background: var(--blue-grad);
+  opacity: 0;
+}
+/* When triggered: expand from centre */
+.burst-circle.go {
+  animation: burstExpand .72s cubic-bezier(.4,0,.2,1) forwards;
+}
+/* After burst: cream overlay slides up to reveal content */
+.loader-curtain {
+  position: fixed; inset: 0; z-index: 8998;
+  background: var(--cream-0);
+  transform: translateY(0);
+  pointer-events: none;
+}
+.loader-curtain.lift {
+  animation: curtainLift .65s cubic-bezier(.76,0,.24,1) .62s forwards;
+}
+@keyframes burstExpand {
+  0%   { transform: translate(-50%,-50%) scale(0);    opacity: .9; }
+  100% { transform: translate(-50%,-50%) scale(5);    opacity: 0; }
+}
+@keyframes curtainLift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-105%); }
+}
 </style>
 </head>
 <body>
+
+<!-- ══ LOADER ══ -->
+<div class="loader-curtain" id="loaderCurtain"></div>
+<div class="loader-burst" id="loaderBurst">
+  <div class="burst-circle" id="burstCircle"></div>
+</div>
+<div id="loader">
+  <div class="loader-rings">
+    <div class="loader-ring"></div>
+    <div class="loader-ring"></div>
+    <div class="loader-ring"></div>
+    <div class="loader-ring"></div>
+    <span class="loader-logo">portfolio.</span>
+  </div>
+</div>
 
 <div class="orb orb-a"></div>
 <div class="orb orb-b"></div>
@@ -954,6 +1083,40 @@ function handleSubmit(e){
   const btn=document.getElementById('submitBtn');
   btn.textContent='送出中…'; btn.disabled=true;
 }
+
+/* ══ LOADER ══ */
+(function(){
+  const loader   = document.getElementById('loader');
+  const burst    = document.getElementById('burstCircle');
+  const curtain  = document.getElementById('loaderCurtain');
+
+  // Minimum display time so the animation has time to breathe
+  const MIN_MS = 1400;
+  const startTime = Date.now();
+
+  function runExit(){
+    // 1. Burst the blue circle outward
+    burst.classList.add('go');
+    // 2. Lift the cream curtain to reveal content
+    curtain.classList.add('lift');
+    // 3. Fade out the loader overlay
+    setTimeout(()=>{ loader.classList.add('done'); }, 200);
+  }
+
+  function maybeExit(){
+    const elapsed = Date.now() - startTime;
+    const wait = Math.max(0, MIN_MS - elapsed);
+    setTimeout(runExit, wait);
+  }
+
+  if(document.readyState === 'complete'){
+    maybeExit();
+  } else {
+    window.addEventListener('load', maybeExit);
+    // Fallback: never hang forever
+    setTimeout(runExit, 4000);
+  }
+})();
 </script>
 </body>
 </html>
