@@ -1113,4 +1113,19 @@ function handleSubmit(e){
     setTimeout(()=>{ loader.classList.add('done'); }, 200);
   }
 
-  function maybeExit()
+  function maybeExit(){
+    const elapsed = Date.now() - startTime;
+    const wait = Math.max(0, MIN_MS - elapsed);
+    setTimeout(runExit, wait);
+  }
+
+  if(document.readyState === 'complete'){
+    maybeExit();
+  } else {
+    window.addEventListener('load', maybeExit);
+    setTimeout(runExit, 4000);
+  }
+})();
+</script>
+</body>
+</html>
