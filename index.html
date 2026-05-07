@@ -1,1131 +1,702 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>董伊淇 — 專案企劃</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,400&family=Dancing+Script:wght@600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --cream-0: #faf8f4;
-  --cream-1: #f5f1eb;
-  --white:   #ffffff;
-  --blue-soft:  #dde9ff;
-  --blue-mid:   #6ea3f7;
-  --blue-main:  #3470e4;
-  --blue-deep:  #1a4fbe;
-  --blue-grad:  linear-gradient(135deg, #6ea3f7 0%, #3470e4 60%, #1a4fbe 100%);
-  --text-dark:  #1c2333;
-  --text-mid:   #4a5568;
-  --text-light: #8a97ab;
-  --glass:    rgba(255,255,255,0.62);
-  --glass-b:  rgba(255,255,255,0.85);
-  --glass-bd: rgba(255,255,255,0.78);
-  --glass-sh: rgba(90,140,240,0.09);
-  --radius: 22px;
-  --trans: 0.38s cubic-bezier(.4,0,.2,1);
-}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html {
-  scroll-behavior: smooth;
-  /* Prevent double-tap zoom on mobile */
-  touch-action: manipulation;
+
+:root {
+  --bg:        #f3f0eb;
+  --bg-card:   #faf8f5;
+  --navy:      #0d2140;
+  --navy-mid:  #1a3660;
+  --navy-soft: #2d5282;
+  --mist:      #7ea8c8;
+  --pale:      #cce0f0;
+  --wash:      #e6eff8;
+  --ink:       #1c2d42;
+  --ink-2:     #4a6a88;
+  --ink-3:     #90aabb;
+  --rule:      #c5d5e5;
+  --serif:     'Cormorant Garamond', Georgia, serif;
+  --sans:      'Noto Sans TC', sans-serif;
 }
+
+/* ── Custom cursor ── */
+* { cursor: none !important; }
+#cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--navy);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease, opacity 0.2s;
+  mix-blend-mode: multiply;
+}
+#cursor-ring {
+  position: fixed;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(13,33,64,0.28);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.18s ease, width 0.25s ease, height 0.25s ease, opacity 0.2s;
+}
+body.cursor-hover #cursor { width: 14px; height: 14px; background: var(--navy-soft); }
+body.cursor-hover #cursor-ring { width: 44px; height: 44px; border-color: rgba(45,82,130,0.35); }
+
+html { scroll-behavior: smooth; }
 body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--cream-0);
-  color: var(--text-dark);
-  min-height: 100vh;
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-img, video { display: block; }
 
-/* Cursor — desktop only */
-@media(hover:hover) and (pointer:fine){
-  body { cursor: none; }
-  button, a { cursor: none; }
+/* ── Background layer ── */
+.bg-layer {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0; overflow: hidden;
 }
 
-/* Cursor */
-#cursor { position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; }
-.c-dot { position: absolute; transform: translate(-50%,-50%); width: 7px; height: 7px; border-radius: 50%; background: var(--blue-main); }
-.c-ring { position: absolute; transform: translate(-50%,-50%); width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--blue-mid); opacity: .55; transition: width .22s, height .22s, opacity .22s, background .22s; }
-body:has(a:hover) .c-ring, body:has(button:hover) .c-ring, body:has(.visual-card:hover) .c-ring { width: 52px; height: 52px; opacity: .9; background: rgba(110,163,247,.1); }
-/* Hide custom cursor entirely on touch devices */
-@media(hover:none){ #cursor { display: none; } }
-
-/* Orbs */
-.orb { position: fixed; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; animation: orbDrift 20s ease-in-out infinite alternate; }
-.orb-a { width: 580px; height: 580px; top: -130px; left: -160px; background: radial-gradient(circle, rgba(110,163,247,.18), transparent 70%); }
-.orb-b { width: 440px; height: 440px; bottom: -90px; right: -110px; background: radial-gradient(circle, rgba(221,233,255,.55), transparent 70%); animation-delay: -10s; }
-.orb-c { width: 300px; height: 300px; top: 42%; left: 56%; background: radial-gradient(circle, rgba(195,218,255,.28), transparent 70%); animation-delay: -5s; }
-@keyframes orbDrift { from { transform:translate(0,0) scale(1); } to { transform:translate(32px,22px) scale(1.1); } }
-
-body::after { content:''; position:fixed; inset:0; z-index:1; pointer-events:none; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E"); background-size:180px; }
-
-/* Pages */
-.page { display:none; position:relative; z-index:2; }
-.page.active { display:block; animation:pageFade .42s ease both; }
-@keyframes pageFade { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
-.container { max-width:1180px; margin:0 auto; padding:0 36px; }
-
-/* Nav */
-nav { position:sticky; top:0; z-index:500; padding:0 36px; background:rgba(250,248,244,.8); backdrop-filter:blur(22px) saturate(1.4); -webkit-backdrop-filter:blur(22px) saturate(1.4); border-bottom:1px solid rgba(255,255,255,.85); box-shadow:0 1px 18px rgba(90,130,220,.06); }
-.nav-inner { max-width:1180px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:68px; }
-.nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:500; color:var(--text-dark); text-decoration:none; }
-.nav-logo em { font-style:italic; background:var(--blue-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.nav-links { display:flex; gap:4px; list-style:none; }
-.nav-links button { background:none; border:none; font-family:'Outfit',sans-serif; font-size:.95rem; color:var(--text-mid); padding:8px 18px; border-radius:100px; transition:background var(--trans), color var(--trans); }
-.nav-links button:hover { background:rgba(110,163,247,.12); color:var(--blue-main); }
-.nav-links button.active { background:var(--blue-grad); color:#fff; box-shadow:0 4px 14px rgba(52,112,228,.28); }
-
-/* ═══ HOME ═══ */
-.hero { padding:96px 0 80px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; min-height:calc(100vh - 68px); }
-.hero-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--blue-main); background:rgba(110,163,247,.1); border:1px solid rgba(110,163,247,.22); border-radius:100px; padding:6px 16px; margin-bottom:26px; }
-.hero-eyebrow::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--blue-mid); }
-.hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,5.5vw,4.8rem); font-weight:500; line-height:1.12; margin-bottom:20px; }
-.grad { background:var(--blue-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-style:italic; }
-.hero-desc { font-size:1.05rem; color:var(--text-mid); line-height:1.8; max-width:420px; margin-bottom:42px; }
-.hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
-.btn-primary { display:inline-flex; align-items:center; gap:9px; background:var(--blue-grad); color:#fff; border:none; padding:13px 28px; border-radius:100px; font-family:'Outfit',sans-serif; font-size:.98rem; font-weight:500; box-shadow:0 8px 26px rgba(52,112,228,.3); transition:transform var(--trans), box-shadow var(--trans); }
-.btn-primary:hover { transform:translateY(-3px); box-shadow:0 14px 36px rgba(52,112,228,.42); }
-.btn-ghost { display:inline-flex; align-items:center; gap:9px; background:var(--glass); backdrop-filter:blur(10px); color:var(--text-dark); border:1px solid rgba(255,255,255,.78); padding:13px 28px; border-radius:100px; font-family:'Outfit',sans-serif; font-size:.9rem; box-shadow:0 4px 16px rgba(90,130,220,.09); transition:transform var(--trans), box-shadow var(--trans); }
-.btn-ghost:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(90,130,220,.17); }
-
-.hero-visual { position:relative; display:flex; justify-content:center; align-items:center; }
-
-/* Design tool illustration */
-.design-scene { position:relative; width:400px; height:400px; }
-.ds-card {
-  position:absolute;
-  background:var(--glass-b);
-  backdrop-filter:blur(18px);
-  border:1px solid var(--glass-bd);
-  border-radius:18px;
-  box-shadow:0 10px 36px rgba(52,112,228,.12);
-  animation:floatCard 6s ease-in-out infinite alternate;
+/* Floating ink circles */
+.ink-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  animation: drift linear infinite alternate;
 }
-/* Central canvas card */
-.ds-canvas {
-  width:200px; height:160px;
-  top:50%; left:50%; transform:translate(-50%,-50%);
-  padding:16px;
-  animation:none;
-  background:rgba(255,255,255,.88);
-  display:flex; align-items:center; justify-content:center;
+.ink-1 { width:520px;height:420px; background:radial-gradient(ellipse,rgba(160,200,230,0.28) 0%,transparent 70%); top:-80px;right:-60px; animation-duration:22s; }
+.ink-2 { width:380px;height:320px; background:radial-gradient(ellipse,rgba(180,215,238,0.2) 0%,transparent 70%); bottom:60px;left:-80px; animation-duration:28s; animation-direction:alternate-reverse; }
+.ink-3 { width:260px;height:200px; background:radial-gradient(ellipse,rgba(200,225,242,0.18) 0%,transparent 70%); top:42%;left:55%; animation-duration:17s; }
+@keyframes drift {
+  0%   { transform:translate(0,0) scale(1); }
+  33%  { transform:translate(18px,-12px) scale(1.04); }
+  66%  { transform:translate(-10px,20px) scale(0.97); }
+  100% { transform:translate(22px,8px) scale(1.02); }
 }
-.ds-canvas-inner {
-  width:100%; height:100%;
-  border-radius:10px;
-  background:linear-gradient(135deg,var(--blue-soft) 0%,rgba(180,210,255,.5) 100%);
-  position:relative; overflow:hidden;
-  display:flex; align-items:center; justify-content:center;
+
+/* Wandering dust particles */
+.dust { position:absolute; border-radius:50%; animation: dustFloat linear infinite; opacity:0; }
+@keyframes dustFloat {
+  0%   { transform:translateY(0) translateX(0); opacity:0; }
+  10%  { opacity:1; }
+  90%  { opacity:0.6; }
+  100% { transform:translateY(-120px) translateX(30px); opacity:0; }
 }
-.ds-canvas-inner::before {
-  content:''; position:absolute; inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 18px,rgba(110,163,247,.12) 18px,rgba(110,163,247,.12) 19px),
-             repeating-linear-gradient(90deg,transparent,transparent 18px,rgba(110,163,247,.12) 18px,rgba(110,163,247,.12) 19px);
-}
-.ds-shape {
-  position:absolute;
-  border-radius:50%;
-  background:var(--blue-grad);
-  opacity:.7;
-}
-.ds-shape-1 { width:40px; height:40px; top:14px; left:16px; border-radius:8px; transform:rotate(15deg); }
-.ds-shape-2 { width:28px; height:28px; bottom:14px; right:20px; }
-.ds-shape-3 { width:20px; height:20px; top:14px; right:18px; border-radius:4px; opacity:.5; background:linear-gradient(135deg,#aacbff,#6ea3f7); }
 
-/* Colour swatches card */
-.ds-colors {
-  width:130px; padding:12px 14px;
-  top:20px; right:10px;
-  animation-delay:0s; animation-duration:7s;
-}
-.ds-colors-label { font-size:.68rem; color:var(--text-light); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; }
-.ds-swatches { display:flex; gap:5px; }
-.ds-swatch { width:22px; height:22px; border-radius:6px; border:2px solid rgba(255,255,255,.9); box-shadow:0 2px 6px rgba(0,0,0,.1); }
+/* Concentric rings removed */
 
-/* Layers card */
-.ds-layers {
-  width:140px; padding:12px 14px;
-  bottom:30px; right:0;
-  animation-delay:-2s; animation-duration:8s;
-}
-.ds-layers-label { font-size:.68rem; color:var(--text-light); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; }
-.ds-layer-row { display:flex; align-items:center; gap:7px; padding:4px 0; border-bottom:1px solid rgba(110,163,247,.1); }
-.ds-layer-row:last-child { border:none; }
-.ds-layer-icon { width:14px; height:14px; border-radius:3px; flex-shrink:0; }
-.ds-layer-name { font-size:.72rem; color:var(--text-mid); }
-
-/* Pen tool card */
-.ds-tool {
-  width:100px; padding:14px;
-  top:30px; left:0;
-  animation-delay:-1s; animation-duration:9s;
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-}
-.ds-tool-icon { width:36px; height:36px; border-radius:10px; background:var(--blue-grad); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(52,112,228,.3); }
-.ds-tool-icon svg { width:18px; height:18px; color:#fff; }
-.ds-tool-name { font-size:.7rem; color:var(--text-mid); letter-spacing:.04em; }
-
-/* Progress card */
-.ds-progress {
-  width:150px; padding:14px 16px;
-  bottom:20px; left:10px;
-  animation-delay:-3s; animation-duration:7.5s;
-}
-.ds-prog-label { font-size:.7rem; color:var(--text-light); margin-bottom:8px; }
-.ds-prog-title { font-size:.85rem; font-weight:500; margin-bottom:10px; }
-.ds-prog-bars { display:flex; flex-direction:column; gap:5px; }
-.ds-prog-bar { height:4px; border-radius:100px; background:rgba(110,163,247,.15); overflow:hidden; }
-.ds-prog-fill { height:100%; border-radius:100px; background:var(--blue-grad); }
-
-@keyframes floatCard {
-  from { transform:translateY(0) rotate(0deg); }
-  to   { transform:translateY(-12px) rotate(1.5deg); }
-}
-/* Override for layers card to go opposite */
-.ds-layers { animation-direction:alternate-reverse; }
-
-/* ═══ WORKS ═══ */
-.works-header { padding:60px 0 0; }
-.page-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:500; margin-bottom:6px; }
-.page-sub { font-size:.97rem; color:var(--text-light); margin-bottom:38px; }
-.tabs-row { display:flex; gap:4px; margin-bottom:42px; }
-.works-tab { background:rgba(255,255,255,.58); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.75); border-radius:100px; font-family:'Outfit',sans-serif; font-size:.87rem; padding:9px 26px; color:var(--text-mid); transition:all var(--trans); }
-.works-tab.active { background:var(--blue-grad); color:#fff; border-color:transparent; box-shadow:0 5px 18px rgba(52,112,228,.28); }
-.works-tab:hover:not(.active) { background:rgba(110,163,247,.12); color:var(--blue-main); }
-
-/* Visual masonry */
-.visual-grid { columns:3 260px; gap:18px; padding-bottom:80px; }
-.visual-card { break-inside:avoid; margin-bottom:18px; border-radius:18px; overflow:hidden; position:relative; background:var(--white); border:1px solid rgba(255,255,255,.85); box-shadow:0 4px 20px rgba(90,130,200,.08); transition:transform var(--trans), box-shadow var(--trans); }
-.visual-card:hover { transform:translateY(-6px); box-shadow:0 18px 50px rgba(52,112,228,.15); }
-.visual-card img { width:100%; height:auto; display:block; transition:transform .55s ease; }
-.visual-card:hover img { transform:scale(1.04); }
-.vc-label { padding:13px 16px 15px; background:rgba(255,255,255,.92); }
-.vc-name { font-size:.97rem; font-weight:500; margin-bottom:3px; }
-.vc-tag { font-size:.73rem; letter-spacing:.1em; text-transform:uppercase; color:var(--blue-main); }
-.vc-hover { position:absolute; inset:0; background:linear-gradient(160deg,rgba(52,112,228,.72),rgba(26,79,190,.9)); opacity:0; transition:opacity var(--trans); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:#fff; text-align:center; padding:24px; }
-.visual-card:hover .vc-hover { opacity:1; }
-.vc-hover-title { font-family:'Cormorant Garamond',serif; font-size:1.2rem; }
-.vc-hover-hint { font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.32); border-radius:100px; padding:5px 14px; }
-
-/* Anim grid */
-.anim-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:40px; padding-bottom:80px; }
-.anim-card { position:relative; }
-.phone-wrap { display:flex; justify-content:center; margin-bottom:22px; }
-.phone { position:relative; width:210px; background:linear-gradient(160deg,#1e2d50,#0e1a38); border-radius:42px; padding:13px 9px; box-shadow:0 0 0 1.5px rgba(255,255,255,.15), 0 0 0 3px rgba(15,40,100,.55), 0 28px 64px rgba(8,22,80,.36), inset 0 1px 0 rgba(255,255,255,.12); transition:transform var(--trans), box-shadow var(--trans); }
-.anim-card:hover .phone { transform:translateY(-10px) rotate(-1deg); box-shadow:0 0 0 1.5px rgba(255,255,255,.2), 0 0 0 3px rgba(15,40,100,.55), 0 42px 80px rgba(8,22,80,.46), inset 0 1px 0 rgba(255,255,255,.12); }
-.phone-island { position:absolute; top:17px; left:50%; transform:translateX(-50%); width:68px; height:21px; border-radius:100px; background:#07101f; z-index:5; }
-.phone::before { content:''; position:absolute; left:-3.5px; top:75px; width:3.5px; height:46px; border-radius:2px 0 0 2px; background:#17274a; box-shadow:0 26px 0 #17274a; }
-.phone::after { content:''; position:absolute; right:-3.5px; top:96px; width:3.5px; height:56px; border-radius:0 2px 2px 0; background:#17274a; }
-.phone-screen { position:relative; border-radius:30px; overflow:hidden; background:#000; aspect-ratio:9/19.5; z-index:2; }
-.phone-screen video { width:100%; height:100%; object-fit:cover; }
-.phone-glare { position:absolute; inset:0; border-radius:30px; background:linear-gradient(135deg,rgba(255,255,255,.1),transparent 45%); pointer-events:none; z-index:6; }
-.vid-btn { position:absolute; inset:0; z-index:10; display:flex; align-items:center; justify-content:center; background:rgba(8,18,50,.3); backdrop-filter:blur(2px); transition:opacity var(--trans); }
-.vid-btn.hidden { opacity:0; pointer-events:none; }
-.play-ico { width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 18px rgba(0,0,0,.26); transition:transform .2s; }
-.vid-btn:hover .play-ico { transform:scale(1.1); }
-.play-ico svg { width:18px; height:18px; margin-left:3px; }
-.anim-info { text-align:center; padding:0 6px; }
-.anim-title { font-size:1.05rem; font-weight:500; margin-bottom:7px; }
-.anim-desc { font-size:.9rem; color:var(--text-mid); line-height:1.65; }
-.anim-tags { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-top:10px; }
-.tag { font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; padding:4px 12px; border-radius:100px; background:rgba(110,163,247,.1); border:1px solid rgba(110,163,247,.2); color:var(--blue-main); }
-
-/* ═══ ABOUT ═══ */
-.about-page { padding:60px 0 80px; }
-.about-layout { display:grid; grid-template-columns:360px 1fr; gap:56px; align-items:start; }
-.about-profile { position:sticky; top:90px; }
-.profile-card { background:var(--glass); backdrop-filter:blur(18px) saturate(1.4); border:1px solid var(--glass-bd); border-radius:var(--radius); padding:36px 28px; box-shadow:0 8px 36px var(--glass-sh); text-align:center; }
-.profile-avatar { width:110px; height:110px; border-radius:50%; margin:0 auto 18px; background:linear-gradient(135deg,var(--blue-soft),rgba(110,163,247,.35)); display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:2.8rem; color:var(--blue-main); font-style:italic; border:3px solid rgba(255,255,255,.82); box-shadow:0 6px 24px rgba(52,112,228,.14); overflow:hidden; }
-.profile-avatar img { width:100%; height:100%; object-fit:cover; }
-.profile-name { font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:5px; }
-.profile-role { font-size:.8rem; color:var(--text-light); letter-spacing:.08em; text-transform:uppercase; margin-bottom:22px; }
-.profile-skills { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:22px; }
-.profile-links { display:flex; flex-direction:column; gap:9px; }
-.profile-link { display:flex; align-items:center; gap:10px; padding:11px 14px; border-radius:12px; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.75); color:var(--text-mid); font-size:.84rem; text-decoration:none; transition:background var(--trans), color var(--trans), transform var(--trans); }
-.profile-link:hover { background:rgba(110,163,247,.12); color:var(--blue-main); transform:translateX(4px); }
-.profile-link svg { width:15px; height:15px; flex-shrink:0; }
-
-.about-content {}
-.about-section { margin-bottom:42px; }
-.about-h { font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
-.about-h-dot { width:8px; height:8px; border-radius:50%; background:var(--blue-grad); flex-shrink:0; }
-.about-p { font-size:1rem; color:var(--text-mid); line-height:1.85; margin-bottom:10px; }
-.skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:12px; }
-.skill-item { background:var(--glass); backdrop-filter:blur(12px); border:1px solid var(--glass-bd); border-radius:16px; padding:18px 14px; box-shadow:0 4px 14px var(--glass-sh); transition:transform var(--trans), box-shadow var(--trans); }
-.skill-item:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(52,112,228,.12); }
-.skill-icon { font-size:1.6rem; margin-bottom:10px; }
-.skill-name { font-size:.92rem; font-weight:500; }
-
-.exp-item { display:flex; gap:20px; padding:18px; background:var(--glass); backdrop-filter:blur(12px); border:1px solid var(--glass-bd); border-radius:14px; box-shadow:0 4px 14px var(--glass-sh); margin-bottom:12px; }
-.exp-year { min-width:64px; text-align:right; font-size:.76rem; color:var(--text-light); padding-top:3px; }
-.exp-title { font-weight:500; margin-bottom:4px; font-size:1rem; }
-.exp-desc { font-size:.9rem; color:var(--text-mid); line-height:1.7; }
-
-/* ═══ CONTACT ═══ */
-.contact-page { padding:60px 0 80px; }
-.contact-layout { display:grid; grid-template-columns:1fr 1.05fr; gap:56px; align-items:start; }
-.contact-intro { font-size:1.02rem; color:var(--text-mid); line-height:1.8; margin-bottom:34px; }
-.contact-items { display:flex; flex-direction:column; gap:12px; }
-.contact-item { display:flex; align-items:center; gap:14px; background:var(--glass); backdrop-filter:blur(14px); border:1px solid var(--glass-bd); border-radius:14px; padding:15px 18px; box-shadow:0 4px 16px var(--glass-sh); }
-.ci-icon { width:38px; height:38px; border-radius:10px; background:var(--blue-grad); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
-.ci-icon svg { width:17px; height:17px; color:#fff; }
-.ci-label { font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text-light); }
-.ci-val { font-size:.98rem; font-weight:500; }
-.formspree-note { margin-top:26px; padding:16px 18px; background:rgba(110,163,247,.07); border:1px solid rgba(110,163,247,.18); border-radius:14px; font-size:.8rem; color:var(--text-mid); line-height:1.75; }
-.formspree-note a { color:var(--blue-main); text-decoration:none; font-weight:500; }
-.formspree-note code { background:rgba(110,163,247,.12); padding:1px 6px; border-radius:5px; font-size:.78rem; }
-
-.contact-form-wrap { background:var(--glass); backdrop-filter:blur(18px) saturate(1.4); border:1px solid var(--glass-bd); border-radius:var(--radius); padding:36px 30px; box-shadow:0 8px 36px var(--glass-sh); }
-.form-title { font-family:'Cormorant Garamond',serif; font-size:1.6rem; margin-bottom:24px; }
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.form-group { display:flex; flex-direction:column; gap:5px; margin-bottom:12px; }
-.form-group label { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text-light); }
-.form-group input, .form-group textarea { background:rgba(255,255,255,.72); border:1px solid rgba(200,215,245,.5); border-radius:12px; padding:11px 14px; font-family:'Outfit',sans-serif; font-size:.97rem; color:var(--text-dark); outline:none; transition:border var(--trans), box-shadow var(--trans); }
-.form-group input:focus, .form-group textarea:focus { border-color:var(--blue-mid); box-shadow:0 0 0 3px rgba(110,163,247,.15); }
-.form-group textarea { min-height:120px; resize:vertical; }
-
-/* ═══ LIGHTBOX ═══ */
-#lightbox { position:fixed; inset:0; z-index:2000; display:none; align-items:center; justify-content:center; padding:24px; }
-#lightbox.open { display:flex; }
-.lb-backdrop { position:absolute; inset:0; background:rgba(12,22,54,.58); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
-.lb-panel {
+/* ── Page ── */
+.page {
   position:relative; z-index:1;
-  background:rgba(250,248,244,.97); backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,.88); border-radius:26px;
-  box-shadow:0 32px 80px rgba(10,30,100,.2);
-  max-width:900px; width:100%;
-  height:80vh; max-height:600px;
-  overflow:hidden;
-  display:grid; grid-template-columns:1.1fr 1fr;
-  animation:lbIn .32s cubic-bezier(.34,1.3,.64,1) both;
-}
-@keyframes lbIn { from{opacity:0;transform:scale(.88)} to{opacity:1;transform:scale(1)} }
-.lb-images { padding:24px 0 24px 24px; display:flex; flex-direction:column; gap:10px; overflow:hidden; height:100%; }
-.lb-main-img { border-radius:14px; overflow:hidden; flex:1; min-height:0; position:relative; }
-.lb-main-img img { width:100%; height:100%; object-fit:contain; display:block; background:#f5f3ef; transition:opacity .2s; }
-.lb-main-img:hover img { opacity:.95; }
-.lb-thumbs { display:flex; gap:7px; flex-wrap:wrap; flex-shrink:0; }
-.lb-thumb { width:56px; height:56px; border-radius:9px; overflow:hidden; border:2px solid transparent; transition:border var(--trans), transform var(--trans); flex-shrink:0; }
-.lb-thumb.active { border-color:var(--blue-main); }
-.lb-thumb:hover { transform:scale(1.06); }
-.lb-thumb img { width:100%; height:100%; object-fit:cover; }
-.lb-info { padding:32px 24px 24px 20px; display:flex; flex-direction:column; overflow-y:auto; height:100%; }
-.lb-tag { font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--blue-main); margin-bottom:10px; flex-shrink:0; }
-.lb-title { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:500; margin-bottom:14px; flex-shrink:0; }
-.lb-desc { font-size:.95rem; color:var(--text-mid); line-height:1.82; }
-.lb-meta { margin-top:20px; display:flex; flex-direction:column; gap:8px; flex-shrink:0; }
-.lb-meta-row { display:flex; gap:10px; font-size:.82rem; }
-.lb-meta-k { color:var(--text-light); min-width:48px; }
-.lb-meta-v { color:var(--text-dark); font-weight:500; }
-.lb-close { position:absolute; top:16px; right:16px; z-index:2; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.82); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.9); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,.09); transition:transform var(--trans), background var(--trans); }
-.lb-close:hover { transform:rotate(90deg); background:rgba(255,90,90,.12); }
-.lb-close svg { width:15px; height:15px; }
-.lb-info::-webkit-scrollbar { width:3px; }
-.lb-info::-webkit-scrollbar-thumb { background:rgba(110,163,247,.3); border-radius:3px; }
-
-/* Reveal */
-.reveal { opacity:0; transform:translateY(22px); transition:opacity .62s ease, transform .62s ease; }
-.reveal.in { opacity:1; transform:translateY(0); }
-
-/* Footer */
-footer { position:relative; z-index:2; border-top:1px solid rgba(200,215,240,.3); text-align:center; padding:34px 0; font-size:.85rem; color:var(--text-light); }
-footer a { color:var(--blue-main); text-decoration:none; }
-
-/* ── Lightbox nav arrows — sit inside the main image ── */
-.lb-arrow {
-  position:absolute; top:50%; z-index:10;
-  transform:translateY(-50%);
-  width:34px; height:34px; border-radius:50%;
-  background:rgba(255,255,255,.82);
-  backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,.9);
-  box-shadow:0 3px 14px rgba(10,30,100,.13);
-  display:flex; align-items:center; justify-content:center;
-  transition:background var(--trans), opacity var(--trans), transform var(--trans);
-  opacity:0;
-}
-.lb-main-img:hover .lb-arrow:not(.hidden-arrow) { opacity:.85; }
-.lb-arrow:hover { background:#fff; opacity:1 !important; }
-.lb-arrow:active { transform:translateY(-50%) scale(.92); }
-.lb-arrow-left  { left:8px; }
-.lb-arrow-right { right:8px; }
-.lb-arrow.hidden-arrow { opacity:0 !important; pointer-events:none; }
-.lb-arrow svg { width:15px; height:15px; color:var(--blue-main); }
-
-/* ── Skill card pop animation ── */
-@keyframes skillPop {
-  0%   { opacity:0; transform:translateY(16px) scale(.9); }
-  70%  { transform:translateY(-4px) scale(1.04); }
-  100% { opacity:1; transform:translateY(0) scale(1); }
-}
-.skill-item { opacity:0; }
-.skill-item.popped { animation:skillPop .45s cubic-bezier(.34,1.3,.64,1) both; opacity:1; }
-
-/* Responsive */
-@media(max-width:860px){
-  .hero{grid-template-columns:1fr;padding:80px 0 60px}
-  .hero-visual{display:none}
-  .about-layout{grid-template-columns:1fr}
-  .about-profile{position:static}
-  .contact-layout{grid-template-columns:1fr}
-  .lb-panel{grid-template-columns:1fr;height:auto;max-height:95vh;overflow-y:auto}
-  .lb-images{padding:20px 20px 0;height:auto;overflow:visible}
-  .lb-main-img{flex:none;height:260px}
-  .lb-info{padding:16px 20px 24px;height:auto;overflow-y:visible}
-  .lb-arrow{display:none}
-}
-@media(max-width:600px){
-  .container{padding:0 18px}
-  .visual-grid{columns:1}
-  .anim-grid{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  .nav-links button{padding:7px 11px;font-size:.82rem}
-  /* Ensure reveals always show on small screens */
-  .reveal{opacity:1!important;transform:none!important;transition:none!important}
-}
-/* Touch devices — skip reveal animation entirely so images always appear */
-@media(hover:none){
-  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  max-width:880px; margin:0 auto;
+  padding:72px 44px 100px;
 }
 
-/* ══════════════════════════════
-   LOADER
-══════════════════════════════ */
-#loader {
-  position: fixed; inset: 0; z-index: 9000;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--cream-0);
-  transition: opacity .55s ease, visibility .55s ease;
-}
-#loader.done {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* Ripple rings */
-.loader-rings {
+/* Frosted glass content card */
+.page-glass {
+  background: rgba(243,240,235,0.72);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.55);
+  box-shadow: 0 4px 32px rgba(13,33,64,0.06);
+  padding: 64px 52px 80px;
   position: relative;
-  width: 120px; height: 120px;
-  display: flex; align-items: center; justify-content: center;
-}
-.loader-ring {
-  position: absolute;
-  border-radius: 50%;
-  background: transparent;
-  border: 2px solid transparent;
-  animation: ringPulse 2s ease-out infinite;
-}
-.loader-ring:nth-child(1) {
-  width: 40px; height: 40px;
-  background: var(--blue-grad);
-  border: none;
-  animation: coreBreath 2s ease-in-out infinite;
-}
-.loader-ring:nth-child(2) {
-  width: 70px; height: 70px;
-  border-color: rgba(110,163,247,.5);
-  animation-delay: 0s;
-}
-.loader-ring:nth-child(3) {
-  width: 100px; height: 100px;
-  border-color: rgba(110,163,247,.3);
-  animation-delay: .35s;
-}
-.loader-ring:nth-child(4) {
-  width: 130px; height: 130px;
-  border-color: rgba(110,163,247,.15);
-  animation-delay: .7s;
 }
 
-@keyframes coreBreath {
-  0%, 100% { transform: scale(1);   opacity: 1; }
-  50%       { transform: scale(1.15); opacity: .85; }
+/* ── Scroll reveal ── */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.75s ease, transform 0.75s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+/* ============ HERO ============ */
+.hero {
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:48px; align-items:center;
+  margin-bottom:68px;
+  padding-bottom:52px;
+  border-bottom:1px solid var(--rule);
+  position:relative;
 }
-@keyframes ringPulse {
-  0%   { transform: scale(.6); opacity: .8; }
-  80%  { opacity: 0; }
-  100% { transform: scale(1.4); opacity: 0; }
+/* Animated divider shimmer */
+.hero::after {
+  content:'';
+  position:absolute; bottom:-1px; left:0;
+  width:80px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--mist),transparent);
+  animation:shimmer 3.5s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%  { left:0; opacity:0; }
+  20% { opacity:1; }
+  80% { opacity:1; }
+  100%{ left:calc(100% - 80px); opacity:0; }
 }
 
-/* Logo text under rings */
-.loader-logo {
-  position: absolute;
-  bottom: -38px; left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem; font-weight: 500; letter-spacing: .12em;
-  background: var(--blue-grad);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  animation: logoPulse 2s ease-in-out infinite;
+/* Hexagon photo */
+.hex-wrap {
+  display:flex; flex-direction:column; align-items:center; gap:10px;
 }
-@keyframes logoPulse {
-  0%, 100% { opacity: .5; }
-  50%       { opacity: 1; }
+.hex-svg { width:128px; height:148px; filter:drop-shadow(0 4px 16px rgba(13,33,64,0.08)); }
+.hex-label {
+  font-size:0.65rem; color:var(--ink-3);
+  letter-spacing:0.1em; text-transform:uppercase;
+  font-weight:300;
 }
 
-/* Burst overlay — the "爆開" part */
-.loader-burst {
-  position: fixed; inset: 0; z-index: 8999;
-  pointer-events: none;
-  overflow: hidden;
+/* Breathing glow on hex */
+@keyframes hexGlow {
+  0%,100% { opacity:0.55; }
+  50%      { opacity:0.85; }
 }
-.burst-circle {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  border-radius: 50%;
-  background: var(--blue-grad);
-  opacity: 0;
+
+/* Hero typography */
+.hero-over {
+  font-size:0.72rem; letter-spacing:0.26em; text-transform:uppercase;
+  color:var(--mist); font-weight:400; margin-bottom:10px;
 }
-/* When triggered: expand from centre */
-.burst-circle.go {
-  animation: burstExpand .72s cubic-bezier(.4,0,.2,1) forwards;
+.hero-name-row {
+  display:flex; align-items:flex-end; gap:14px;
+  margin-bottom:12px; flex-wrap:wrap;
 }
-/* After burst: cream overlay slides up to reveal content */
-.loader-curtain {
-  position: fixed; inset: 0; z-index: 8998;
-  background: var(--cream-0);
-  transform: translateY(0);
-  pointer-events: none;
+.hero-name {
+  font-family:var(--serif);
+  font-size:4.4rem; font-weight:600;
+  color:var(--navy); line-height:1;
+  letter-spacing:0.06em;
 }
-.loader-curtain.lift {
-  animation: curtainLift .65s cubic-bezier(.76,0,.24,1) .62s forwards;
+.hero-name em { font-style:normal; color:var(--navy); font-weight:600; }
+.hero-name-en {
+  font-family:'Dancing Script', cursive;
+  font-size:2.9rem; font-weight:600;
+  color:var(--navy-soft); line-height:1;
+  letter-spacing:0.01em;
+  padding-bottom:0.05em;
 }
-@keyframes burstExpand {
-  0%   { transform: translate(-50%,-50%) scale(0);    opacity: .9; }
-  100% { transform: translate(-50%,-50%) scale(5);    opacity: 0; }
+.hero-role {
+  font-family:var(--serif);
+  font-size:1.15rem; font-style:italic; font-weight:300;
+  color:var(--ink-2); margin-bottom:18px; letter-spacing:0.04em;
 }
-@keyframes curtainLift {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-105%); }
+.hero-bio {
+  font-size:1.02rem; color:var(--ink); font-weight:300;
+  line-height:1.95; max-width:420px; margin-bottom:22px;
+}
+.contacts { display:flex; flex-wrap:wrap; gap:6px 18px; }
+.contacts span {
+  font-size:0.92rem; color:var(--ink-2); font-weight:300;
+  display:flex; align-items:center; gap:6px;
+  transition:color 0.2s;
+}
+.contacts span:hover { color:var(--navy); }
+.contacts span::before {
+  content:''; width:4px; height:4px; border-radius:50%;
+  background:var(--mist); flex-shrink:0;
+  animation:dotPulse 3s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%,100%{ transform:scale(1); opacity:0.7; }
+  50%    { transform:scale(1.5); opacity:1; }
+}
+
+/* ============ SECTION HEAD ============ */
+.sec-head {
+  display:flex; align-items:baseline; gap:14px; margin-bottom:30px;
+}
+.sec-title {
+  font-family:var(--serif);
+  font-size:1.55rem; font-weight:600; font-style:italic;
+  color:var(--navy); white-space:nowrap; letter-spacing:0.03em;
+}
+.sec-rule { flex:1; height:1px; background:linear-gradient(90deg,var(--rule),transparent); }
+.sec-n { font-size:0.65rem; color:var(--ink-3); letter-spacing:0.14em; font-weight:300; }
+
+.section { margin-bottom:64px; }
+
+/* ============ TIMELINE ============ */
+.timeline { display:flex; flex-direction:column; }
+.tl-item {
+  display:grid; grid-template-columns:88px 1fr;
+  gap:0 30px; padding-bottom:38px; position:relative;
+}
+.tl-item:last-child { padding-bottom:0; }
+.tl-left { text-align:right; padding-top:3px; position:relative; }
+.tl-left::after {
+  content:''; position:absolute;
+  right:-16px; top:9px;
+  width:8px; height:8px; border-radius:50%;
+  background:var(--bg-card); border:1.5px solid var(--mist);
+  z-index:1; animation:tldot 3.5s ease-in-out infinite;
+}
+@keyframes tldot {
+  0%,100%{ box-shadow:0 0 0 0 rgba(126,168,200,0); }
+  50%    { box-shadow:0 0 0 5px rgba(126,168,200,0.2); }
+}
+.tl-item:not(:last-child) .tl-left::before {
+  content:''; position:absolute;
+  right:-13px; top:17px; bottom:-38px;
+  width:1px;
+  background:linear-gradient(180deg,var(--rule) 0%,transparent 100%);
+}
+.tl-date { font-size:0.8rem; color:var(--mist); line-height:1.65; font-weight:300; letter-spacing:0.04em; }
+.tl-co   { font-size:0.88rem; color:var(--ink-2); font-weight:500; margin-bottom:3px; letter-spacing:0.01em; }
+.tl-role {
+  font-family:var(--serif);
+  font-size:1.28rem; font-weight:600; color:var(--navy);
+  margin-bottom:14px; line-height:1.3;
+}
+.tl-tasks { display:flex; flex-direction:column; gap:9px; }
+.tl-task  { font-size:0.97rem; color:var(--ink); line-height:1.9; font-weight:300; }
+.tl-task b { color:var(--mist); font-weight:600; }
+
+/* ============ TWO-COL ============ */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:52px; margin-bottom:64px; }
+
+/* Education */
+.edu-uni  { font-family:var(--serif); font-size:1.38rem; font-weight:600; color:var(--navy); margin-bottom:2px; }
+.edu-dept { font-size:0.97rem; color:var(--navy-soft); font-weight:400; margin-bottom:2px; }
+.edu-yr   { font-size:0.84rem; color:var(--ink-3); letter-spacing:0.07em; font-weight:300; margin-bottom:14px; }
+.edu-note {
+  font-size:0.97rem; color:var(--ink); font-weight:300;
+  line-height:1.85; font-style:italic;
+  padding-left:14px; border-left:2px solid var(--pale);
+}
+
+/* Skills */
+.skill-group  { margin-bottom:14px; }
+.skill-g-lbl  { font-size:0.88rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--mist); font-weight:500; margin-bottom:8px; }
+.skill-tags   { display:flex; flex-wrap:wrap; gap:6px; }
+.skill-tag {
+  padding:6px 15px; border-radius:20px;
+  border:1px solid var(--rule); background:#ffffff;
+  font-size:0.84rem; color:var(--navy-mid); font-weight:400;
+  letter-spacing:0.02em;
+  transition:border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+}
+.skill-tag:hover { background:var(--wash); border-color:var(--mist); color:var(--navy); transform:translateY(-1px); }
+.skill-tag.hi { font-weight:500; }
+
+/* ============ PROJECTS ============ */
+.proj-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:22px; }
+.proj-card {
+  background:var(--bg-card); border:1px solid var(--rule); border-radius:12px;
+  overflow:hidden; display:flex; flex-direction:column;
+  transition:border-color 0.25s, box-shadow 0.25s, transform 0.28s;
+}
+.proj-card:hover {
+  border-color:var(--mist);
+  box-shadow:0 8px 32px rgba(13,33,64,0.08);
+  transform:translateY(-4px);
+}
+
+/* Image placeholder */
+.proj-img-wrap {
+  position:relative; width:100%; aspect-ratio:16/9;
+  border-bottom:1px solid var(--rule);
+  overflow:hidden; display:block; cursor:none;
+}
+.proj-img-ph {
+  width:100%; height:100%;
+  background:linear-gradient(135deg,var(--wash) 0%,#dde9f4 50%,#e8f1f8 100%);
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:8px;
+  position:relative;
+}
+.proj-img-overlay {
+  position:absolute; inset:0;
+  background:rgba(13,33,64,0);
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  transition:background 0.3s ease;
+  pointer-events:none;
+}
+.proj-img-overlay span {
+  font-family:var(--sans);
+  font-size:1.05rem; font-weight:500; letter-spacing:0.2em;
+  color:rgba(255,255,255,0);
+  transition:color 0.3s ease;
+}
+.proj-img-overlay svg {
+  opacity:0;
+  transition:opacity 0.3s ease;
+}
+.proj-img-wrap:hover .proj-img-overlay {
+  background:rgba(13,33,64,0.62);
+}
+.proj-img-wrap:hover .proj-img-overlay span {
+  color:rgba(255,255,255,0.92);
+}
+.proj-img-wrap:hover .proj-img-overlay svg {
+  opacity:0.85;
+}
+.proj-img-icon { opacity:0.28; }
+.proj-img-lbl  { font-size:0.65rem; color:var(--ink-3); letter-spacing:0.1em; text-transform:uppercase; font-weight:300; }
+
+/* Card body */
+.proj-body { padding:18px 20px 20px; display:flex; flex-direction:column; gap:0; flex:1; }
+.proj-meta { display:flex; align-items:center; gap:7px; margin-bottom:8px; }
+.proj-yr   { font-size:0.72rem; color:var(--ink-3); font-weight:300; letter-spacing:0.07em; }
+.proj-type {
+  font-size:0.68rem; padding:2px 9px; border-radius:3px;
+  background:var(--wash); color:var(--navy-soft);
+  border:1px solid var(--pale); font-weight:400; letter-spacing:0.03em;
+}
+.proj-name { font-size:0.95rem; color:var(--navy); line-height:1.55; font-weight:500; margin-bottom:14px; flex:1; }
+.proj-div  { height:1px; background:var(--rule); margin-bottom:12px; opacity:0.5; }
+.proj-desc-lbl { font-size:0.65rem; color:var(--ink-3); letter-spacing:0.14em; text-transform:uppercase; font-weight:300; margin-bottom:8px; }
+.proj-desc-text {
+  font-size:0.88rem; color:var(--ink-3); font-weight:300;
+  line-height:1.8; font-style:italic;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  padding-top:40px; border-top:1px solid var(--rule);
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:0.72rem; color:var(--ink-3); font-weight:300; letter-spacing:0.07em;
+}
+.footer-sig { font-family:var(--serif); font-style:italic; font-size:0.92rem; color:var(--navy-soft); }
+
+/* ── Floating line deco (ambient looping) ── */
+.float-line {
+  position:fixed; pointer-events:none; z-index:0;
+  opacity:0; animation:lineFade 12s ease-in-out infinite;
+}
+.float-line svg line { stroke:rgba(126,168,200,0.18); stroke-width:1; }
+@keyframes lineFade {
+  0%,100%{ opacity:0; }
+  40%,60% { opacity:1; }
+}
+
+@media (max-width:640px) {
+  .page    { padding:24px 16px 48px; }
+  .page-glass { padding:36px 24px 52px; border-radius:14px; }
+  .hero    { grid-template-columns:1fr; gap:28px; }
+  .hero-name { font-size:2.8rem; }
+  .hero-name-en { font-size:1.8rem; }
+  .two-col { grid-template-columns:1fr; gap:40px; }
+  .tl-item { grid-template-columns:72px 1fr; gap:0 20px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ══ LOADER ══ -->
-<div class="loader-curtain" id="loaderCurtain"></div>
-<div class="loader-burst" id="loaderBurst">
-  <div class="burst-circle" id="burstCircle"></div>
-</div>
-<div id="loader">
-  <div class="loader-rings">
-    <div class="loader-ring"></div>
-    <div class="loader-ring"></div>
-    <div class="loader-ring"></div>
-    <div class="loader-ring"></div>
-    <span class="loader-logo">portfolio.</span>
-  </div>
+<!-- Custom cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Background -->
+<div class="bg-layer">
+  <div class="ink-circle ink-1"></div>
+  <div class="ink-circle ink-2"></div>
+  <div class="ink-circle ink-3"></div>
+  <!-- Dust particles (JS-generated) -->
 </div>
 
-<div class="orb orb-a"></div>
-<div class="orb orb-b"></div>
-<div class="orb orb-c"></div>
+<main class="page">
+<div class="page-glass">
 
-<div id="cursor">
-  <div class="c-ring" id="cRing"></div>
-  <div class="c-dot" id="cDot"></div>
-</div>
+  <!-- ════ HERO ════ -->
+  <section class="hero reveal" style="transition-delay:0s;">
+    <div class="hex-wrap">
+      <!-- Hexagon photo placeholder -->
+      <svg class="hex-svg" viewBox="0 0 128 148" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#dce9f4"/>
+            <stop offset="100%" stop-color="#c8ddf0"/>
+          </linearGradient>
+          <clipPath id="hexClip">
+            <polygon points="64,4 124,38 124,110 64,144 4,110 4,38"/>
+          </clipPath>
+        </defs>
+        <!-- Fill -->
+        <polygon points="64,4 124,38 124,110 64,144 4,110 4,38" fill="url(#hexGrad)"/>
+        <!-- Animated border -->
+        <polygon points="64,4 124,38 124,110 64,144 4,110 4,38"
+                 fill="none" stroke="#93b4d4" stroke-width="1.2"
+                 stroke-dasharray="320" stroke-dashoffset="320"
+                 style="animation:hexDraw 2.5s ease forwards 0.4s;">
+        </polygon>
+        <!-- Inner subtle ring -->
+        <polygon points="64,14 114,42 114,106 64,134 14,106 14,42"
+                 fill="none" stroke="rgba(147,180,212,0.3)" stroke-width="0.8"/>
+        <!-- Person silhouette icon -->
+        <g opacity="0.3" transform="translate(64,74)">
+          <circle cx="0" cy="-18" r="14" fill="#2d5282"/>
+          <path d="M-26,18 Q-26,-2 0,-2 Q26,-2 26,18 Z" fill="#2d5282"/>
+        </g>
+        <!-- Label -->
+        <text x="64" y="161" text-anchor="middle" font-size="8" fill="#90aabb" font-family="Noto Sans TC,sans-serif" letter-spacing="2" font-weight="300">PHOTO</text>
+      </svg>
+    </div>
 
-<!-- Navigation -->
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="#" onclick="showPage('home');return false;">port<em>folio.</em></a>
-    <ul class="nav-links">
-      <li><button onclick="showPage('home')" id="nav-home" class="active">首頁</button></li>
-      <li><button onclick="showPage('works')" id="nav-works">作品集</button></li>
-      <li><button onclick="showPage('about')" id="nav-about">關於我</button></li>
-      <li><button onclick="showPage('contact')" id="nav-contact">聯絡</button></li>
-    </ul>
-  </div>
-</nav>
+    <div>
+      <div class="hero-over">Portfolio &nbsp;/&nbsp; Resume</div>
+      <div class="hero-name-row">
+        <h1 class="hero-name">董<em>伊淇</em></h1>
+        <span class="hero-name-en">Eri Tung</span>
+      </div>
+      <div class="hero-role">Project Planner &nbsp;·&nbsp; Digital Creative</div>
+      <p class="hero-bio">擁有 3 年專案企劃經驗，策劃多組數位廣告素材上線與活動網頁規劃。具備時程控管與跨部門溝通能力，並能運用自動化工具提高內部工作流程效率。</p>
+      <div class="contacts">
+        <span>eri.tung421@gmail.com</span>
+        <span>0983-755-899</span>
+      </div>
+    </div>
+  </section>
 
-<!-- ═══════════ HOME ═══════════ -->
-<div class="page active" id="page-home">
-  <div class="container">
-    <div class="hero">
-      <div class="hero-text reveal">
-        <span class="hero-eyebrow">Visual &amp; Motion Designer</span>
-        <h1>Creative<br><span class="grad">Works</span><br>&amp; Digital Stories</h1>
-        <p class="hero-desc">視覺設計 × 動態廣告 × 互動體驗。<br>以影像說故事，讓創意留下印記。</p>
-        <div class="hero-btns">
-          <button class="btn-primary" onclick="showPage('works')">
-            瀏覽作品
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-          <button class="btn-ghost" onclick="showPage('contact')">聯絡我</button>
+  <!-- ════ EXPERIENCE ════ -->
+  <section class="section reveal" style="transition-delay:0.1s;">
+    <div class="sec-head">
+      <h2 class="sec-title">Work Experience</h2>
+      <div class="sec-rule"></div>
+      <span class="sec-n">01</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-date">2023.06<br>— Now</div></div>
+        <div>
+          <div class="tl-co">艾迪英特股份有限公司</div>
+          <div class="tl-role">專案企劃</div>
+          <div class="tl-tasks">
+            <div class="tl-task"><b>數位廣告提案與執行</b> — 負責網路廣告全方位提案，從創意發想到文案撰寫，協助內外橋樑溝通，確保專案順利上線。</div>
+            <div class="tl-task"><b>視覺品質控管（Aesthetic Review）</b> — 擔任設計師與客戶間的橋樑，審核所有設計產出，提供具體視覺修改意見，確保素材符合品牌調性。</div>
+            <div class="tl-task"><b>靜態 / 動畫 Demo 製作</b> — 使用 PS、AE 等軟體於提案階段，透過動態 Demo 大幅提升提案過案率。</div>
+            <div class="tl-task"><b>流程自動化優化</b> — 自主運用 AI 平台開發工作小工具，減少手動作業時間，提升團隊協作效率。</div>
+            <div class="tl-task"><b>活動網頁規劃</b> — 策劃並執行活動 Landing Page，負責 UI 佈局規劃與跨部門溝通協調。</div>
+          </div>
         </div>
       </div>
-      <div class="hero-visual reveal">
-        <div class="design-scene">
 
-          <!-- Central canvas -->
-          <div class="ds-card ds-canvas">
-            <div class="ds-canvas-inner">
-              <div class="ds-shape ds-shape-1"></div>
-              <div class="ds-shape ds-shape-2"></div>
-              <div class="ds-shape ds-shape-3"></div>
-            </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-date">2022.10<br>— 2023.05</div></div>
+        <div>
+          <div class="tl-co">日商卓一智能科技股份有限公司</div>
+          <div class="tl-role">設計實習生</div>
+          <div class="tl-tasks">
+            <div class="tl-task">廣告素材製作，累積數位廣告製作與流程執行的基礎能力。</div>
           </div>
+        </div>
+      </div>
 
-          <!-- Colour swatches -->
-          <div class="ds-card ds-colors">
-            <div class="ds-colors-label">Palette</div>
-            <div class="ds-swatches">
-              <div class="ds-swatch" style="background:#6ea3f7"></div>
-              <div class="ds-swatch" style="background:#3470e4"></div>
-              <div class="ds-swatch" style="background:#dde9ff"></div>
-              <div class="ds-swatch" style="background:#faf8f4"></div>
-              <div class="ds-swatch" style="background:#1c2333"></div>
-            </div>
+    </div>
+  </section>
+
+  <!-- ════ EDUCATION + SKILLS ════ -->
+  <div class="two-col reveal" style="transition-delay:0.15s;">
+    <div>
+      <div class="sec-head">
+        <h2 class="sec-title">Education</h2>
+        <div class="sec-rule"></div>
+        <span class="sec-n">02</span>
+      </div>
+      <div class="edu-uni">中國文化大學</div>
+      <div class="edu-dept">廣告系</div>
+      <div class="edu-yr">2018 — 2022</div>
+      <p class="edu-note">擔任畢業展覽「解迷因」主視覺設計負責人，規劃整體視覺風格、標準字與主視覺動畫呈現，並處理後續送印等流程執行。</p>
+    </div>
+    <div>
+      <div class="sec-head">
+        <h2 class="sec-title">Skills</h2>
+        <div class="sec-rule"></div>
+        <span class="sec-n">03</span>
+      </div>
+      <div>
+        <div class="skill-group">
+          <div class="skill-g-lbl">企劃 &amp; 溝通</div>
+          <div class="skill-tags">
+            <span class="skill-tag hi">專案管理</span>
+            <span class="skill-tag hi">跨部門溝通</span>
+            <span class="skill-tag hi">時程控管</span>
+            <span class="skill-tag">提案設計</span>
+            <span class="skill-tag">文案撰寫</span>
           </div>
-
-          <!-- Layers panel -->
-          <div class="ds-card ds-layers">
-            <div class="ds-layers-label">Layers</div>
-            <div class="ds-layer-row">
-              <div class="ds-layer-icon" style="background:var(--blue-grad)"></div>
-              <span class="ds-layer-name">Background</span>
-            </div>
-            <div class="ds-layer-row">
-              <div class="ds-layer-icon" style="background:#dde9ff"></div>
-              <span class="ds-layer-name">Typography</span>
-            </div>
-            <div class="ds-layer-row">
-              <div class="ds-layer-icon" style="background:rgba(110,163,247,.3)"></div>
-              <span class="ds-layer-name">Elements</span>
-            </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-g-lbl">數位廣告</div>
+          <div class="skill-tags">
+            <span class="skill-tag hi">廣告策略</span>
+            <span class="skill-tag">Landing Page</span>
+            <span class="skill-tag">UI 佈局規劃</span>
+            <span class="skill-tag">Aesthetic Review</span>
           </div>
-
-          <!-- Pen tool -->
-          <div class="ds-card ds-tool">
-            <div class="ds-tool-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-            </div>
-            <div class="ds-tool-name">Pen Tool</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-g-lbl">工具 &amp; 技術</div>
+          <div class="skill-tags">
+            <span class="skill-tag hi">Photoshop</span>
+            <span class="skill-tag hi">After Effects</span>
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">AI 自動化平台</span>
           </div>
-
-          <!-- Progress / export card -->
-          <div class="ds-card ds-progress">
-            <div class="ds-prog-label">Export Progress</div>
-            <div class="ds-prog-title">Brand_v3.fig</div>
-            <div class="ds-prog-bars">
-              <div class="ds-prog-bar"><div class="ds-prog-fill" style="width:92%"></div></div>
-              <div class="ds-prog-bar"><div class="ds-prog-fill" style="width:68%;animation-delay:.2s"></div></div>
-              <div class="ds-prog-bar"><div class="ds-prog-fill" style="width:45%;animation-delay:.4s"></div></div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
+
+  <!-- ════ PROJECTS ════ -->
+  <section class="section reveal" style="transition-delay:0.2s;">
+    <div class="sec-head">
+      <h2 class="sec-title">Key Projects</h2>
+      <div class="sec-rule"></div>
+      <span class="sec-n">04</span>
+    </div>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <a class="proj-img-wrap" href="https://xpark365lifestyle.ad2iction.com/" target="_blank" rel="noopener">
+          <div class="proj-img-ph">
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span class="proj-img-lbl">proj_xpark_365.png</span>
+          </div>
+          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+        </a>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type">活動網頁</span></div>
+          <div class="proj-name">XPARK — 365種海生之道</div>
+          <div class="proj-div"></div>
+          <div class="proj-desc-lbl">專案說明</div>
+          <div class="proj-desc-text">文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字。</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <a class="proj-img-wrap" href="https://xpark365quiz.ad2iction.com/" target="_blank" rel="noopener">
+          <div class="proj-img-ph">
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span class="proj-img-lbl">proj_xpark_quiz.png</span>
+          </div>
+          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+        </a>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type">心理測驗</span></div>
+          <div class="proj-name">XPARK — 如果在海裡重生，你會是什麼海洋生物？</div>
+          <div class="proj-div"></div>
+          <div class="proj-desc-lbl">專案說明</div>
+          <div class="proj-desc-text">文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字。</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <a class="proj-img-wrap" href="https://www.mandarin-airlines.com/mda-app/index.html" target="_blank" rel="noopener">
+          <div class="proj-img-ph">
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span class="proj-img-lbl">proj_mandarin_app.png</span>
+          </div>
+          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+        </a>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">資訊網頁</span></div>
+          <div class="proj-name">華信航空 APP — 全新啟動！</div>
+          <div class="proj-div"></div>
+          <div class="proj-desc-lbl">專案說明</div>
+          <div class="proj-desc-text">文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字。</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <a class="proj-img-wrap" href="https://wwwosc.ad2iction.com/25/darlie2025" target="_blank" rel="noopener">
+          <div class="proj-img-ph">
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span class="proj-img-lbl">proj_haolai_patrol.png</span>
+          </div>
+          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+        </a>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">網頁互動</span></div>
+          <div class="proj-name">好來牙膏 — 角落菌糾察隊</div>
+          <div class="proj-div"></div>
+          <div class="proj-desc-lbl">專案說明</div>
+          <div class="proj-desc-text">文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字。</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <a class="proj-img-wrap" href="https://meiji-2025winter-event.com.tw/" target="_blank" rel="noopener">
+          <div class="proj-img-ph">
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span class="proj-img-lbl">proj_meiji_100th.png</span>
+          </div>
+          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+        </a>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">活動 / 互動</span></div>
+          <div class="proj-name">吃下 meiji 祝福連連 — 迎向100週年 99甜蜜心意再+1</div>
+          <div class="proj-div"></div>
+          <div class="proj-desc-lbl">專案說明</div>
+          <div class="proj-desc-text">文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字。</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer reveal" style="transition-delay:0.25s;">
+    <span class="footer-sig">董伊淇</span>
+    <span>Project Planner &nbsp;·&nbsp; Updated 2025</span>
+  </footer>
+
 </div>
+</main>
 
-<!-- ═══════════ WORKS ═══════════ -->
-<div class="page" id="page-works">
-  <div class="container">
-    <div class="works-header reveal">
-      <p class="page-title">Selected <span class="grad">Works</span></p>
-      <p class="page-sub">點擊視覺作品可展開細節 · 點擊播放按鈕觀看動畫廣告</p>
-      <div class="tabs-row">
-        <button class="works-tab active" onclick="switchWorksTab(this,'visual')">🎨 視覺作品</button>
-        <button class="works-tab" onclick="switchWorksTab(this,'animation')">📱 動畫廣告</button>
-      </div>
-    </div>
+<style>
+@keyframes hexDraw {
+  from { stroke-dashoffset:320; opacity:0.4; }
+  to   { stroke-dashoffset:0;   opacity:1; }
+}
+</style>
 
-    <!-- Visual -->
-    <div id="wtab-visual">
-      <div class="visual-grid">
-
-        <!-- ▼ 複製此區塊新增作品 ▼ -->
-        <!-- data-imgs: 逗號分隔，第一張為主圖，後續為細節圖 -->
-        <div class="visual-card reveal"
-          data-title="Brand Identity"
-          data-tag="Branding"
-          data-desc="為新銳美妝品牌打造完整識別系統，包含 Logo、色票、字體規範與應用延伸，呈現細膩而現代的品牌個性。"
-          data-year="2024"
-          data-tool="Illustrator, Figma"
-          data-imgs="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80,https://images.unsplash.com/photo-1634942537034-2531766767d1?w=400&q=80,https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&q=80"
-          onclick="openLightbox(this)">
-          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" alt="Brand Identity" loading="lazy">
-          <div class="vc-hover"><div class="vc-hover-title">Brand Identity</div><div class="vc-hover-hint">點擊查看詳情</div></div>
-          <div class="vc-label"><p class="vc-name">Brand Identity</p><p class="vc-tag">Branding</p></div>
-        </div>
-
-        <div class="visual-card reveal"
-          data-title="E-Commerce Visual"
-          data-tag="Digital Design"
-          data-desc="電商首頁 Banner 與商品頁視覺設計，強調質感陳列與清晰購買動線，提升用戶轉換率。"
-          data-year="2024"
-          data-tool="Photoshop, Figma"
-          data-imgs="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80,https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&q=80"
-          onclick="openLightbox(this)">
-          <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80" alt="E-Commerce" loading="lazy">
-          <div class="vc-hover"><div class="vc-hover-title">E-Commerce Visual</div><div class="vc-hover-hint">點擊查看詳情</div></div>
-          <div class="vc-label"><p class="vc-name">E-Commerce Visual</p><p class="vc-tag">Digital Design</p></div>
-        </div>
-
-        <div class="visual-card reveal"
-          data-title="Social Media Ad"
-          data-tag="Social / Ads"
-          data-desc="Instagram、Facebook 跨平台廣告素材，統一品牌視覺語言，適應多種版位尺寸。"
-          data-year="2024"
-          data-tool="Photoshop, Illustrator"
-          data-imgs="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80,https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=400&q=80"
-          onclick="openLightbox(this)">
-          <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80" alt="Social Ad" loading="lazy">
-          <div class="vc-hover"><div class="vc-hover-title">Social Media Ad</div><div class="vc-hover-hint">點擊查看詳情</div></div>
-          <div class="vc-label"><p class="vc-name">Social Media Ad</p><p class="vc-tag">Social / Ads</p></div>
-        </div>
-
-        <div class="visual-card reveal"
-          data-title="Illustration Poster"
-          data-tag="Illustration"
-          data-desc="以插圖風格詮釋城市生活主題，融合手繪線條與數位色彩，限量海報系列。"
-          data-year="2023"
-          data-tool="Procreate, Illustrator"
-          data-imgs="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&q=80,https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80"
-          onclick="openLightbox(this)">
-          <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=600&q=80" alt="Poster" loading="lazy">
-          <div class="vc-hover"><div class="vc-hover-title">Illustration Poster</div><div class="vc-hover-hint">點擊查看詳情</div></div>
-          <div class="vc-label"><p class="vc-name">Illustration Poster</p><p class="vc-tag">Illustration</p></div>
-        </div>
-
-        <div class="visual-card reveal"
-          data-title="Packaging Design"
-          data-tag="Packaging"
-          data-desc="植物萃取保養品牌包裝設計，以植物線稿搭配大地色系，呈現天然純淨形象。"
-          data-year="2023"
-          data-tool="Illustrator, Photoshop"
-          data-imgs="https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=800&q=80,https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80"
-          onclick="openLightbox(this)">
-          <img src="https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=600&q=80" alt="Packaging" loading="lazy">
-          <div class="vc-hover"><div class="vc-hover-title">Packaging Design</div><div class="vc-hover-hint">點擊查看詳情</div></div>
-          <div class="vc-label"><p class="vc-name">Packaging Design</p><p class="vc-tag">Packaging</p></div>
-        </div>
-
-        <div class="visual-card reveal"
-          data-title="Event Visual"
-          data-tag="Event Design"
-          data-desc="年度音樂藝術節完整視覺提案，涵蓋主視覺、票券設計、舞台背板與周邊延伸。"
-          data-year="2023"
-          data-tool="Figma, Illustrator"
-          data-imgs="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80,https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&q=80"
-          onclick="openLightbox(this)">
-          <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80" alt="Event" loading="lazy">
-          <div class="vc-hover"><div class="vc-hover-title">Event Visual</div><div class="vc-hover-hint">點擊查看詳情</div></div>
-          <div class="vc-label"><p class="vc-name">Event Visual</p><p class="vc-tag">Event Design</p></div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Animation -->
-    <div id="wtab-animation" style="display:none">
-      <div class="anim-grid">
-
-        <!-- ▼ 替換 video src 為你的影片路徑 ▼ -->
-        <div class="anim-card reveal">
-          <div class="phone-wrap">
-            <div class="phone">
-              <div class="phone-island"></div>
-              <div class="phone-screen">
-                <video id="v1" src="videos/ad1.mp4" playsinline loop muted preload="metadata"></video>
-                <div class="phone-glare"></div>
-                <div class="vid-btn" id="vb1" onclick="toggleVid('v1','vb1')">
-                  <div class="play-ico"><svg viewBox="0 0 24 24" fill="#3470e4"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="anim-info">
-            <p class="anim-title">Banner Ad Animation</p>
-            <p class="anim-desc">電商品牌網頁廣告，產品入場與 CTA 引導動態，節奏輕快。</p>
-            <div class="anim-tags"><span class="tag">Web Ad</span><span class="tag">After Effects</span></div>
-          </div>
-        </div>
-
-        <div class="anim-card reveal">
-          <div class="phone-wrap">
-            <div class="phone">
-              <div class="phone-island"></div>
-              <div class="phone-screen">
-                <video id="v2" src="videos/ad2.mp4" playsinline loop muted preload="metadata"></video>
-                <div class="phone-glare"></div>
-                <div class="vid-btn" id="vb2" onclick="toggleVid('v2','vb2')">
-                  <div class="play-ico"><svg viewBox="0 0 24 24" fill="#3470e4"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="anim-info">
-            <p class="anim-title">Product Launch Ad</p>
-            <p class="anim-desc">新品上市動態廣告，強烈視覺節點與轉場設計。</p>
-            <div class="anim-tags"><span class="tag">Social Ad</span><span class="tag">Motion</span></div>
-          </div>
-        </div>
-
-        <div class="anim-card reveal">
-          <div class="phone-wrap">
-            <div class="phone">
-              <div class="phone-island"></div>
-              <div class="phone-screen">
-                <video id="v3" src="videos/ad3.mp4" playsinline loop muted preload="metadata"></video>
-                <div class="phone-glare"></div>
-                <div class="vid-btn" id="vb3" onclick="toggleVid('v3','vb3')">
-                  <div class="play-ico"><svg viewBox="0 0 24 24" fill="#3470e4"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="anim-info">
-            <p class="anim-title">Festival Campaign</p>
-            <p class="anim-desc">節慶活動廣告動畫，歡慶粒子與文字動態，視覺張力十足。</p>
-            <div class="anim-tags"><span class="tag">Campaign</span><span class="tag">Lottie</span></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ═══════════ ABOUT ═══════════ -->
-<div class="page" id="page-about">
-  <div class="container">
-    <div class="about-page">
-      <div class="about-layout">
-
-        <div class="about-profile reveal">
-          <div class="profile-card">
-            <div class="profile-avatar">
-              <!-- 有大頭照請改為 <img src="your-photo.jpg" alt="Photo"> -->
-              Y
-            </div>
-            <p class="profile-name">你的名字</p>
-            <p class="profile-role">Visual &amp; Motion Designer</p>
-            <div class="profile-skills">
-              <span class="tag">Branding</span>
-              <span class="tag">Web Ads</span>
-              <span class="tag">Motion</span>
-              <span class="tag">Illustration</span>
-            </div>
-            <div class="profile-links">
-              <a href="https://github.com/YOUR" target="_blank" class="profile-link">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                GitHub
-              </a>
-              <a href="https://behance.net/YOUR" target="_blank" class="profile-link">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029H23.7zM16.03 13c.078-2.008 1.481-2.544 2.514-2.544 1.088 0 2.357.639 2.405 2.544H16.03zm-7.128 1c.073-.747.175-1.437.398-2.032.394-1.056 1.23-1.82 2.697-1.82 1.448 0 2.234.748 2.234 1.92 0 1.01-.493 1.638-1.562 2.073C11.335 14.705 9 15.01 9 17c0 1.47.783 2.5 2.62 2.5h.38c1.55 0 2.59-.643 2.97-1.932.078-.262.115-.525.115-.797V16H9v-1.063-.937zM9 5v2h6V5H9zm-.374 3.2c1.009 0 1.718.652 1.718 1.741 0 .949-.544 1.64-1.59 1.64H6.25V8.2h2.376zm.265 5.8c1.22 0 1.927.756 1.927 1.896 0 1.076-.737 1.804-1.927 1.804H6.25V14h2.641z"/></svg>
-                Behance
-              </a>
-              <a href="/cdn-cgi/l/email-protection#2b52445e596b4e464a424705484446" class="profile-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-                <span class="__cf_email__" data-cfemail="443d2b3136042129252d286a272b29">[email&#160;protected]</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="about-content">
-          <div class="about-section reveal">
-            <p class="about-h"><span class="about-h-dot"></span>About Me</p>
-            <p class="about-p">嗨！我是一位視覺設計師，專注於品牌識別、動態廣告與數位視覺設計。<!-- 補充你的介紹 --></p>
-            <p class="about-p">我相信好的設計不只是好看，而是能說故事、引發共鳴，並解決真實的溝通問題。每一個專案對我來說都是一次探索與挑戰。</p>
-          </div>
-
-          <div class="about-section reveal">
-            <p class="about-h"><span class="about-h-dot"></span>Skills</p>
-            <div class="skills-grid">
-              <div class="skill-item"><div class="skill-icon">🎨</div><div class="skill-name">Visual Design</div></div>
-              <div class="skill-item"><div class="skill-icon">✨</div><div class="skill-name">Motion Graphics</div></div>
-              <div class="skill-item"><div class="skill-icon">📐</div><div class="skill-name">Branding</div></div>
-              <div class="skill-item"><div class="skill-icon">📱</div><div class="skill-name">Web Ad Design</div></div>
-              <div class="skill-item"><div class="skill-icon">🖊</div><div class="skill-name">Illustration</div></div>
-              <div class="skill-item"><div class="skill-icon">⚡</div><div class="skill-name">After Effects</div></div>
-            </div>
-          </div>
-
-          <div class="about-section reveal">
-            <p class="about-h"><span class="about-h-dot"></span>Experience</p>
-            <!-- 複製 exp-item 新增經歷 -->
-            <div class="exp-item">
-              <div class="exp-year">2023–現在</div>
-              <div><p class="exp-title">設計師職稱 · 公司名稱</p><p class="exp-desc">負責品牌視覺、廣告素材與動態設計，與行銷團隊緊密協作。</p></div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-year">2021–2023</div>
-              <div><p class="exp-title">Junior Designer · 前一家公司</p><p class="exp-desc">協助設計各類行銷素材與社群視覺，累積多元設計經驗。</p></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ CONTACT ═══════════ -->
-<div class="page" id="page-contact">
-  <div class="container">
-    <div class="contact-page">
-      <div class="contact-layout">
-
-        <div class="contact-info reveal">
-          <p class="page-title" style="margin-bottom:12px">Say <span class="grad">Hello</span></p>
-          <p class="contact-intro">有合作提案、作品詢問或只是想打聲招呼，都非常歡迎！<br>通常在 1–2 個工作天內回覆。</p>
-          <div class="contact-items">
-            <div class="contact-item">
-              <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
-              <div><div class="ci-label">Email</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="21584e545361444c40484d0f424e4c">[email&#160;protected]</a></div></div>
-            </div>
-            <div class="contact-item">
-              <div class="ci-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></div>
-              <div><div class="ci-label">GitHub</div><div class="ci-val">github.com/YOUR_USERNAME</div></div>
-            </div>
-          </div>
-
-          <div class="formspree-note" style="display:none"></div>
-        </div>
-
-        <div class="contact-form-wrap reveal">
-          <form action="https://formspree.io/f/xzdjdrdn" method="POST" onsubmit="handleSubmit(event)">
-            <p class="form-title">Send a <span class="grad">Message</span></p>
-            <div class="form-row">
-              <div class="form-group"><label>姓名 *</label><input type="text" name="name" placeholder="你的名字" required></div>
-              <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="your@email.com" required></div>
-            </div>
-            <div class="form-group"><label>主旨</label><input type="text" name="subject" placeholder="合作提案 / 作品詢問 / 其他"></div>
-            <div class="form-group"><label>訊息 *</label><textarea name="message" placeholder="想說的話…" required></textarea></div>
-            <button type="submit" class="btn-primary" id="submitBtn" style="margin-top:6px">
-              送出訊息
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <p>© 2025 Portfolio · GitHub Pages · <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" target="_blank">View Source</a></p>
-</footer>
-
-<!-- ═══════════ LIGHTBOX ═══════════ -->
-<div id="lightbox">
-  <div class="lb-backdrop" onclick="closeLightbox()"></div>
-  <div class="lb-panel">
-    <button class="lb-close" onclick="closeLightbox()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div class="lb-images">
-      <div class="lb-main-img">
-        <button class="lb-arrow lb-arrow-left hidden-arrow" id="lbPrev" onclick="lbNav(-1)" aria-label="上一張">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="lb-arrow lb-arrow-right hidden-arrow" id="lbNext" onclick="lbNav(1)" aria-label="下一張">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <img id="lbMain" src="" alt="">
-      </div>
-      <div class="lb-thumbs" id="lbThumbs"></div>
-    </div>
-    <div class="lb-info">
-      <p class="lb-tag" id="lbTag"></p>
-      <p class="lb-title" id="lbTitle"></p>
-      <p class="lb-desc" id="lbDesc"></p>
-      <div class="lb-meta">
-        <div class="lb-meta-row"><span class="lb-meta-k">年份</span><span class="lb-meta-v" id="lbYear"></span></div>
-        <div class="lb-meta-row"><span class="lb-meta-k">工具</span><span class="lb-meta-v" id="lbTool"></span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* Cursor */
-const cDot=document.getElementById('cDot'),cRing=document.getElementById('cRing');
+<script>
+/* ── Cursor ── */
+const cur  = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-(function loop(){
-  cDot.style.cssText=`left:${mx}px;top:${my}px`;
-  rx+=(mx-rx)*.13;ry+=(my-ry)*.13;
-  cRing.style.cssText=`left:${rx}px;top:${ry}px`;
-  requestAnimationFrame(loop);
-})();
-
-/* Pages */
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.getElementById('nav-'+id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-  setTimeout(()=>{
-    document.querySelectorAll('#page-'+id+' .reveal').forEach(el=>revObs.observe(el));
-  },50);
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+function animRing(){
+  rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+  ring.style.left=Math.round(rx)+'px'; ring.style.top=Math.round(ry)+'px';
+  requestAnimationFrame(animRing);
 }
-
-/* Reveal */
-const revObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
-
-/* Works tabs */
-function switchWorksTab(btn,id){
-  document.querySelectorAll('.works-tab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('wtab-visual').style.display=id==='visual'?'block':'none';
-  document.getElementById('wtab-animation').style.display=id==='animation'?'block':'none';
-  if(id==='animation'){
-    setTimeout(()=>{
-      document.querySelectorAll('#wtab-animation .reveal').forEach(el=>{
-        revObs.unobserve(el);
-        el.classList.remove('in');
-        void el.offsetHeight; // force reflow
-        revObs.observe(el);
-      });
-    },60);
-  }
-}
-
-/* Video */
-function toggleVid(vId,bId){
-  const v=document.getElementById(vId),b=document.getElementById(bId);
-  if(v.paused){
-    document.querySelectorAll('video').forEach(x=>{
-      if(x!==v){x.pause();const pb=x.closest('.phone-screen')?.querySelector('.vid-btn');if(pb)pb.classList.remove('hidden');}
-    });
-    v.play();b.classList.add('hidden');
-  }else{v.pause();b.classList.remove('hidden');}
-}
-
-/* Lightbox */
-let lbImgs=[], lbIdx=0;
-
-function updateLbArrows(){
-  const prev=document.getElementById('lbPrev'), next=document.getElementById('lbNext');
-  if(!prev||!next) return;
-  prev.classList.toggle('hidden-arrow', lbIdx===0);
-  next.classList.toggle('hidden-arrow', lbIdx===lbImgs.length-1);
-}
-
-function setLbImg(src, idx){
-  const img = document.getElementById('lbMain');
-  img.style.opacity='0';
-  img.style.transition='opacity .2s';
-  setTimeout(()=>{ img.src=src; img.style.opacity='1'; },180);
-  lbIdx=idx;
-  document.querySelectorAll('.lb-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  updateLbArrows();
-}
-
-function lbNav(dir){
-  const newIdx = lbIdx + dir;
-  if(newIdx<0||newIdx>=lbImgs.length) return;
-  setLbImg(lbImgs[newIdx], newIdx);
-}
-
-function openLightbox(card){
-  lbImgs=(card.dataset.imgs||'').split(',').map(s=>s.trim()).filter(Boolean);
-  lbIdx=0;
-  document.getElementById('lbTag').textContent=card.dataset.tag||'';
-  document.getElementById('lbTitle').textContent=card.dataset.title||'';
-  document.getElementById('lbDesc').textContent=card.dataset.desc||'';
-  document.getElementById('lbYear').textContent=card.dataset.year||'';
-  document.getElementById('lbTool').textContent=card.dataset.tool||'';
-  const thumbs=document.getElementById('lbThumbs');
-  thumbs.innerHTML='';
-  lbImgs.forEach((src,i)=>{
-    const t=document.createElement('div');
-    t.className='lb-thumb'+(i===0?' active':'');
-    t.innerHTML=`<img src="${src}" alt="" loading="lazy">`;
-    t.onclick=()=>setLbImg(src,i);
-    thumbs.appendChild(t);
-  });
-  document.getElementById('lbMain').src=lbImgs[0]||'';
-  updateLbArrows();
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow='';
-}
-
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape') closeLightbox();
-  if(document.getElementById('lightbox').classList.contains('open')){
-    if(e.key==='ArrowLeft'||e.key==='ArrowUp') lbNav(-1);
-    if(e.key==='ArrowRight'||e.key==='ArrowDown') lbNav(1);
-  }
+animRing();
+document.querySelectorAll('a,button,label,.proj-card,.skill-tag,.proj-img-wrap').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
 });
 
-/* Skill pop animation on scroll into view */
-const skillObs = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      const items = entry.target.querySelectorAll('.skill-item');
-      items.forEach((item,i)=>{
-        setTimeout(()=>item.classList.add('popped'), i*80);
-      });
-      skillObs.unobserve(entry.target);
-    }
-  });
-},{threshold:0.2});
-document.querySelectorAll('.skills-grid').forEach(g=>skillObs.observe(g));
+/* ── Scroll reveal ── */
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }),{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* Contact form */
-function handleSubmit(e){
-  const btn=document.getElementById('submitBtn');
-  btn.textContent='送出中…'; btn.disabled=true;
+/* ── Dust particles ── */
+const bgLayer = document.querySelector('.bg-layer');
+function spawnDust(){
+  const d = document.createElement('div');
+  d.className = 'dust';
+  const sz = 2+Math.random()*3;
+  d.style.cssText = `
+    width:${sz}px;height:${sz}px;
+    left:${10+Math.random()*80}%;
+    bottom:${Math.random()*30}%;
+    background:rgba(126,168,200,${0.25+Math.random()*0.35});
+    animation-duration:${5+Math.random()*8}s;
+    animation-delay:${Math.random()*3}s;
+  `;
+  bgLayer.appendChild(d);
+  d.addEventListener('animationend',()=>d.remove());
 }
-
-/* ══ LOADER ══ */
-(function(){
-  const loader   = document.getElementById('loader');
-  const burst    = document.getElementById('burstCircle');
-  const curtain  = document.getElementById('loaderCurtain');
-
-  // Minimum display time so the animation has time to breathe
-  const MIN_MS = 1400;
-  const startTime = Date.now();
-
-  function runExit(){
-    // 1. Burst the blue circle outward
-    burst.classList.add('go');
-    // 2. Lift the cream curtain to reveal content
-    curtain.classList.add('lift');
-    // 3. Fade out the loader overlay
-    setTimeout(()=>{ loader.classList.add('done'); }, 200);
-  }
-
-  function maybeExit(){
-    const elapsed = Date.now() - startTime;
-    const wait = Math.max(0, MIN_MS - elapsed);
-    setTimeout(runExit, wait);
-  }
-
-  if(document.readyState === 'complete'){
-    maybeExit();
-  } else {
-    window.addEventListener('load', maybeExit);
-    setTimeout(runExit, 4000);
-  }
-})();
+setInterval(spawnDust,900);
+for(let i=0;i<8;i++) spawnDust();
 </script>
 </body>
 </html>
