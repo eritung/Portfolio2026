@@ -55,6 +55,8 @@
 }
 body.cursor-hover #cursor { width: 14px; height: 14px; background: var(--navy-soft); }
 body.cursor-hover #cursor-ring { width: 44px; height: 44px; border-color: rgba(45,82,130,0.35); }
+body.cursor-active #cursor { transform: translate(-50%,-50%) scale(0.8); background: var(--mist); }
+body.cursor-active #cursor-ring { transform: translate(-50%,-50%) scale(0.72); opacity: 0.68; border-color: rgba(13,33,64,0.42); }
 
 html { scroll-behavior: smooth; }
 body {
@@ -89,13 +91,30 @@ body {
   100% { transform:translate(22px,8px) scale(1.02); }
 }
 
-/* Wandering dust particles */
-.dust { position:absolute; border-radius:50%; animation: dustFloat linear infinite; opacity:0; }
+/* Wandering dust particles: fixed CSS loop */
+.dust {
+  position:absolute; border-radius:50%; opacity:0;
+  background:rgba(126,168,200,0.42);
+  animation: dustFloat 9s linear infinite;
+  will-change: transform, opacity;
+}
+.dust:nth-child(4)  { width:3px;height:3px; left:12%; bottom:16%; animation-duration:8s;  animation-delay:-1s; }
+.dust:nth-child(5)  { width:2px;height:2px; left:22%; bottom:24%; animation-duration:10s; animation-delay:-4s; }
+.dust:nth-child(6)  { width:4px;height:4px; left:34%; bottom:10%; animation-duration:12s; animation-delay:-7s; }
+.dust:nth-child(7)  { width:2px;height:2px; left:46%; bottom:30%; animation-duration:9s;  animation-delay:-3s; }
+.dust:nth-child(8)  { width:3px;height:3px; left:58%; bottom:18%; animation-duration:11s; animation-delay:-6s; }
+.dust:nth-child(9)  { width:2px;height:2px; left:68%; bottom:27%; animation-duration:8.5s;animation-delay:-2s; }
+.dust:nth-child(10) { width:4px;height:4px; left:78%; bottom:12%; animation-duration:13s; animation-delay:-8s; }
+.dust:nth-child(11) { width:3px;height:3px; left:88%; bottom:22%; animation-duration:9.5s;animation-delay:-5s; }
+.dust:nth-child(12) { width:2px;height:2px; left:18%; bottom:42%; animation-duration:12.5s;animation-delay:-9s; }
+.dust:nth-child(13) { width:3px;height:3px; left:38%; bottom:52%; animation-duration:10.5s;animation-delay:-6.5s; }
+.dust:nth-child(14) { width:2px;height:2px; left:62%; bottom:46%; animation-duration:11.5s;animation-delay:-4.5s; }
+.dust:nth-child(15) { width:4px;height:4px; left:82%; bottom:38%; animation-duration:14s; animation-delay:-10s; }
 @keyframes dustFloat {
-  0%   { transform:translateY(0) translateX(0); opacity:0; }
-  10%  { opacity:1; }
-  90%  { opacity:0.6; }
-  100% { transform:translateY(-120px) translateX(30px); opacity:0; }
+  0%   { transform:translate3d(0,0,0) scale(0.85); opacity:0; }
+  12%  { opacity:0.85; }
+  72%  { opacity:0.55; }
+  100% { transform:translate3d(32px,-130px,0) scale(1.08); opacity:0; }
 }
 
 /* Concentric rings removed */
@@ -174,6 +193,7 @@ body {
   display:flex; align-items:flex-end; gap:14px;
   margin-bottom:12px; flex-wrap:wrap;
 }
+.name-pair { display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap; }
 .hero-name {
   font-family:var(--serif);
   font-size:4.4rem; font-weight:600;
@@ -187,6 +207,7 @@ body {
   color:var(--navy-soft); line-height:1;
   letter-spacing:0.02em;
   padding-bottom:0.05em;
+  white-space:nowrap;
 }
 .hero-role {
   font-family:var(--serif);
@@ -218,13 +239,20 @@ body {
 .sec-head {
   display:flex; align-items:baseline; gap:14px; margin-bottom:30px;
 }
+.sec-title-wrap {
+  display:flex; align-items:baseline; gap:9px; white-space:nowrap;
+}
 .sec-title {
   font-family:var(--serif);
   font-size:1.55rem; font-weight:600; font-style:italic;
-  color:var(--navy); white-space:nowrap; letter-spacing:0.03em;
+  color:var(--navy); letter-spacing:0.03em;
 }
 .sec-rule { flex:1; height:1px; background:linear-gradient(90deg,var(--rule),transparent); }
-.sec-n { font-size:0.65rem; color:var(--ink-3); letter-spacing:0.14em; font-weight:300; }
+.sec-n {
+  font-family:var(--serif); font-size:2.05rem; color:var(--mist);
+  letter-spacing:0.04em; font-weight:600; line-height:1;
+}
+.sec-slash { font-family:var(--serif); font-size:1.2rem; color:var(--ink-3); font-style:italic; }
 
 .section { margin-bottom:64px; }
 
@@ -461,28 +489,26 @@ body {
 }
 
 /* ============ LANGUAGE ============ */
-.lang-section { margin-top:28px; }
+.edu-block {
+  display:grid; gap:16px;
+}
+.edu-card, .lang-card {
+  background:rgba(255,255,255,0.5);
+  border:1px solid var(--rule);
+  border-radius:14px;
+  padding:18px 20px;
+}
+.lang-section { margin-top:0; }
+.lang-list { display:grid; gap:10px; }
 .lang-item {
-  margin-bottom:14px;
-  padding:12px 14px;
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  padding:11px 13px;
   background:rgba(230,239,248,0.38);
   border:1px solid rgba(197,213,229,0.6);
   border-radius:10px;
 }
-.lang-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
 .lang-name { font-size:0.92rem; color:var(--navy); font-weight:500; letter-spacing:0.02em; }
-.lang-level { font-size:0.72rem; color:var(--ink-3); font-weight:300; letter-spacing:0.06em; }
-.lang-bar-track {
-  height:4px; border-radius:4px;
-  background:rgba(197,213,229,0.5);
-  overflow:hidden; margin-bottom:5px;
-}
-.lang-bar-fill {
-  height:100%; border-radius:4px;
-  background:linear-gradient(90deg,var(--mist),var(--pale));
-  transition:width 0.6s ease;
-}
-.lang-note { font-size:0.73rem; color:var(--ink-3); font-weight:300; letter-spacing:0.04em; }
+.lang-level { font-size:0.78rem; color:var(--ink-2); font-weight:300; letter-spacing:0.04em; text-align:right; }
 .lang-badge {
   display:inline-flex; align-items:center; gap:5px;
   padding:3px 10px; border-radius:5px;
@@ -491,18 +517,34 @@ body {
   font-size:0.75rem; color:var(--navy-soft); font-weight:500;
   letter-spacing:0.05em;
 }
-.lang-badge-row { display:flex; align-items:center; justify-content:space-between; }
+
+/* ── Back to top ── */
+.back-to-top {
+  position:fixed; right:24px; bottom:24px;
+  width:48px; height:48px; border-radius:50%;
+  border:1px solid rgba(126,168,200,0.55);
+  background:rgba(250,248,245,0.78);
+  color:var(--navy);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 28px rgba(13,33,64,0.1);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  opacity:0; visibility:hidden; transform:translateY(12px);
+  transition:opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, border-color 0.2s ease;
+  z-index:20;
+}
+.back-to-top.visible { opacity:1; visibility:visible; transform:translateY(0); }
+.back-to-top:hover { border-color:var(--mist); transform:translateY(-2px); }
+.back-to-top:active { transform:translateY(0) scale(0.92); }
 
 /* ── Mobile hero: photo inline with name ── */
 @media (max-width:640px) {
   .page        { padding:24px 16px 48px; }
   .page-glass  { padding:32px 20px 48px; border-radius:14px; }
   .hero { grid-template-columns:1fr; gap:0; }
-  .hero > .hex-wrap { display:none; }  /* hide the standalone hex-wrap */
+  .hero > .hex-wrap { display:none; }
   .hero-text::before {
-    content:''; display:none; /* placeholder for future use */
+    content:''; display:none;
   }
-  /* Inline photo + name block */
   .hero-name-row {
     display:flex; align-items:center; gap:16px;
     flex-wrap:nowrap; margin-bottom:10px;
@@ -525,6 +567,10 @@ body {
   .tl-item:not(:last-child) .tl-left::before { right:-17px; }
   .proj-mobile-hint { display:inline; }
   .sec-head    { flex-wrap: wrap; gap: 8px; align-items: center; }
+  .sec-title-wrap { gap: 7px; }
+  .sec-n { font-size:1.55rem; }
+  .sec-title { font-size:1.35rem; }
+  .back-to-top { right:16px; bottom:16px; width:44px; height:44px; }
   .proj-grid   { grid-template-columns: 1fr; }
 }
 .proj-mobile-hint {
@@ -533,31 +579,36 @@ body {
   white-space: nowrap; letter-spacing: 0.02em;
   font-family: var(--sans); font-weight: 300;
 }
-
-/* mobile page padding is in the @media block above */
 </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<!-- Background -->
 <div class="bg-layer">
   <div class="ink-circle ink-1"></div>
   <div class="ink-circle ink-2"></div>
   <div class="ink-circle ink-3"></div>
-  <!-- Dust particles (JS-generated) -->
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
+  <div class="dust"></div>
 </div>
 
 <main class="page">
 <div class="page-glass">
 
-  <!-- ════ HERO ════ -->
   <section class="hero reveal" style="transition-delay:0s;">
     <div class="hex-wrap">
-      <!-- Hexagon photo placeholder -->
       <svg class="hex-svg" viewBox="0 0 128 148" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -587,7 +638,6 @@ body {
     <div class="hero-text">
       <div class="hero-over">Portfolio &nbsp;/&nbsp; Resume</div>
       <div class="hero-name-row">
-        <!-- Inline photo shown on mobile only -->
         <svg class="hex-svg hex-inline" style="display:none;width:64px;height:74px;flex-shrink:0;" viewBox="0 0 128 148" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="hexGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -602,7 +652,7 @@ body {
             <path d="M-26,18 Q-26,-2 0,-2 Q26,-2 26,18 Z" fill="#2d5282"/>
           </g>
         </svg>
-        <div>
+        <div class="name-pair">
           <h1 class="hero-name">董<em>伊淇</em></h1>
           <span class="hero-name-en">Eri Tung</span>
         </div>
@@ -628,12 +678,10 @@ body {
     </div>
   </section>
 
-  <!-- ════ EXPERIENCE ════ -->
   <section class="section reveal" style="transition-delay:0.1s;">
     <div class="sec-head">
-      <h2 class="sec-title">Work Experience</h2>
+      <div class="sec-title-wrap"><span class="sec-n">01</span><span class="sec-slash">/</span><h2 class="sec-title">Work Experience</h2></div>
       <div class="sec-rule"></div>
-      <span class="sec-n">01</span>
     </div>
     <div class="timeline">
 
@@ -696,52 +744,43 @@ body {
     </div>
   </section>
 
-  <!-- ════ EDUCATION + SKILLS ════ -->
   <div class="two-col reveal" style="transition-delay:0.15s;">
     <div>
       <div class="sec-head">
-        <h2 class="sec-title">Education</h2>
+        <div class="sec-title-wrap"><span class="sec-n">02</span><span class="sec-slash">/</span><h2 class="sec-title">Education</h2></div>
         <div class="sec-rule"></div>
-        <span class="sec-n">02</span>
       </div>
-      <div class="edu-uni">中國文化大學</div>
-      <div class="edu-dept">廣告系</div>
-      <div class="edu-yr">2018 — 2022</div>
-      <p class="edu-note">擔任畢業展覽「解迷因」主視覺設計負責人，規劃整體視覺風格、標準字與主視覺動畫呈現，並處理後續送印等流程執行。</p>
-
-      <!-- Language -->
-      <div class="lang-section">
-        <div class="skill-g-lbl" style="margin-bottom:14px;">語言能力</div>
-
-        <div class="lang-item">
-          <div class="lang-header">
-            <span class="lang-name">中文</span>
-            <span class="lang-level">母語</span>
-          </div>
-          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:100%"></div></div>
+      <div class="edu-block">
+        <div class="edu-card">
+          <div class="edu-uni">中國文化大學</div>
+          <div class="edu-dept">廣告系</div>
+          <div class="edu-yr">2018 — 2022</div>
+          <p class="edu-note">擔任畢業展覽「解迷因」主視覺設計負責人，規劃整體視覺風格、標準字與主視覺動畫呈現，並處理後續送印等流程執行。</p>
         </div>
 
-        <div class="lang-item">
-          <div class="lang-header">
-            <span class="lang-name">English</span>
-            <span class="lang-level">日常溝通・書面文件</span>
-          </div>
-          <div class="lang-bar-track"><div class="lang-bar-fill" style="width:60%"></div></div>
-        </div>
-
-        <div class="lang-item">
-          <div class="lang-header">
-            <span class="lang-name">日本語</span>
-            <span class="lang-badge">JLPT N＿</span>
+        <div class="lang-card lang-section">
+          <div class="skill-g-lbl" style="margin-bottom:14px;">語言能力</div>
+          <div class="lang-list">
+            <div class="lang-item">
+              <span class="lang-name">中文</span>
+              <span class="lang-level">母語</span>
+            </div>
+            <div class="lang-item">
+              <span class="lang-name">English</span>
+              <span class="lang-level">日常溝通・書面文件</span>
+            </div>
+            <div class="lang-item">
+              <span class="lang-name">日本語</span>
+              <span class="lang-badge">JLPT N3</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div>
       <div class="sec-head">
-        <h2 class="sec-title">Skills</h2>
+        <div class="sec-title-wrap"><span class="sec-n">03</span><span class="sec-slash">/</span><h2 class="sec-title">Skills</h2></div>
         <div class="sec-rule"></div>
-        <span class="sec-n">03</span>
       </div>
       <div>
         <div class="skill-group">
@@ -761,19 +800,18 @@ body {
             <span class="skill-tag">After Effects</span>
             <span class="skill-tag">Illustrator</span>
             <span class="skill-tag">Animate</span>
+            <span class="skill-tag">Microsoft 文書軟體</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ════ PROJECTS ════ -->
   <section class="section reveal" style="transition-delay:0.2s;">
     <div class="sec-head">
-      <h2 class="sec-title">Key Projects</h2>
+      <div class="sec-title-wrap"><span class="sec-n">04</span><span class="sec-slash">/</span><h2 class="sec-title">Key Projects</h2></div>
       <span class="proj-mobile-hint">※ 點擊圖片進入網頁</span>
       <div class="sec-rule"></div>
-      <span class="sec-n">04</span>
     </div>
     <div class="proj-grid">
 
@@ -873,6 +911,10 @@ body {
 </div>
 </main>
 
+<button class="back-to-top" type="button" aria-label="回到最上方">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
 <style>
 @keyframes hexDraw {
   from { stroke-dashoffset:320; opacity:0.4; }
@@ -885,41 +927,52 @@ body {
 const cur  = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+
+document.addEventListener('mousemove', e => {
+  mx=e.clientX;
+  my=e.clientY;
+  cur.style.left=mx+'px';
+  cur.style.top=my+'px';
+});
+
+document.addEventListener('mousedown', () => document.body.classList.add('cursor-active'));
+document.addEventListener('mouseup', () => document.body.classList.remove('cursor-active'));
+document.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+
 function animRing(){
-  rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
-  ring.style.left=Math.round(rx)+'px'; ring.style.top=Math.round(ry)+'px';
+  rx += (mx-rx)*0.12;
+  ry += (my-ry)*0.12;
+  ring.style.left=Math.round(rx)+'px';
+  ring.style.top=Math.round(ry)+'px';
   requestAnimationFrame(animRing);
 }
 animRing();
+
 document.querySelectorAll('a,button,label,.proj-card,.skill-tag,.proj-img-wrap').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
 });
 
 /* ── Scroll reveal ── */
-const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }),{threshold:0.06});
+const io = new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    e.target.classList.add('visible');
+    io.unobserve(e.target);
+  }
+}),{threshold:0.06});
+
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* ── Dust particles ── */
-const bgLayer = document.querySelector('.bg-layer');
-function spawnDust(){
-  const d = document.createElement('div');
-  d.className = 'dust';
-  const sz = 2+Math.random()*3;
-  d.style.cssText = `
-    width:${sz}px;height:${sz}px;
-    left:${10+Math.random()*80}%;
-    bottom:${Math.random()*30}%;
-    background:rgba(126,168,200,${0.25+Math.random()*0.35});
-    animation-duration:${5+Math.random()*8}s;
-    animation-delay:${Math.random()*3}s;
-  `;
-  bgLayer.appendChild(d);
-  d.addEventListener('animationend',()=>d.remove());
+/* ── Back to top ── */
+const backTop = document.querySelector('.back-to-top');
+
+function toggleBackTop(){
+  backTop.classList.toggle('visible', window.scrollY > 420);
 }
-setInterval(spawnDust,900);
-for(let i=0;i<8;i++) spawnDust();
+
+window.addEventListener('scroll', toggleBackTop, { passive:true });
+backTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+toggleBackTop();
 </script>
 </body>
 </html>
