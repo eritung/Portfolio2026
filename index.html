@@ -4,17 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>董伊淇 Eri Tung — Project Planner</title>
-<meta name="description" content="董伊淇 Eri Tung 的個人履歷與作品集，包含專案企劃、數位廣告提案、活動網頁規劃與跨部門溝通經驗。">
+<meta name="description" content="董伊淇 Eri Tung 的個人履歷與作品集，包含數位專案企劃、跨部門溝通、創意提案、視覺品質控管與 AI 流程優化經驗。">
 
 <meta property="og:title" content="董伊淇 Eri Tung — Project Planner">
-<meta property="og:description" content="專案企劃、數位廣告提案、活動網頁規劃與作品集。">
+<meta property="og:description" content="數位專案企劃、跨部門溝通、創意提案、視覺品質控管與 AI 流程優化作品集。">
 <meta property="og:type" content="website">
 <meta property="og:image" content="preview.png">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="董伊淇 Eri Tung — Project Planner">
-<meta name="twitter:description" content="專案企劃、數位廣告提案、活動網頁規劃與作品集。">
-<meta name="twitter:image" content="preview.png"><link href="https://fonts.googleapis.com/css2?family=Oranienbaum:ital@0;1&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="twitter:description" content="數位專案企劃、跨部門溝通、創意提案、視覺品質控管與 AI 流程優化作品集。">
+<meta name="twitter:image" content="preview.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Oranienbaum:ital@0;1&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -317,9 +320,9 @@ body {
 
 .hero-top {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 28px;
-  margin-bottom: 18px;
+  margin-bottom: 0;
 }
 
 .hero-text-main {
@@ -328,7 +331,6 @@ body {
 }
 
 .hero-text {
-  margin-left: 156px;
   max-width: 520px;
 }
 
@@ -419,7 +421,7 @@ body {
   font-style: italic;
   font-weight: 300;
   color: var(--ink-2);
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   letter-spacing: 0.04em;
 }
 
@@ -427,15 +429,16 @@ body {
   font-size: 1.02rem;
   color: var(--ink);
   font-weight: 300;
-  line-height: 1.95;
-  max-width: 420px;
+  line-height: 1.8;
+  max-width: 520px;
+  margin-top: 0;
   margin-bottom: 22px;
 }
 
 .hero-stats {
   display: flex;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .stat-item {
@@ -466,11 +469,42 @@ body {
 
 .stat-l {
   font-size: 0.65rem;
-  color: var(--ink-3);
+  color: var(--ink-2);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: 3px;
+}
+
+/* ============ HERO STRENGTH TAGS ============ */
+.hero-strengths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  max-width: 520px;
+}
+
+.strength-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: rgba(240,247,252,0.78);
+  border: 1px solid rgba(143,190,219,0.34);
+  color: var(--navy-soft);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.strength-tag:hover {
+  background: rgba(220,236,248,0.82);
+  border-color: var(--mist);
+  color: var(--navy);
+  transform: translateY(-1px);
 }
 
 .hero-contacts {
@@ -1117,9 +1151,9 @@ body {
   }
 
   .hero-top {
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 0;
   }
 
   .hero-text {
@@ -1156,7 +1190,7 @@ body {
 
   .hero-role {
     font-size: 1rem;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   .hero-bio {
@@ -1168,6 +1202,17 @@ body {
   .hero-stats {
     flex-wrap: wrap;
     gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .hero-strengths {
+    gap: 7px;
+    margin-bottom: 18px;
+  }
+
+  .strength-tag {
+    font-size: 0.78rem;
+    padding: 5px 11px;
   }
 
   .stat-item {
@@ -1275,48 +1320,58 @@ body {
   </div>
 
   <section class="hero reveal" style="transition-delay:0s;">
-    <div class="hero-top">
-      <div class="hex-wrap">
-        <img class="profile-photo" src="profile.png" alt="董伊淇 Eri Tung">
-      </div>
-
-      <div class="hero-text-main">
-        <div class="hero-over">Portfolio &nbsp;/&nbsp; Resume</div>
-
-        <div class="hero-name-row">
-          <div class="name-pair">
-            <h1 class="hero-name">董<em>伊淇</em></h1>
-            <span class="hero-name-en">Eri Tung</span>
-          </div>
-        </div>
-
-        <div class="hero-role">Project Planner &nbsp;·&nbsp; Digital Creative</div>
-        <div class="status-badge"><span class="status-dot"></span>Available for new opportunities</div>
-      </div>
+  <div class="hero-top">
+    <div class="hex-wrap">
+      <img class="profile-photo" src="profile.png" alt="董伊淇 Eri Tung">
     </div>
 
-    <div class="hero-text">
-      <p class="hero-bio">擁有 3 年專案企劃經驗，策劃多組數位廣告素材上線與活動網頁規劃。具備時程控管與跨部門溝通能力，並能運用自動化工具提高內部工作流程效率。</p>
+    <div class="hero-text-main">
+      <div class="hero-over">Information - </div>
+
+      <div class="hero-name-row">
+        <div class="name-pair">
+          <h1 class="hero-name">董<em>伊淇</em></h1>
+          <span class="hero-name-en">Eri Tung</span>
+        </div>
+      </div>
+
+      <div class="hero-role">Project Planner &nbsp;·&nbsp; Digital Creative</div>
+
+      <p class="hero-bio">近 3 年專案企劃經驗，策劃多組數位廣告素材上線與活動網頁規劃。具備時程控管與跨部門溝通能力，並能運用自動化工具提高內部工作流程效率。</p>
 
       <div class="hero-stats">
-        <div class="stat-item"><span class="stat-n">3+</span><span class="stat-l">年經驗</span></div>
-        <div class="stat-item"><span class="stat-n">10+</span><span class="stat-l">專案執行</span></div>
-        <div class="stat-item"><span class="stat-n">5+</span><span class="stat-l">品牌合作</span></div>
+        <div class="stat-item"><span class="stat-n">3</span><span class="stat-l">年經驗</span></div>
+        <div class="stat-item"><span class="stat-n">350+</span><span class="stat-l">專案執行</span></div>
+        <div class="stat-item"><span class="stat-n">200+</span><span class="stat-l">品牌合作</span></div>
+      </div>
+
+      <div class="hero-strengths" aria-label="核心優勢">
+        <span class="strength-tag">數位專案企劃</span>
+        <span class="strength-tag">跨部門溝通</span>
+        <span class="strength-tag">創意提案</span>
+        <span class="strength-tag">視覺品質控管</span>
+        <span class="strength-tag">AI 流程優化</span>
       </div>
 
       <div class="hero-contacts">
         <a class="contact-chip" href="mailto:eri.tung421@gmail.com">
-          <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 7l10 7 10-7"/>
+          </svg>
           eri.tung421@gmail.com
         </a>
 
         <a class="contact-chip" href="tel:0983755899">
-          <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 2.98 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z"/></svg>
+          <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 2.98 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z"/>
+          </svg>
           0983-755-899
         </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <section class="section reveal" style="transition-delay:0.1s;">
     <div class="sec-head">
@@ -1338,7 +1393,7 @@ body {
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                 數位廣告提案與執行
               </div>
-              <div class="tl-task-body">負責網路廣告全方位提案，從創意發想到文案撰寫，協助內外橋樑溝通，確保專案順利上線。</div>
+              <div class="tl-task-body">負責數位廣告提案創意發想與文案撰寫，整合客戶需求、設計產出與內部時程，確保素材如期上線並符合品牌調性。</div>
             </div>
 
             <div class="tl-task">
@@ -1346,7 +1401,7 @@ body {
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><circle cx="11" cy="11" r="3"/></svg>
                 視覺品質控管（Aesthetic Review）
               </div>
-              <div class="tl-task-body">擔任設計師與客戶間的橋樑，審核所有設計產出，提供具體視覺修改意見，確保素材符合品牌調性。</div>
+              <div class="tl-task-body">擔任設計師與客戶間的橋樑，審核專案動畫、設計產出，提供具體視覺修改意見，確保素材符合品牌調性。</div>
             </div>
 
             <div class="tl-task">
@@ -1354,7 +1409,7 @@ body {
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
                 靜態 / 動畫 Demo 製作
               </div>
-              <div class="tl-task-body">使用 PS、AE 等軟體於提案階段，透過動態 Demo 大幅提升提案過案率。</div>
+              <div class="tl-task-body">使用 PS、AE 等軟體於提案階段，透過動態 Demo 提升提案過案率。</div>
             </div>
 
             <div class="tl-task">
@@ -1370,7 +1425,7 @@ body {
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
                 活動網頁規劃
               </div>
-              <div class="tl-task-body">策劃並執行活動 Landing Page，負責 UI 佈局規劃與跨部門溝通協調。</div>
+              <div class="tl-task-body">策劃並執行活動 Landing Page規劃，負責 UI 佈局規劃與跨部門溝通協調。</div>
             </div>
           </div>
         </div>
@@ -1383,8 +1438,17 @@ body {
           <div class="tl-co">日商卓一智能科技股份有限公司</div>
           <div class="tl-role">設計實習生</div>
           <div class="tl-tasks">
-            <div class="tl-task">廣告素材製作，累積數位廣告製作與流程執行的基礎能力。</div>
-          </div>
+          <div class="tl-task">
+            <div class="tl-task-title">
+              <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="M21 15l-5-5L5 21"/>
+              </svg>
+              廣告素材設計與上架
+            </div>
+            <div class="tl-task-body">協助廣告素材設計與版面調整，並依照媒體規格執行素材上架作業。</div>
+          </div>          </div>
         </div>
       </div>
     </div>
@@ -1402,7 +1466,7 @@ body {
           <div class="edu-uni">中國文化大學</div>
           <div class="edu-dept">廣告學系</div>
           <div class="edu-yr">2018 — 2022</div>
-          <p class="edu-note">擔任畢業展覽「解迷因」主視覺設計負責人，規劃整體視覺風格、標準字與主視覺動畫呈現，並處理後續送印等流程執行。</p>
+          <p class="edu-note">當屆畢業展「解迷因」主視覺設計負責人，負責視覺系統、標準字、動畫延伸與印刷執行。</p>
         </div>
 
         <div class="lang-card lang-section">
@@ -1438,10 +1502,13 @@ body {
         <div class="skill-group">
           <div class="skill-g-lbl">企劃 &amp; 溝通</div>
           <div class="skill-tags">
-            <span class="skill-tag">專案管理</span>
+            <span class="skill-tag">數位專案企劃</span>
             <span class="skill-tag">跨部門溝通</span>
+            <span class="skill-tag">創意提案</span>
+            <span class="skill-tag">視覺品質控管</span>
+            <span class="skill-tag">AI 流程優化</span>
+            <span class="skill-tag">專案管理</span>
             <span class="skill-tag">時程控管</span>
-            <span class="skill-tag">提案設計</span>
             <span class="skill-tag">文案撰寫</span>
           </div>
         </div>
@@ -1607,7 +1674,7 @@ function animRing(){
 }
 animRing();
 
-document.querySelectorAll('a,button,label,.proj-card,.skill-tag,.proj-img-wrap').forEach(el => {
+document.querySelectorAll('a,button,label,.proj-card,.skill-tag,.strength-tag,.proj-img-wrap').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
 });
