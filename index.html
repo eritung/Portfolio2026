@@ -3,38 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>董伊淇 — 專案企劃</title>
-<link href="https://fonts.googleapis.com/css2?family=Oranienbaum:ital@0;1&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<title>董伊淇 Eri Tung — Project Planner</title>
+<meta name="description" content="董伊淇 Eri Tung 的個人履歷與作品集，包含專案企劃、數位廣告提案、活動網頁規劃與跨部門溝通經驗。">
+
+<meta property="og:title" content="董伊淇 Eri Tung — Project Planner">
+<meta property="og:description" content="專案企劃、數位廣告提案、活動網頁規劃與作品集。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="preview.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="董伊淇 Eri Tung — Project Planner">
+<meta name="twitter:description" content="專案企劃、數位廣告提案、活動網頁規劃與作品集。">
+<meta name="twitter:image" content="preview.png"><link href="https://fonts.googleapis.com/css2?family=Oranienbaum:ital@0;1&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #f3f0eb;
-  --bg-card:   #faf8f5;
-  --navy:      #0d2140;
-  --navy-mid:  #1a3660;
-  --navy-soft: #2d5282;
-  --mist:      #7ea8c8;
-  --pale:      #cce0f0;
-  --wash:      #e6eff8;
-  --ink:       #1c2d42;
-  --ink-2:     #4a6a88;
-  --ink-3:     #90aabb;
-  --rule:      #c5d5e5;
+  --bg:        #fbf8f3;
+  --bg-card:   #ffffff;
+  --navy:      #14345a;
+  --navy-mid:  #24517d;
+  --navy-soft: #3f72a5;
+  --mist:      #8fbedb;
+  --pale:      #dcecf8;
+  --wash:      #f0f7fc;
+  --ink:       #20344a;
+  --ink-2:     #5b7894;
+  --ink-3:     #a4b8c8;
+  --rule:      #d9e7f2;
   --serif:     'Oranienbaum', Georgia, serif;
   --sans:      'Noto Sans TC', sans-serif;
 }
 
-/* ── Custom cursor (desktop only) ── */
+/* ── Custom cursor ── */
 @media (hover: hover) and (pointer: fine) {
   * { cursor: none !important; }
 }
 @media (hover: none), (pointer: coarse) {
   #cursor, #cursor-ring { display: none !important; }
 }
+
 #cursor {
   position: fixed;
-  width: 10px; height: 10px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--navy);
   pointer-events: none;
@@ -43,22 +55,44 @@
   transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease, opacity 0.2s;
   mix-blend-mode: multiply;
 }
+
 #cursor-ring {
   position: fixed;
-  width: 32px; height: 32px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1px solid rgba(13,33,64,0.28);
+  border: 1px solid rgba(20,52,90,0.24);
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%,-50%);
   transition: transform 0.18s ease, width 0.25s ease, height 0.25s ease, opacity 0.2s;
 }
-body.cursor-hover #cursor { width: 14px; height: 14px; background: var(--navy-soft); }
-body.cursor-hover #cursor-ring { width: 44px; height: 44px; border-color: rgba(45,82,130,0.35); }
-body.cursor-active #cursor { transform: translate(-50%,-50%) scale(0.8); background: var(--mist); }
-body.cursor-active #cursor-ring { transform: translate(-50%,-50%) scale(0.72); opacity: 0.68; border-color: rgba(13,33,64,0.42); }
+
+body.cursor-hover #cursor {
+  width: 14px;
+  height: 14px;
+  background: var(--navy-soft);
+}
+
+body.cursor-hover #cursor-ring {
+  width: 44px;
+  height: 44px;
+  border-color: rgba(63,114,165,0.32);
+}
+
+body.cursor-active #cursor {
+  transform: translate(-50%,-50%) scale(0.8);
+  background: var(--mist);
+}
+
+body.cursor-active #cursor-ring {
+  transform: translate(-50%,-50%) scale(0.72);
+  opacity: 0.68;
+  border-color: rgba(20,52,90,0.36);
+}
 
 html { scroll-behavior: smooth; }
+
 body {
   font-family: var(--sans);
   background: var(--bg);
@@ -70,517 +104,1153 @@ body {
 
 /* ── Background layer ── */
 .bg-layer {
-  position: fixed; inset: 0;
-  pointer-events: none; z-index: 0; overflow: hidden;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
 }
 
-/* Floating ink circles */
 .ink-circle {
   position: absolute;
   border-radius: 50%;
   filter: blur(70px);
   animation: drift linear infinite alternate;
 }
-.ink-1 { width:520px;height:420px; background:radial-gradient(ellipse,rgba(160,200,230,0.28) 0%,transparent 70%); top:-80px;right:-60px; animation-duration:22s; }
-.ink-2 { width:380px;height:320px; background:radial-gradient(ellipse,rgba(180,215,238,0.2) 0%,transparent 70%); bottom:60px;left:-80px; animation-duration:28s; animation-direction:alternate-reverse; }
-.ink-3 { width:260px;height:200px; background:radial-gradient(ellipse,rgba(200,225,242,0.18) 0%,transparent 70%); top:42%;left:55%; animation-duration:17s; }
+
+.ink-1 {
+  width: 520px;
+  height: 420px;
+  background: radial-gradient(ellipse,rgba(175,215,242,0.34) 0%,transparent 70%);
+  top: -80px;
+  right: -60px;
+  animation-duration: 22s;
+}
+
+.ink-2 {
+  width: 380px;
+  height: 320px;
+  background: radial-gradient(ellipse,rgba(205,230,246,0.28) 0%,transparent 70%);
+  bottom: 60px;
+  left: -80px;
+  animation-duration: 28s;
+  animation-direction: alternate-reverse;
+}
+
+.ink-3 {
+  width: 260px;
+  height: 200px;
+  background: radial-gradient(ellipse,rgba(220,238,248,0.26) 0%,transparent 70%);
+  top: 42%;
+  left: 55%;
+  animation-duration: 17s;
+}
+
 @keyframes drift {
-  0%   { transform:translate(0,0) scale(1); }
-  33%  { transform:translate(18px,-12px) scale(1.04); }
-  66%  { transform:translate(-10px,20px) scale(0.97); }
-  100% { transform:translate(22px,8px) scale(1.02); }
+  0%   { transform: translate(0,0) scale(1); }
+  33%  { transform: translate(18px,-12px) scale(1.04); }
+  66%  { transform: translate(-10px,20px) scale(0.97); }
+  100% { transform: translate(22px,8px) scale(1.02); }
 }
 
-/* Wandering dust particles: fixed CSS loop */
-.dust {
-  position:absolute; border-radius:50%; opacity:0;
-  background:rgba(126,168,200,0.42);
-  animation: dustFloat 9s linear infinite;
+/* ── Glass aura ── */
+.glass-aura {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 1;
+  filter: saturate(1.08);
+}
+
+.aura-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(38px);
+  opacity: 0.72;
+  animation: auraFloat 11s ease-in-out infinite alternate;
   will-change: transform, opacity;
-}
-.dust:nth-child(4)  { width:3px;height:3px; left:12%; bottom:16%; animation-duration:8s;  animation-delay:-1s; }
-.dust:nth-child(5)  { width:2px;height:2px; left:22%; bottom:24%; animation-duration:10s; animation-delay:-4s; }
-.dust:nth-child(6)  { width:4px;height:4px; left:34%; bottom:10%; animation-duration:12s; animation-delay:-7s; }
-.dust:nth-child(7)  { width:2px;height:2px; left:46%; bottom:30%; animation-duration:9s;  animation-delay:-3s; }
-.dust:nth-child(8)  { width:3px;height:3px; left:58%; bottom:18%; animation-duration:11s; animation-delay:-6s; }
-.dust:nth-child(9)  { width:2px;height:2px; left:68%; bottom:27%; animation-duration:8.5s;animation-delay:-2s; }
-.dust:nth-child(10) { width:4px;height:4px; left:78%; bottom:12%; animation-duration:13s; animation-delay:-8s; }
-.dust:nth-child(11) { width:3px;height:3px; left:88%; bottom:22%; animation-duration:9.5s;animation-delay:-5s; }
-.dust:nth-child(12) { width:2px;height:2px; left:18%; bottom:42%; animation-duration:12.5s;animation-delay:-9s; }
-.dust:nth-child(13) { width:3px;height:3px; left:38%; bottom:52%; animation-duration:10.5s;animation-delay:-6.5s; }
-.dust:nth-child(14) { width:2px;height:2px; left:62%; bottom:46%; animation-duration:11.5s;animation-delay:-4.5s; }
-.dust:nth-child(15) { width:4px;height:4px; left:82%; bottom:38%; animation-duration:14s; animation-delay:-10s; }
-@keyframes dustFloat {
-  0%   { transform:translate3d(0,0,0) scale(0.85); opacity:0; }
-  12%  { opacity:0.85; }
-  72%  { opacity:0.55; }
-  100% { transform:translate3d(32px,-130px,0) scale(1.08); opacity:0; }
+  mix-blend-mode: normal;
 }
 
-/* Concentric rings removed */
+.aura-circle:nth-of-type(1) {
+  width: 320px;
+  height: 320px;
+  left: -120px;
+  top: -20px;
+  background: rgba(190,224,244,0.58);
+  animation-duration: 12s;
+}
+
+.aura-circle:nth-of-type(2) {
+  width: 300px;
+  height: 300px;
+  right: -100px;
+  top: 130px;
+  background: rgba(205,232,246,0.72);
+  animation-duration: 14s;
+  animation-direction: alternate-reverse;
+}
+
+.aura-circle:nth-of-type(3) {
+  width: 360px;
+  height: 360px;
+  left: 4%;
+  top: 34%;
+  background: rgba(230,220,240,0.56);
+  animation-duration: 15s;
+}
+
+.aura-circle:nth-of-type(4) {
+  width: 340px;
+  height: 340px;
+  right: 4%;
+  bottom: 70px;
+  background: rgba(174,211,235,0.58);
+  animation-duration: 13s;
+  animation-direction: alternate-reverse;
+}
+
+.aura-circle:nth-of-type(5) {
+  width: 280px;
+  height: 280px;
+  left: 34%;
+  top: 24%;
+  background: rgba(252,241,224,0.48);
+  animation-duration: 11s;
+}
+
+.aura-circle:nth-of-type(6) {
+  width: 270px;
+  height: 270px;
+  left: 50%;
+  bottom: 8%;
+  background: rgba(214,238,246,0.62);
+  animation-duration: 16s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes auraFloat {
+  0% {
+    transform: translate3d(-42px, 30px, 0) scale(0.96);
+    opacity: 0.46;
+  }
+  35% {
+    opacity: 0.86;
+  }
+  70% {
+    transform: translate3d(56px, -44px, 0) scale(1.12);
+    opacity: 0.72;
+  }
+  100% {
+    transform: translate3d(88px, -66px, 0) scale(1.2);
+    opacity: 0.52;
+  }
+}
 
 /* ── Page ── */
 .page {
-  position:relative; z-index:1;
-  max-width:880px; margin:0 auto;
-  padding:72px 44px 100px;
+  position: relative;
+  z-index: 1;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 72px 44px 100px;
 }
 
-/* Frosted glass content card */
 .page-glass {
-  background: rgba(243,240,235,0.72);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  background: rgba(255,255,255,0.44);
+  backdrop-filter: blur(9px) saturate(1.12);
+  -webkit-backdrop-filter: blur(9px) saturate(1.12);
   border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.55);
-  box-shadow: 0 4px 32px rgba(13,33,64,0.06);
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: 0 8px 36px rgba(20,52,90,0.06);
   padding: 64px 52px 80px;
   position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.page-glass > :not(.glass-aura) {
+  position: relative;
+  z-index: 2;
 }
 
 /* ── Scroll reveal ── */
-.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.75s ease, transform 0.75s ease; }
-.reveal.visible { opacity:1; transform:none; }
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
 
 /* ============ HERO ============ */
 .hero {
-  display:grid;
-  grid-template-columns:140px 1fr;
-  gap:48px; align-items:center;
-  margin-bottom:68px;
-  padding-bottom:52px;
-  border-bottom:1px solid var(--rule);
-  position:relative;
+  display: block;
+  margin-bottom: 68px;
+  padding-bottom: 52px;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
 }
-/* Animated divider shimmer */
+
 .hero::after {
-  content:'';
-  position:absolute; bottom:-1px; left:0;
-  width:80px; height:1px;
-  background:linear-gradient(90deg,transparent,var(--mist),transparent);
-  animation:shimmer 3.5s ease-in-out infinite;
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg,transparent,var(--mist),transparent);
+  animation: shimmer 3.5s ease-in-out infinite;
 }
+
 @keyframes shimmer {
-  0%  { left:0; opacity:0; }
-  20% { opacity:1; }
-  80% { opacity:1; }
-  100%{ left:calc(100% - 80px); opacity:0; }
+  0%  { left: 0; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100%{ left: calc(100% - 80px); opacity: 0; }
 }
 
-/* Hexagon photo */
+.hero-top {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 18px;
+}
+
+.hero-text-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-text {
+  margin-left: 156px;
+  max-width: 520px;
+}
+
 .hex-wrap {
-  display:flex; flex-direction:column; align-items:center; gap:10px;
-}
-.hex-svg { width:128px; height:148px; filter:drop-shadow(0 4px 16px rgba(13,33,64,0.08)); }
-.hex-label {
-  font-size:0.65rem; color:var(--ink-3);
-  letter-spacing:0.1em; text-transform:uppercase;
-  font-weight:300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
-/* Breathing glow on hex */
-@keyframes hexGlow {
-  0%,100% { opacity:0.55; }
-  50%      { opacity:0.85; }
+.hex-svg {
+  width: 128px;
+  height: 148px;
+  filter: drop-shadow(0 4px 16px rgba(20,52,90,0.08));
 }
 
-/* Hero typography */
+.profile-photo {
+  width: 128px;
+  height: 148px;
+  object-fit: cover;
+  object-position: center;
+  clip-path: polygon(50% 0%, 97% 24%, 97% 76%, 50% 100%, 3% 76%, 3% 24%);
+  filter: drop-shadow(0 4px 16px rgba(20,52,90,0.08));
+  display: block;
+}
+
+.profile-photo.hex-inline {
+  width: 64px;
+  height: 74px;
+  flex-shrink: 0;
+}
+
 .hero-over {
-  font-size:0.72rem; letter-spacing:0.26em; text-transform:uppercase;
-  color:var(--mist); font-weight:400; margin-bottom:10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--mist);
+  font-weight: 400;
+  margin-bottom: 10px;
 }
+
 .hero-name-row {
-  display:flex; align-items:flex-end; gap:14px;
-  margin-bottom:12px; flex-wrap:wrap;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
 }
-.name-pair { display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap; }
+
+.name-pair {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .hero-name {
-  font-family:var(--serif);
-  font-size:4.4rem; font-weight:600;
-  color:var(--navy); line-height:1;
-  letter-spacing:0.06em;
+  font-family: var(--serif);
+  font-size: 4.4rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1;
+  letter-spacing: 0.06em;
 }
-.hero-name em { font-style:normal; color:var(--navy); font-weight:600; }
+
+.hero-name em {
+  font-style: normal;
+  color: var(--navy);
+  font-weight: 600;
+}
+
 .hero-name-en {
-  font-family:'Oranienbaum', serif;
-  font-size:2.4rem; font-weight:400; font-style:italic;
-  color:var(--navy-soft); line-height:1;
-  letter-spacing:0.02em;
-  padding-bottom:0.05em;
-  white-space:nowrap;
+  font-family: 'Oranienbaum', serif;
+  font-size: 2.4rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--navy-soft);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  padding-bottom: 0.05em;
+  white-space: nowrap;
 }
+
 .hero-role {
-  font-family:var(--serif);
-  font-size:1.15rem; font-style:italic; font-weight:300;
-  color:var(--ink-2); margin-bottom:18px; letter-spacing:0.04em;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+  letter-spacing: 0.04em;
 }
+
 .hero-bio {
-  font-size:1.02rem; color:var(--ink); font-weight:300;
-  line-height:1.95; max-width:420px; margin-bottom:22px;
-}
-.contacts { display:flex; flex-wrap:wrap; gap:6px 18px; }
-.contacts span {
-  font-size:0.92rem; color:var(--ink-2); font-weight:300;
-  display:flex; align-items:center; gap:6px;
-  transition:color 0.2s;
-}
-.contacts span:hover { color:var(--navy); }
-.contacts span::before {
-  content:''; width:4px; height:4px; border-radius:50%;
-  background:var(--mist); flex-shrink:0;
-  animation:dotPulse 3s ease-in-out infinite;
-}
-@keyframes dotPulse {
-  0%,100%{ transform:scale(1); opacity:0.7; }
-  50%    { transform:scale(1.5); opacity:1; }
+  font-size: 1.02rem;
+  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.95;
+  max-width: 420px;
+  margin-bottom: 22px;
 }
 
-/* ============ SECTION HEAD ============ */
-.sec-head {
-  display:flex; align-items:baseline; gap:14px; margin-bottom:30px;
-}
-.sec-title-wrap {
-  display:flex; align-items:baseline; gap:9px; white-space:nowrap;
-}
-.sec-title {
-  font-family:var(--serif);
-  font-size:1.55rem; font-weight:600; font-style:italic;
-  color:var(--navy); letter-spacing:0.03em;
-}
-.sec-rule { flex:1; height:1px; background:linear-gradient(90deg,var(--rule),transparent); }
-.sec-n {
-  font-family:var(--serif); font-size:2.05rem; color:var(--mist);
-  letter-spacing:0.04em; font-weight:600; line-height:1;
-}
-.sec-slash { font-family:var(--serif); font-size:1.2rem; color:var(--ink-3); font-style:italic; }
-
-.section { margin-bottom:64px; }
-
-/* ============ TIMELINE ============ */
-.timeline { display:flex; flex-direction:column; }
-.tl-item {
-  display:grid; grid-template-columns:88px 1fr;
-  gap:0 48px; padding-bottom:38px; position:relative;
-}
-.tl-item:last-child { padding-bottom:0; }
-.tl-left { text-align:right; padding-top:3px; position:relative; align-self:stretch; }
-.tl-left::after {
-  content:''; position:absolute;
-  right:-28px; top:9px;
-  width:8px; height:8px; border-radius:50%;
-  background:var(--bg-card); border:1.5px solid var(--mist);
-  z-index:1; animation:tldot 3.5s ease-in-out infinite;
-}
-@keyframes tldot {
-  0%,100%{ box-shadow:0 0 0 0 rgba(126,168,200,0); }
-  50%    { box-shadow:0 0 0 5px rgba(126,168,200,0.2); }
-}
-.tl-item:not(:last-child) .tl-left::before {
-  content:''; position:absolute;
-  right:-25px; top:17px; bottom:-38px;
-  width:1px;
-  background:linear-gradient(180deg,var(--rule) 60%,transparent 100%);
-}
-.tl-date { font-size:0.8rem; color:var(--mist); line-height:1.65; font-weight:300; letter-spacing:0.04em; }
-.tl-co   { font-size:0.88rem; color:var(--ink-2); font-weight:500; margin-bottom:3px; letter-spacing:0.01em; }
-.tl-role {
-  font-family:var(--serif);
-  font-size:1.28rem; font-weight:600; color:var(--navy);
-  margin-bottom:14px; line-height:1.3;
-}
-.tl-tasks { display:flex; flex-direction:column; gap:9px; }
-.tl-task  { font-size:0.97rem; color:var(--ink); line-height:1.9; font-weight:300; }
-.tl-task b { color:var(--mist); font-weight:600; }
-
-/* ============ TWO-COL ============ */
-.two-col { display:grid; grid-template-columns:1fr 1fr; gap:52px; margin-bottom:64px; }
-
-/* Education */
-.edu-uni  { font-family:var(--serif); font-size:1.38rem; font-weight:600; color:var(--navy); margin-bottom:2px; }
-.edu-dept { font-size:0.97rem; color:var(--navy-soft); font-weight:400; margin-bottom:2px; }
-.edu-yr   { font-size:0.84rem; color:var(--ink-3); letter-spacing:0.07em; font-weight:300; margin-bottom:14px; }
-.edu-note {
-  font-size:0.97rem; color:var(--ink); font-weight:300;
-  line-height:1.85; font-style:italic;
-  padding-left:14px; border-left:2px solid var(--pale);
-}
-
-/* Skills */
-.skill-group  { margin-bottom:14px; }
-.skill-g-lbl  { font-size:0.88rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--mist); font-weight:500; margin-bottom:8px; }
-.skill-tags   { display:flex; flex-wrap:wrap; gap:6px; }
-.skill-tag {
-  padding:6px 15px; border-radius:20px;
-  border:1px solid rgba(197,213,229,0.8);
-  background: rgba(230,239,248,0.55);
-  font-size:0.84rem; color:var(--navy-soft); font-weight:400;
-  letter-spacing:0.02em;
-  transition:border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
-}
-.skill-tag:hover { background:rgba(206,224,240,0.75); border-color:var(--mist); color:var(--navy); transform:translateY(-1px); }
-
-/* ============ PROJECTS ============ */
-.proj-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:22px; }
-.proj-card {
-  background:var(--bg-card); border:1px solid var(--rule); border-radius:12px;
-  overflow:hidden; display:flex; flex-direction:column;
-  transition:border-color 0.25s, box-shadow 0.25s, transform 0.28s;
-}
-.proj-card:hover {
-  border-color:var(--mist);
-  box-shadow:0 8px 32px rgba(13,33,64,0.08);
-  transform:translateY(-4px);
-}
-
-/* Image placeholder */
-.proj-img-wrap {
-  position:relative; width:100%; aspect-ratio:16/9;
-  border-bottom:1px solid var(--rule);
-  overflow:hidden; display:block; cursor:none;
-}
-.proj-img-ph {
-  width:100%; height:100%;
-  background:linear-gradient(135deg,var(--wash) 0%,#dde9f4 50%,#e8f1f8 100%);
-  display:flex; align-items:center; justify-content:center;
-  flex-direction:column; gap:8px;
-  position:relative;
-}
-.proj-img-overlay {
-  position:absolute; inset:0;
-  background:rgba(13,33,64,0);
-  display:flex; align-items:center; justify-content:center; gap:10px;
-  transition:background 0.3s ease;
-  pointer-events:none;
-}
-.proj-img-overlay span {
-  font-family:var(--sans);
-  font-size:1.05rem; font-weight:500; letter-spacing:0.2em;
-  color:rgba(255,255,255,0);
-  transition:color 0.3s ease;
-}
-.proj-img-overlay svg {
-  opacity:0;
-  transition:opacity 0.3s ease;
-}
-.proj-img-wrap:hover .proj-img-overlay {
-  background:rgba(13,33,64,0.62);
-}
-.proj-img-wrap:hover .proj-img-overlay span {
-  color:rgba(255,255,255,0.92);
-}
-.proj-img-wrap:hover .proj-img-overlay svg {
-  opacity:0.85;
-}
-.proj-img-icon { opacity:0.28; }
-.proj-img-lbl  { font-size:0.65rem; color:var(--ink-3); letter-spacing:0.1em; text-transform:uppercase; font-weight:300; }
-
-/* Card body */
-.proj-body { padding:18px 20px 20px; display:flex; flex-direction:column; gap:0; flex:1; }
-.proj-meta { display:flex; align-items:center; gap:7px; margin-bottom:8px; }
-.proj-yr   { font-size:0.72rem; color:var(--ink-3); font-weight:300; letter-spacing:0.07em; }
-.proj-type {
-  font-size:0.68rem; padding:2px 9px; border-radius:3px;
-  background:var(--wash); color:var(--navy-soft);
-  border:1px solid var(--pale); font-weight:400; letter-spacing:0.03em;
-}
-.proj-name { font-size:0.95rem; color:var(--navy); line-height:1.55; font-weight:500; margin-bottom:14px; flex:1; }
-.proj-div  { height:1px; background:var(--rule); margin-bottom:12px; opacity:0.5; }
-.proj-desc-lbl { font-size:0.65rem; color:var(--ink-3); letter-spacing:0.14em; text-transform:uppercase; font-weight:300; margin-bottom:8px; }
-.proj-desc-text {
-  font-size:0.88rem; color:var(--ink-3); font-weight:300;
-  line-height:1.8; font-style:italic;
-}
-
-/* ============ FOOTER ============ */
-.footer {
-  padding-top:40px; border-top:1px solid var(--rule);
-  display:flex; justify-content:center; align-items:center; gap:10px;
-  font-size:0.72rem; color:var(--ink-3); font-weight:300; letter-spacing:0.1em;
-}
-.footer-sig { font-family:'Oranienbaum', serif; font-style:italic; font-size:1.1rem; color:var(--navy-soft); font-weight:400; }
-.footer-yr  { font-family:var(--serif); font-style:italic; font-size:0.88rem; color:var(--ink-3); }
-
-/* ── Floating line deco (ambient looping) ── */
-.float-line {
-  position:fixed; pointer-events:none; z-index:0;
-  opacity:0; animation:lineFade 12s ease-in-out infinite;
-}
-.float-line svg line { stroke:rgba(126,168,200,0.18); stroke-width:1; }
-@keyframes lineFade {
-  0%,100%{ opacity:0; }
-  40%,60% { opacity:1; }
-}
-
-/* ── Hero stats bar ── */
 .hero-stats {
-  display: flex; gap: 12px; margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
 }
+
 .stat-item {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 10px 16px; border-radius: 10px;
-  background: rgba(255,255,255,0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.76);
   border: 1px solid var(--rule);
   backdrop-filter: blur(6px);
   min-width: 72px;
   transition: border-color 0.2s, transform 0.2s;
 }
-.stat-item:hover { border-color: var(--mist); transform: translateY(-2px); }
-.stat-n {
-  font-family: var(--serif); font-size: 1.5rem; font-weight: 600;
-  color: var(--navy); line-height: 1;
-}
-.stat-l {
-  font-size: 0.65rem; color: var(--ink-3); letter-spacing: 0.1em;
-  text-transform: uppercase; font-weight: 300; margin-top: 3px;
+
+.stat-item:hover {
+  border-color: var(--mist);
+  transform: translateY(-2px);
 }
 
-/* ── Contact chips ── */
-.hero-contacts { display: flex; flex-wrap: wrap; gap: 8px; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.stat-l {
+  font-size: 0.65rem;
+  color: var(--ink-3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-top: 3px;
+}
+
+.hero-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .contact-chip {
-  display: flex; align-items: center; gap: 7px;
-  padding: 7px 14px; border-radius: 24px;
-  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.78);
   border: 1px solid var(--rule);
-  font-size: 0.88rem; color: var(--ink-2); font-weight: 300;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+  font-weight: 300;
   transition: border-color 0.2s, color 0.2s, transform 0.2s;
   text-decoration: none;
 }
-.contact-chip:hover { border-color: var(--mist); color: var(--navy); transform: translateY(-1px); }
-.contact-chip svg { flex-shrink: 0; }
 
-/* ── Status badge ── */
-.status-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--navy-soft); font-weight: 400;
-  padding: 4px 11px; border-radius: 20px;
-  background: rgba(206,225,240,0.45);
-  border: 1px solid var(--pale);
-  margin-bottom: 12px;
+.contact-chip:hover {
+  border-color: var(--mist);
+  color: var(--navy);
+  transform: translateY(-1px);
 }
+
+.contact-chip svg {
+  flex-shrink: 0;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy-soft);
+  font-weight: 400;
+  padding: 4px 11px;
+  border-radius: 20px;
+  background: rgba(220,236,248,0.58);
+  border: 1px solid var(--pale);
+  margin-bottom: 0;
+}
+
 .status-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #5aae8a;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #67bd98;
   animation: dotPulse 2.5s ease-in-out infinite;
 }
 
-/* ── Task item (work experience) ── */
+@keyframes dotPulse {
+  0%,100% { transform: scale(1); opacity: 0.7; }
+  50%     { transform: scale(1.5); opacity: 1; }
+}
+
+/* ============ SECTION HEAD ============ */
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.sec-title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  white-space: nowrap;
+}
+
+.sec-title {
+  font-family: var(--serif);
+  font-size: 1.55rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--navy);
+  letter-spacing: 0.03em;
+}
+
+.sec-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg,var(--rule),transparent);
+}
+
+.sec-n {
+  font-family: var(--serif);
+  font-size: 2.05rem;
+  color: var(--mist);
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.sec-slash {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+.section {
+  margin-bottom: 64px;
+}
+
+/* ============ TIMELINE ============ */
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 0 48px;
+  padding-bottom: 38px;
+  position: relative;
+}
+
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.tl-left {
+  text-align: right;
+  padding-top: 3px;
+  position: relative;
+  align-self: stretch;
+}
+
+.tl-left::after {
+  content: '';
+  position: absolute;
+  right: -28px;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1.5px solid var(--mist);
+  z-index: 1;
+  animation: tldot 3.5s ease-in-out infinite;
+}
+
+@keyframes tldot {
+  0%,100% { box-shadow: 0 0 0 0 rgba(143,190,219,0); }
+  50%     { box-shadow: 0 0 0 5px rgba(143,190,219,0.22); }
+}
+
+.tl-item:not(:last-child) .tl-left::before {
+  content: '';
+  position: absolute;
+  right: -25px;
+  top: 17px;
+  bottom: -38px;
+  width: 1px;
+  background: linear-gradient(180deg,var(--rule) 60%,transparent 100%);
+}
+
+.tl-date {
+  font-size: 0.8rem;
+  color: var(--mist);
+  line-height: 1.65;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+.tl-co {
+  font-size: 0.88rem;
+  color: var(--ink-2);
+  font-weight: 500;
+  margin-bottom: 3px;
+  letter-spacing: 0.01em;
+}
+
+.tl-role {
+  font-family: var(--serif);
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+
+.tl-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
 .tl-task {
   display: block;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.68);
   border: 1px solid var(--rule);
   border-radius: 10px;
   padding: 13px 16px 14px;
   transition: border-color 0.2s, box-shadow 0.2s;
+  font-size: 0.97rem;
+  color: var(--ink);
+  line-height: 1.9;
+  font-weight: 300;
 }
-.tl-task:hover { border-color: var(--pale); box-shadow: 0 2px 12px rgba(13,33,64,0.05); }
+
+.tl-task:hover {
+  border-color: var(--pale);
+  box-shadow: 0 2px 12px rgba(20,52,90,0.05);
+}
+
 .tl-task-title {
-  display: flex; align-items: center; gap: 7px;
-  font-size: 0.93rem; color: var(--navy-soft); font-weight: 600;
-  margin-bottom: 6px; line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.93rem;
+  color: var(--navy-soft);
+  font-weight: 600;
+  margin-bottom: 6px;
+  line-height: 1.4;
 }
+
 .tl-task-icon {
-  width: 15px; height: 15px; flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
   opacity: 0.75;
 }
+
 .tl-task-body {
-  font-size: 0.91rem; color: var(--ink); line-height: 1.9; font-weight: 300;
+  font-size: 0.91rem;
+  color: var(--ink);
+  line-height: 1.9;
+  font-weight: 300;
   padding-left: 22px;
 }
 
-/* ============ LANGUAGE ============ */
+/* ============ TWO-COL ============ */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 52px;
+  margin-bottom: 64px;
+}
+
+/* Education */
 .edu-block {
-  display:grid; gap:16px;
+  display: grid;
+  gap: 16px;
 }
-.edu-card, .lang-card {
-  background:rgba(255,255,255,0.5);
-  border:1px solid var(--rule);
-  border-radius:14px;
-  padding:18px 20px;
+
+.edu-card,
+.lang-card {
+  background: rgba(255,255,255,0.68);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 18px 20px;
 }
-.lang-section { margin-top:0; }
-.lang-list { display:grid; gap:10px; }
+
+.edu-uni {
+  font-size: 0.97rem;
+  color: var(--navy-soft);
+  font-weight: 400;
+  margin-bottom: 2px;
+  letter-spacing: 0.02em;
+}
+
+.edu-dept {
+  font-family: var(--serif);
+  font-size: 1.38rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+
+.edu-yr {
+  font-size: 0.84rem;
+  color: var(--ink-3);
+  letter-spacing: 0.07em;
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+
+.edu-note {
+  font-size: 0.97rem;
+  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.85;
+  font-style: italic;
+  padding-left: 14px;
+  border-left: 2px solid var(--pale);
+}
+
+/* Skills */
+.skill-group {
+  margin-bottom: 14px;
+}
+
+.skill-g-lbl {
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mist);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tag {
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(217,231,242,0.9);
+  background: rgba(240,247,252,0.72);
+  font-size: 0.84rem;
+  color: var(--navy-soft);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.skill-tag:hover {
+  background: rgba(220,236,248,0.78);
+  border-color: var(--mist);
+  color: var(--navy);
+  transform: translateY(-1px);
+}
+
+/* ============ LANGUAGE ============ */
+.lang-section {
+  margin-top: 0;
+}
+
+.lang-list {
+  display: grid;
+  gap: 10px;
+}
+
 .lang-item {
-  display:flex; justify-content:space-between; align-items:center; gap:14px;
-  padding:11px 13px;
-  background:rgba(230,239,248,0.38);
-  border:1px solid rgba(197,213,229,0.6);
-  border-radius:10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 13px;
+  background: rgba(240,247,252,0.68);
+  border: 1px solid rgba(217,231,242,0.82);
+  border-radius: 10px;
 }
-.lang-name { font-size:0.92rem; color:var(--navy); font-weight:500; letter-spacing:0.02em; }
-.lang-level { font-size:0.78rem; color:var(--ink-2); font-weight:300; letter-spacing:0.04em; text-align:right; }
+
+.lang-name {
+  font-size: 0.92rem;
+  color: var(--navy);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.lang-level {
+  font-size: 0.78rem;
+  color: var(--ink-2);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
 .lang-badge {
-  display:inline-flex; align-items:center; gap:5px;
-  padding:3px 10px; border-radius:5px;
-  background:rgba(126,168,200,0.12);
-  border:1px solid rgba(126,168,200,0.35);
-  font-size:0.75rem; color:var(--navy-soft); font-weight:500;
-  letter-spacing:0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background: rgba(143,190,219,0.14);
+  border: 1px solid rgba(143,190,219,0.35);
+  font-size: 0.75rem;
+  color: var(--navy-soft);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* ============ PROJECTS ============ */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+  gap: 22px;
+}
+
+.proj-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.28s;
+}
+
+.proj-card:hover {
+  border-color: var(--mist);
+  box-shadow: 0 8px 32px rgba(20,52,90,0.08);
+  transform: translateY(-4px);
+}
+
+.proj-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  display: block;
+  cursor: none;
+}
+
+.proj-img-ph {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg,var(--wash) 0%,#e8f3fa 50%,#f5fbff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.proj-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20,52,90,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.proj-img-overlay span {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0);
+  transition: color 0.3s ease;
+}
+
+.proj-img-overlay svg {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.proj-img-wrap:hover .proj-img-overlay {
+  background: rgba(20,52,90,0.58);
+}
+
+.proj-img-wrap:hover .proj-img-overlay span {
+  color: rgba(255,255,255,0.92);
+}
+
+.proj-img-wrap:hover .proj-img-overlay svg {
+  opacity: 0.85;
+}
+
+.proj-img-icon {
+  opacity: 0.28;
+}
+
+.proj-img-lbl {
+  font-size: 0.65rem;
+  color: var(--ink-3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.proj-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.proj-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.proj-yr {
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  font-weight: 300;
+  letter-spacing: 0.07em;
+}
+
+.proj-type {
+  font-size: 0.68rem;
+  padding: 2px 9px;
+  border-radius: 3px;
+  background: var(--wash);
+  color: var(--navy-soft);
+  border: 1px solid var(--pale);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+.proj-name {
+  font-size: 0.95rem;
+  color: var(--navy);
+  line-height: 1.55;
+  font-weight: 500;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.proj-div {
+  height: 1px;
+  background: var(--rule);
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.proj-desc-lbl {
+  font-size: 0.65rem;
+  color: var(--ink-3);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.proj-desc-text {
+  font-size: 0.88rem;
+  color: var(--ink-3);
+  font-weight: 300;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  padding-top: 40px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.footer-sig {
+  font-family: 'Oranienbaum', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--navy-soft);
+  font-weight: 400;
+}
+
+.footer-yr {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--ink-3);
 }
 
 /* ── Back to top ── */
 .back-to-top {
-  position:fixed; right:24px; bottom:24px;
-  width:48px; height:48px; border-radius:50%;
-  border:1px solid rgba(126,168,200,0.55);
-  background:rgba(250,248,245,0.78);
-  color:var(--navy);
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:0 8px 28px rgba(13,33,64,0.1);
-  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  opacity:0; visibility:hidden; transform:translateY(12px);
-  transition:opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, border-color 0.2s ease;
-  z-index:20;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(143,190,219,0.55);
+  background: rgba(255,255,255,0.82);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 28px rgba(20,52,90,0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, border-color 0.2s ease;
+  z-index: 20;
 }
-.back-to-top.visible { opacity:1; visibility:visible; transform:translateY(0); }
-.back-to-top:hover { border-color:var(--mist); transform:translateY(-2px); }
-.back-to-top:active { transform:translateY(0) scale(0.92); }
 
-/* ── Mobile hero: photo inline with name ── */
-@media (max-width:640px) {
-  .page        { padding:24px 16px 48px; }
-  .page-glass  { padding:32px 20px 48px; border-radius:14px; }
-  .hero { grid-template-columns:1fr; gap:0; }
-  .hero > .hex-wrap { display:none; }
-  .hero-text::before {
-    content:''; display:none;
-  }
-  .hero-name-row {
-    display:flex; align-items:center; gap:16px;
-    flex-wrap:nowrap; margin-bottom:10px;
-  }
-  .hero-name-row .hex-inline { display:flex !important; }
-  .hero-name { font-size:2.2rem; }
-  .hero-name-en { font-size:1.4rem; display:block; margin-top:2px; }
-  .hero-role   { font-size:1rem; }
-  .hero-bio    { font-size:0.95rem; max-width:100%; line-height:1.85; }
-  .hero-stats  { flex-wrap: wrap; gap: 8px; }
-  .stat-item   { min-width: 68px; padding: 8px 12px; }
-  .stat-n      { font-size: 1.3rem; }
-  .hero-contacts { flex-direction: column; gap: 8px; }
-  .contact-chip { font-size: 0.84rem; }
-  .two-col     { grid-template-columns:1fr; gap:40px; }
-  .tl-item     { grid-template-columns:68px 1fr; gap:0 32px; }
-  .tl-role     { font-size:1.1rem; }
-  .tl-task-body { font-size:0.88rem; padding-left:20px; }
-  .tl-left::after { right:-20px; }
-  .tl-item:not(:last-child) .tl-left::before { right:-17px; }
-  .proj-mobile-hint { display:inline; }
-  .sec-head    { flex-wrap: wrap; gap: 8px; align-items: center; }
-  .sec-title-wrap { gap: 7px; }
-  .sec-n { font-size:1.55rem; }
-  .sec-title { font-size:1.35rem; }
-  .back-to-top { right:16px; bottom:16px; width:44px; height:44px; }
-  .proj-grid   { grid-template-columns: 1fr; }
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
+
+.back-to-top:hover {
+  border-color: var(--mist);
+  transform: translateY(-2px);
+}
+
+.back-to-top:active {
+  transform: translateY(0) scale(0.92);
+}
+
 .proj-mobile-hint {
   display: none;
-  font-size: 0.7rem; color: var(--mist);
-  white-space: nowrap; letter-spacing: 0.02em;
-  font-family: var(--sans); font-weight: 300;
+  font-size: 0.7rem;
+  color: var(--mist);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  font-family: var(--sans);
+  font-weight: 300;
+}
+
+@keyframes hexDraw {
+  from { stroke-dashoffset: 320; opacity: 0.4; }
+  to   { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* ── Mobile ── */
+@media (max-width:640px) {
+  .page {
+    padding: 24px 16px 48px;
+  }
+
+  .page-glass {
+    padding: 32px 20px 48px;
+    border-radius: 14px;
+  }
+
+  .hero {
+    display: block;
+  }
+
+  .hero-top {
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .hero-text {
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .hex-wrap {
+    flex-shrink: 0;
+  }
+
+  .profile-photo {
+    width: 72px;
+    height: 84px;
+  }
+
+  .hero-name-row {
+    margin-bottom: 8px;
+  }
+
+  .name-pair {
+    display: block;
+  }
+
+  .hero-name {
+    font-size: 2.2rem;
+  }
+
+  .hero-name-en {
+    font-size: 1.4rem;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .hero-role {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-bio {
+    font-size: 0.95rem;
+    max-width: 100%;
+    line-height: 1.85;
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .stat-item {
+    min-width: 68px;
+    padding: 8px 12px;
+  }
+
+  .stat-n {
+    font-size: 1.3rem;
+  }
+
+  .hero-contacts {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contact-chip {
+    font-size: 0.84rem;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .tl-item {
+    grid-template-columns: 68px 1fr;
+    gap: 0 32px;
+  }
+
+  .tl-role {
+    font-size: 1.1rem;
+  }
+
+  .tl-task-body {
+    font-size: 0.88rem;
+    padding-left: 20px;
+  }
+
+  .tl-left::after {
+    right: -20px;
+  }
+
+  .tl-item:not(:last-child) .tl-left::before {
+    right: -17px;
+  }
+
+  .proj-mobile-hint {
+    display: inline;
+  }
+
+  .sec-head {
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .sec-title-wrap {
+    gap: 7px;
+  }
+
+  .sec-n {
+    font-size: 1.55rem;
+  }
+
+  .sec-title {
+    font-size: 1.35rem;
+  }
+
+  .back-to-top {
+    right: 16px;
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .proj-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <div id="cursor"></div>
@@ -590,86 +1260,56 @@ body {
   <div class="ink-circle ink-1"></div>
   <div class="ink-circle ink-2"></div>
   <div class="ink-circle ink-3"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
-  <div class="dust"></div>
 </div>
 
 <main class="page">
 <div class="page-glass">
 
+  <div class="glass-aura">
+    <div class="aura-circle"></div>
+    <div class="aura-circle"></div>
+    <div class="aura-circle"></div>
+    <div class="aura-circle"></div>
+    <div class="aura-circle"></div>
+    <div class="aura-circle"></div>
+  </div>
+
   <section class="hero reveal" style="transition-delay:0s;">
-    <div class="hex-wrap">
-      <svg class="hex-svg" viewBox="0 0 128 148" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#dce9f4"/>
-            <stop offset="100%" stop-color="#c8ddf0"/>
-          </linearGradient>
-          <clipPath id="hexClip">
-            <polygon points="64,4 124,38 124,110 64,144 4,110 4,38"/>
-          </clipPath>
-        </defs>
-        <polygon points="64,4 124,38 124,110 64,144 4,110 4,38" fill="url(#hexGrad)"/>
-        <polygon points="64,4 124,38 124,110 64,144 4,110 4,38"
-                 fill="none" stroke="#93b4d4" stroke-width="1.2"
-                 stroke-dasharray="320" stroke-dashoffset="320"
-                 style="animation:hexDraw 2.5s ease forwards 0.4s;">
-        </polygon>
-        <polygon points="64,14 114,42 114,106 64,134 14,106 14,42"
-                 fill="none" stroke="rgba(147,180,212,0.3)" stroke-width="0.8"/>
-        <g opacity="0.3" transform="translate(64,74)">
-          <circle cx="0" cy="-18" r="14" fill="#2d5282"/>
-          <path d="M-26,18 Q-26,-2 0,-2 Q26,-2 26,18 Z" fill="#2d5282"/>
-        </g>
-        <text x="64" y="161" text-anchor="middle" font-size="8" fill="#90aabb" font-family="Noto Sans TC,sans-serif" letter-spacing="2" font-weight="300">PHOTO</text>
-      </svg>
+    <div class="hero-top">
+      <div class="hex-wrap">
+        <img class="profile-photo" src="profile.png" alt="董伊淇 Eri Tung">
+      </div>
+
+      <div class="hero-text-main">
+        <div class="hero-over">Portfolio &nbsp;/&nbsp; Resume</div>
+
+        <div class="hero-name-row">
+          <div class="name-pair">
+            <h1 class="hero-name">董<em>伊淇</em></h1>
+            <span class="hero-name-en">Eri Tung</span>
+          </div>
+        </div>
+
+        <div class="hero-role">Project Planner &nbsp;·&nbsp; Digital Creative</div>
+        <div class="status-badge"><span class="status-dot"></span>Available for new opportunities</div>
+      </div>
     </div>
 
     <div class="hero-text">
-      <div class="hero-over">Portfolio &nbsp;/&nbsp; Resume</div>
-      <div class="hero-name-row">
-        <svg class="hex-svg hex-inline" style="display:none;width:64px;height:74px;flex-shrink:0;" viewBox="0 0 128 148" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="hexGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%"   stop-color="#dce9f4"/>
-              <stop offset="100%" stop-color="#c8ddf0"/>
-            </linearGradient>
-          </defs>
-          <polygon points="64,4 124,38 124,110 64,144 4,110 4,38" fill="url(#hexGrad2)"/>
-          <polygon points="64,4 124,38 124,110 64,144 4,110 4,38" fill="none" stroke="#93b4d4" stroke-width="1.2"/>
-          <g opacity="0.3" transform="translate(64,74)">
-            <circle cx="0" cy="-18" r="14" fill="#2d5282"/>
-            <path d="M-26,18 Q-26,-2 0,-2 Q26,-2 26,18 Z" fill="#2d5282"/>
-          </g>
-        </svg>
-        <div class="name-pair">
-          <h1 class="hero-name">董<em>伊淇</em></h1>
-          <span class="hero-name-en">Eri Tung</span>
-        </div>
-      </div>
-      <div class="hero-role">Project Planner &nbsp;·&nbsp; Digital Creative</div>
-      <div class="status-badge"><span class="status-dot"></span>Available for new opportunities</div>
       <p class="hero-bio">擁有 3 年專案企劃經驗，策劃多組數位廣告素材上線與活動網頁規劃。具備時程控管與跨部門溝通能力，並能運用自動化工具提高內部工作流程效率。</p>
+
       <div class="hero-stats">
         <div class="stat-item"><span class="stat-n">3+</span><span class="stat-l">年經驗</span></div>
         <div class="stat-item"><span class="stat-n">10+</span><span class="stat-l">專案執行</span></div>
         <div class="stat-item"><span class="stat-n">5+</span><span class="stat-l">品牌合作</span></div>
       </div>
+
       <div class="hero-contacts">
         <a class="contact-chip" href="mailto:eri.tung421@gmail.com">
           <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
           eri.tung421@gmail.com
         </a>
+
         <a class="contact-chip" href="tel:0983755899">
           <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 2.98 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z"/></svg>
           0983-755-899
@@ -683,13 +1323,15 @@ body {
       <div class="sec-title-wrap"><span class="sec-n">01</span><span class="sec-slash">/</span><h2 class="sec-title">Work Experience</h2></div>
       <div class="sec-rule"></div>
     </div>
-    <div class="timeline">
 
+    <div class="timeline">
       <div class="tl-item">
         <div class="tl-left"><div class="tl-date">2023.06<br>— Now</div></div>
+
         <div>
           <div class="tl-co">艾迪英特股份有限公司</div>
           <div class="tl-role">專案企劃</div>
+
           <div class="tl-tasks">
             <div class="tl-task">
               <div class="tl-task-title">
@@ -698,6 +1340,7 @@ body {
               </div>
               <div class="tl-task-body">負責網路廣告全方位提案，從創意發想到文案撰寫，協助內外橋樑溝通，確保專案順利上線。</div>
             </div>
+
             <div class="tl-task">
               <div class="tl-task-title">
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><circle cx="11" cy="11" r="3"/></svg>
@@ -705,6 +1348,7 @@ body {
               </div>
               <div class="tl-task-body">擔任設計師與客戶間的橋樑，審核所有設計產出，提供具體視覺修改意見，確保素材符合品牌調性。</div>
             </div>
+
             <div class="tl-task">
               <div class="tl-task-title">
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
@@ -712,6 +1356,7 @@ body {
               </div>
               <div class="tl-task-body">使用 PS、AE 等軟體於提案階段，透過動態 Demo 大幅提升提案過案率。</div>
             </div>
+
             <div class="tl-task">
               <div class="tl-task-title">
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
@@ -719,6 +1364,7 @@ body {
               </div>
               <div class="tl-task-body">自主運用 AI 平台開發工作小工具，減少手動作業時間，提升團隊協作效率。</div>
             </div>
+
             <div class="tl-task">
               <div class="tl-task-title">
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
@@ -732,6 +1378,7 @@ body {
 
       <div class="tl-item">
         <div class="tl-left"><div class="tl-date">2022.10<br>— 2023.05</div></div>
+
         <div>
           <div class="tl-co">日商卓一智能科技股份有限公司</div>
           <div class="tl-role">設計實習生</div>
@@ -740,7 +1387,6 @@ body {
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -750,25 +1396,29 @@ body {
         <div class="sec-title-wrap"><span class="sec-n">02</span><span class="sec-slash">/</span><h2 class="sec-title">Education</h2></div>
         <div class="sec-rule"></div>
       </div>
+
       <div class="edu-block">
         <div class="edu-card">
           <div class="edu-uni">中國文化大學</div>
-          <div class="edu-dept">廣告系</div>
+          <div class="edu-dept">廣告學系</div>
           <div class="edu-yr">2018 — 2022</div>
           <p class="edu-note">擔任畢業展覽「解迷因」主視覺設計負責人，規劃整體視覺風格、標準字與主視覺動畫呈現，並處理後續送印等流程執行。</p>
         </div>
 
         <div class="lang-card lang-section">
           <div class="skill-g-lbl" style="margin-bottom:14px;">語言能力</div>
+
           <div class="lang-list">
             <div class="lang-item">
               <span class="lang-name">中文</span>
               <span class="lang-level">母語</span>
             </div>
+
             <div class="lang-item">
               <span class="lang-name">English</span>
               <span class="lang-level">日常溝通・書面文件</span>
             </div>
+
             <div class="lang-item">
               <span class="lang-name">日本語</span>
               <span class="lang-badge">JLPT N3</span>
@@ -777,11 +1427,13 @@ body {
         </div>
       </div>
     </div>
+
     <div>
       <div class="sec-head">
         <div class="sec-title-wrap"><span class="sec-n">03</span><span class="sec-slash">/</span><h2 class="sec-title">Skills</h2></div>
         <div class="sec-rule"></div>
       </div>
+
       <div>
         <div class="skill-group">
           <div class="skill-g-lbl">企劃 &amp; 溝通</div>
@@ -793,6 +1445,7 @@ body {
             <span class="skill-tag">文案撰寫</span>
           </div>
         </div>
+
         <div class="skill-group">
           <div class="skill-g-lbl">Tools &amp; Software</div>
           <div class="skill-tags">
@@ -813,15 +1466,18 @@ body {
       <span class="proj-mobile-hint">※ 點擊圖片進入網頁</span>
       <div class="sec-rule"></div>
     </div>
-    <div class="proj-grid">
 
+    <div class="proj-grid">
       <div class="proj-card">
         <a class="proj-img-wrap" href="https://xpark365lifestyle.ad2iction.com/" target="_blank" rel="noopener">
           <div class="proj-img-ph">
-            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3f72a5" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             <span class="proj-img-lbl">proj_xpark_365.png</span>
           </div>
-          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+          <div class="proj-img-overlay">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>點擊前往</span>
+          </div>
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type">活動網頁</span></div>
@@ -835,10 +1491,13 @@ body {
       <div class="proj-card">
         <a class="proj-img-wrap" href="https://xpark365quiz.ad2iction.com/" target="_blank" rel="noopener">
           <div class="proj-img-ph">
-            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3f72a5" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             <span class="proj-img-lbl">proj_xpark_quiz.png</span>
           </div>
-          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+          <div class="proj-img-overlay">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>點擊前往</span>
+          </div>
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type">心理測驗</span></div>
@@ -852,10 +1511,13 @@ body {
       <div class="proj-card">
         <a class="proj-img-wrap" href="https://www.mandarin-airlines.com/mda-app/index.html" target="_blank" rel="noopener">
           <div class="proj-img-ph">
-            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3f72a5" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             <span class="proj-img-lbl">proj_mandarin_app.png</span>
           </div>
-          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+          <div class="proj-img-overlay">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>點擊前往</span>
+          </div>
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">資訊網頁</span></div>
@@ -869,10 +1531,13 @@ body {
       <div class="proj-card">
         <a class="proj-img-wrap" href="https://wwwosc.ad2iction.com/25/darlie2025" target="_blank" rel="noopener">
           <div class="proj-img-ph">
-            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3f72a5" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             <span class="proj-img-lbl">proj_haolai_patrol.png</span>
           </div>
-          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+          <div class="proj-img-overlay">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>點擊前往</span>
+          </div>
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">網頁互動</span></div>
@@ -886,10 +1551,13 @@ body {
       <div class="proj-card">
         <a class="proj-img-wrap" href="https://meiji-2025winter-event.com.tw/" target="_blank" rel="noopener">
           <div class="proj-img-ph">
-            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5282" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <svg class="proj-img-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3f72a5" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             <span class="proj-img-lbl">proj_meiji_100th.png</span>
           </div>
-          <div class="proj-img-overlay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>點擊前往</span></div>
+          <div class="proj-img-overlay">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>點擊前往</span>
+          </div>
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">活動 / 互動</span></div>
@@ -899,7 +1567,6 @@ body {
           <div class="proj-desc-text">文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字。</div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -915,24 +1582,16 @@ body {
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
 
-<style>
-@keyframes hexDraw {
-  from { stroke-dashoffset:320; opacity:0.4; }
-  to   { stroke-dashoffset:0;   opacity:1; }
-}
-</style>
-
 <script>
-/* ── Cursor ── */
 const cur  = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
+let mx = 0, my = 0, rx = 0, ry = 0;
 
 document.addEventListener('mousemove', e => {
-  mx=e.clientX;
-  my=e.clientY;
-  cur.style.left=mx+'px';
-  cur.style.top=my+'px';
+  mx = e.clientX;
+  my = e.clientY;
+  cur.style.left = mx + 'px';
+  cur.style.top = my + 'px';
 });
 
 document.addEventListener('mousedown', () => document.body.classList.add('cursor-active'));
@@ -940,30 +1599,28 @@ document.addEventListener('mouseup', () => document.body.classList.remove('curso
 document.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
 
 function animRing(){
-  rx += (mx-rx)*0.12;
-  ry += (my-ry)*0.12;
-  ring.style.left=Math.round(rx)+'px';
-  ring.style.top=Math.round(ry)+'px';
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = Math.round(rx) + 'px';
+  ring.style.top = Math.round(ry) + 'px';
   requestAnimationFrame(animRing);
 }
 animRing();
 
-document.querySelectorAll('a,button,label,.proj-card,.skill-tag,.proj-img-wrap').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
+document.querySelectorAll('a,button,label,.proj-card,.skill-tag,.proj-img-wrap').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
 });
 
-/* ── Scroll reveal ── */
-const io = new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){
-    e.target.classList.add('visible');
-    io.unobserve(e.target);
+const io = new IntersectionObserver(entries => entries.forEach(entry => {
+  if(entry.isIntersecting){
+    entry.target.classList.add('visible');
+    io.unobserve(entry.target);
   }
-}),{threshold:0.06});
+}), { threshold: 0.06 });
 
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* ── Back to top ── */
 const backTop = document.querySelector('.back-to-top');
 
 function toggleBackTop(){
