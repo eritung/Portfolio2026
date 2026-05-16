@@ -94,6 +94,97 @@ body.cursor-active #cursor-ring {
   border-color: rgba(20,52,90,0.36);
 }
 
+/* ── Brand Marquee ── */
+.brand-marquee-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.brand-marquee-outer {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: linear-gradient(135deg, rgba(240,247,252,0.55) 0%, rgba(220,236,248,0.35) 100%);
+  padding: 10px 0;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.brand-marquee-outer::before,
+.brand-marquee-outer::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 72px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.brand-marquee-outer::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-card, #fff) 0%, transparent 100%);
+}
+
+.brand-marquee-outer::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-card, #fff) 0%, transparent 100%);
+}
+
+.brand-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: brandScroll 48s linear infinite;
+  will-change: transform;
+}
+
+.brand-marquee-outer:hover .brand-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes brandScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.brand-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.brand-marquee-sep {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--mist);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.brand-marquee-en {
+  font-family: var(--serif);
+  font-size: 13.5px;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  color: var(--navy-mid);
+}
+
+.brand-marquee-cn {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  font-weight: 300;
+  color: var(--ink-2);
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -1353,6 +1444,11 @@ body {
         <span class="strength-tag">AI 流程優化</span>
       </div>
 
+      <div class="brand-marquee-label">精選合作品牌</div>
+      <div class="brand-marquee-outer" aria-label="合作品牌跑馬燈">
+        <div class="brand-marquee-track" id="brandTrack"></div>
+      </div>
+
       <div class="hero-contacts">
         <a class="contact-chip" href="mailto:eri.tung421@gmail.com">
           <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1650,6 +1746,66 @@ body {
 </button>
 
 <script>
+/* ── Brand Marquee ── */
+(function(){
+  const brands = [
+    { en: 'Biore', cn: '蜜妮' },
+    { en: 'Kao', cn: '花王' },
+    { en: 'MegRhythm', cn: '美舒律' },
+    { en: 'TSUBAKI', cn: '思波綺' },
+    { en: 'Liese', cn: '莉婕' },
+    { en: 'Rerise', cn: '麗仕染髮' },
+    { en: 'RYO', cn: '呂' },
+    { en: 'SENKA', cn: '專科' },
+    { en: 'Kotex', cn: '靠得住' },
+    { en: 'C&C', cn: '黑松' },
+    { en: 'Royal Tea', cn: '茶裏王' },
+    { en: 'Pure Tea', cn: '純喫茶' },
+    { en: "M&M's", cn: '' },
+    { en: 'POCKY', cn: '百奇' },
+    { en: 'Pringles', cn: '品客' },
+    { en: 'Mai Hsiang', cn: '麥香' },
+    { en: '濃韻', cn: '' },
+    { en: 'Meiji', cn: '明治' },
+    { en: 'Laurel', cn: '桂冠' },
+    { en: 'House Foods', cn: '好侍食品' },
+    { en: 'Wei Lih', cn: '味味一品' },
+    { en: 'InSeed', cn: '益喜氏' },
+    { en: 'Burger King', cn: '漢堡王' },
+    { en: "McDonald's", cn: '麥當勞' },
+    { en: 'Tokiya', cn: '陶板屋' },
+    { en: 'Carrefour', cn: '家樂福' },
+    { en: 'ELIFEMALL', cn: '全國電子' },
+    { en: 'Ming Yao', cn: '明曜百貨' },
+    { en: 'LG Electronics', cn: '' },
+    { en: 'Dyson', cn: '戴森' },
+    { en: 'ASUS', cn: '華碩' },
+    { en: 'Alinamin', cn: '合利他命' },
+    { en: 'VIGORLIFE', cn: '輝致維骨力' },
+    { en: 'CheongKwanJang', cn: '正官庄' },
+    { en: 'Dry & Dry', cn: '克潮靈' },
+    { en: 'FundRich', cn: '基富通證券' },
+    { en: 'UIP', cn: '聯合國際影業' },
+    { en: '采昌國際', cn: '' },
+    { en: 'Pokémon', cn: '寶可夢' },
+    { en: 'XPARK', cn: '' },
+    { en: '黑松金酒', cn: '' },
+  ];
+
+  function buildItems() {
+    return brands.map(b => {
+      const cn = b.cn ? `<span class="brand-marquee-cn">${b.cn}</span>` : '';
+      return `<span class="brand-marquee-item"><span class="brand-marquee-sep"></span><span class="brand-marquee-en">${b.en}</span>${cn}</span>`;
+    }).join('');
+  }
+
+  const track = document.getElementById('brandTrack');
+  if (track) {
+    const chunk = buildItems();
+    track.innerHTML = chunk + chunk;
+  }
+})();
+
 const cur  = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 let mx = 0, my = 0, rx = 0, ry = 0;
