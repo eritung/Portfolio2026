@@ -347,7 +347,7 @@ body {
 .page {
   position: relative;
   z-index: 1;
-  max-width: 1100px;
+  max-width: 880px;
   margin: 0 auto;
   padding: 72px 44px 100px;
 }
@@ -985,7 +985,7 @@ body {
 /* ============ PROJECTS ============ */
 .proj-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+  grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
   gap: 22px;
 }
 
