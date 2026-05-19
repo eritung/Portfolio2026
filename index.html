@@ -1780,13 +1780,14 @@ body {
 
 @media (max-width: 640px) {
   .carousel-card {
-    flex: 0 0 calc(100vw - 48px);
-    scroll-snap-align: center;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
   }
   .carousel-scroll {
-    scroll-padding-left: 24px;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 0;
+    gap: 12px;
   }
   .carousel-phone-frame { width: 140px; height: 284px; }
   .carousel-phone-area { min-height: 278px; }
@@ -2311,7 +2312,7 @@ body {
           <div class="carousel-phone-area">
             <div class="carousel-phone-frame">
               <div class="carousel-phone-screen">
-                <video class="carousel-phone-video" src="videos/ad1.mp4" preload="metadata" muted loop playsinline></video>
+                <video class="carousel-phone-video" src="videos/dyson_spot.mp4" preload="metadata" muted loop playsinline></video>
               </div>
             </div>
           </div>
@@ -2383,7 +2384,7 @@ body {
           <div class="carousel-phone-area">
             <div class="carousel-phone-frame">
               <div class="carousel-phone-screen">
-                <video class="carousel-phone-video" src="videos/ad1.mp4" preload="metadata" muted loop playsinline></video>
+                <video class="carousel-phone-video" src="videos/tsubaki_shining.mp4" preload="metadata" muted loop playsinline></video>
               </div>
             </div>
           </div>
