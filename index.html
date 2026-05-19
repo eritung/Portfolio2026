@@ -467,8 +467,9 @@ body {
 .hero-name-row {
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
   gap: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   flex-wrap: wrap;
 }
 
@@ -517,13 +518,22 @@ body {
 }
 
 .hero-bio {
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   color: var(--ink);
   font-weight: 300;
-  line-height: 1.8;
-  max-width: 520px;
+  line-height: 1.85;
   margin-top: 0;
   margin-bottom: 22px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.hero-bio p {
+  margin-bottom: 12px;
+}
+
+.hero-bio p:last-child {
+  margin-bottom: 0;
 }
 
 .hero-stats {
@@ -573,7 +583,6 @@ body {
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 20px;
-  max-width: 520px;
 }
 
 .strength-tag {
@@ -771,7 +780,7 @@ body {
 }
 
 .tl-co {
-  font-size: 0.88rem;
+  font-size: 1rem;
   color: var(--ink-2);
   font-weight: 500;
   margin-bottom: 3px;
@@ -780,7 +789,7 @@ body {
 
 .tl-role {
   font-family: var(--serif);
-  font-size: 1.28rem;
+  font-size: 1.42rem;
   font-weight: 600;
   color: var(--navy);
   margin-bottom: 14px;
@@ -815,7 +824,7 @@ body {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 0.93rem;
+  font-size: 1.05rem;
   color: var(--navy-soft);
   font-weight: 600;
   margin-bottom: 6px;
@@ -830,7 +839,7 @@ body {
 }
 
 .tl-task-body {
-  font-size: 0.91rem;
+  font-size: 1rem;
   color: var(--ink);
   line-height: 1.9;
   font-weight: 300;
@@ -884,7 +893,7 @@ body {
 }
 
 .edu-note {
-  font-size: 0.97rem;
+  font-size: 1rem;
   color: var(--ink);
   font-weight: 300;
   line-height: 1.85;
@@ -914,11 +923,11 @@ body {
 }
 
 .skill-tag {
-  padding: 6px 15px;
+  padding: 6px 16px;
   border-radius: 20px;
   border: 1px solid rgba(217,231,242,0.9);
   background: rgba(240,247,252,0.72);
-  font-size: 0.84rem;
+  font-size: 0.97rem;
   color: var(--navy-soft);
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -1120,7 +1129,7 @@ body {
 }
 
 .proj-name {
-  font-size: 0.95rem;
+  font-size: 1.08rem;
   color: var(--navy);
   line-height: 1.55;
   font-weight: 500;
@@ -1145,8 +1154,8 @@ body {
 }
 
 .proj-desc-text {
-  font-size: 0.88rem;
-  color: var(--ink-3);
+  font-size: 1rem;
+  color: var(--ink);
   font-weight: 300;
   line-height: 1.8;
   font-style: italic;
@@ -1393,6 +1402,495 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============ CAROUSEL / FEATURED PROPOSALS ============ */
+.carousel-intro {
+  margin-bottom: 24px;
+  max-width: 620px;
+}
+.carousel-intro-text {
+  font-size: 0.93rem;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.9;
+}
+.carousel-outer {
+  position: relative;
+}
+.carousel-scroll {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 8px 2px 24px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  user-select: none;
+}
+.carousel-scroll::-webkit-scrollbar { display: none; }
+
+.carousel-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.28s;
+}
+.carousel-card:hover {
+  border-color: var(--mist);
+  box-shadow: 0 8px 32px rgba(20,52,90,0.1);
+  transform: translateY(-3px);
+}
+
+/* Phone area */
+.carousel-phone-area {
+  background: linear-gradient(160deg, #e6f1fa 0%, #f0f7fd 60%, #eaf3fa 100%);
+  padding: 26px 0 18px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  min-height: 310px;
+  align-items: flex-start;
+}
+
+.carousel-phone-frame {
+  position: relative;
+  width: 158px;
+  height: 318px;
+  border-radius: 32px;
+  border: 11px solid rgba(20,52,90,0.15);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.6),
+    0 22px 48px rgba(20,52,90,0.18),
+    0 4px 12px rgba(20,52,90,0.1);
+  overflow: hidden;
+  background: #000;
+  flex-shrink: 0;
+}
+/* Dynamic island */
+.carousel-phone-frame::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 14px;
+  background: rgba(8,16,28,0.75);
+  border-radius: 7px;
+  z-index: 10;
+}
+.carousel-phone-screen {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 23px;
+}
+.carousel-phone-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Click-to-play overlay */
+.phone-video-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+}
+.phone-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8,18,34,0.32);
+  transition: background 0.2s, opacity 0.2s;
+  z-index: 5;
+}
+.phone-play-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.phone-play-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.22);
+  color: var(--navy);
+  transition: transform 0.15s, background 0.15s;
+}
+.phone-video-wrap:hover .phone-play-btn {
+  transform: scale(1.1);
+  background: white;
+}
+
+/* Single image slider for 教育部 card */
+.carousel-img-slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #0a1828;
+}
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: block;
+}
+.carousel-slide.active { opacity: 1; }
+.carousel-slide.img-error { display: none !important; }
+.carousel-slide-ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: linear-gradient(145deg, #1c3454 0%, #102236 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.carousel-slide-ph.active { opacity: 1; }
+.carousel-slide-ph svg { width: 22px; height: 22px; opacity: 0.45; }
+.carousel-slide-ph span {
+  font-size: 0.5rem;
+  color: #8fbedb;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+/* Image nav below phone */
+.paris-img-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 11px;
+}
+.paris-nav-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(20,52,90,0.22);
+  background: rgba(255,255,255,0.84);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  backdrop-filter: blur(6px);
+}
+.paris-nav-btn:hover {
+  border-color: var(--mist);
+  background: white;
+  transform: scale(1.1);
+}
+.paris-dots-wrap {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.paris-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.paris-dot.active {
+  background: var(--navy-soft);
+  transform: scale(1.35);
+}
+
+/* Card body */
+.carousel-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+.carousel-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.carousel-card-yr {
+  font-size: 0.82rem;
+  color: var(--ink-2);
+  font-weight: 300;
+  letter-spacing: 0.07em;
+}
+.carousel-card-tag {
+  font-size: 0.78rem;
+  padding: 2px 9px;
+  border-radius: 3px;
+  background: var(--wash);
+  color: var(--navy-soft);
+  border: 1px solid var(--pale);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+.carousel-card-title {
+  font-size: 1.1rem;
+  color: var(--navy);
+  font-weight: 500;
+  line-height: 1.5;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.carousel-card-div {
+  height: 1px;
+  background: var(--rule);
+  opacity: 0.5;
+}
+.carousel-card-desc {
+  font-size: 1rem;
+  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.82;
+  font-style: italic;
+  padding-left: 10px;
+  border-left: 2px solid var(--pale);
+  flex: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.carousel-link-qr {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+.carousel-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 1;
+  min-width: 0;
+  padding: 9px 14px;
+  background: var(--navy);
+  border: 1px solid var(--navy);
+  border-radius: 8px;
+  font-size: 0.86rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.carousel-link-btn:hover {
+  background: var(--navy-mid);
+  border-color: var(--navy-mid);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.carousel-qr-box {
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(20,52,90,0.07);
+}
+.carousel-qr-box canvas,
+.carousel-qr-box img {
+  position: absolute !important;
+  top: 9px !important;
+  left: 9px !important;
+  width: 50px !important;
+  height: 50px !important;
+  display: block !important;
+}
+
+/* Navigation arrows */
+.carousel-nav-btn {
+  position: absolute;
+  top: 178px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--navy);
+}
+.carousel-nav-btn:hover {
+  border-color: var(--mist);
+  box-shadow: 0 4px 16px rgba(20,52,90,0.12);
+}
+.carousel-nav-prev { left: -14px; }
+.carousel-nav-next { right: -14px; }
+
+/* Dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 4px;
+}
+.carousel-dot {
+  height: 5px;
+  width: 5px;
+  border-radius: 3px;
+  background: var(--ink-3);
+  cursor: pointer;
+  transition: background 0.25s, width 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.carousel-dot.active {
+  background: var(--navy-soft);
+  width: 18px;
+}
+
+@media (max-width: 640px) {
+  .carousel-card { flex: 0 0 272px; }
+  .carousel-phone-frame { width: 140px; height: 284px; }
+  .carousel-phone-area { min-height: 278px; }
+  .carousel-nav-btn { display: none; }
+}
+/* ── Hero body 2-col grid ── */
+.hero-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 210px;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 20px;
+}
+.hero-bio-col { min-width: 0; }
+.hero-side-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.hero-side-col .hero-stats {
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.hero-side-col .stat-item {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-width: unset;
+  padding: 10px 16px;
+}
+.hero-side-col .stat-n { font-size: 1.35rem; }
+.hero-side-col .stat-l { margin-top: 0; }
+.hero-side-col .hero-strengths { margin-bottom: 0; }
+
+@media (max-width: 640px) {
+  .hero-body-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .hero-side-col .hero-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .hero-side-col .stat-item {
+    flex-direction: column;
+    width: auto;
+    min-width: 68px;
+  }
+  .hero-side-col .stat-n { font-size: 1.3rem; }
+}
+/* ── Bio highlight ── */
+.bio-hl {
+  background: rgba(143,190,219,0.2);
+  color: var(--navy);
+  font-weight: 500;
+  font-style: normal;
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+
+/* ── Stat badges (pill style) ── */
+.stat-badge-row {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid var(--pale);
+  border-radius: 24px;
+  font-size: 0.86rem;
+  color: var(--ink-2);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  transition: border-color 0.2s, background 0.2s;
+}
+.stat-badge:hover {
+  border-color: var(--mist);
+  background: #fff;
+}
+.stat-badge-n {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1;
+}
+
+/* ── Contacts inline near name ── */
+.hero-name-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+  padding-bottom: 4px;
+}
+/* ── Animation performance: pause when tab hidden, respect reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .ink-circle, .aura-circle, .brand-marquee-track,
+  .hero::after, .status-dot, .tl-left::after {
+    animation: none !important;
+  }
+  .brand-marquee-track { transform: none !important; }
+}
+
 </style>
 </head>
 
@@ -1433,47 +1931,51 @@ body {
           <h1 class="hero-name">董<em>伊淇</em></h1>
           <span class="hero-name-en">Eri Tung</span>
         </div>
+        <div class="hero-name-contacts">
+          <a class="contact-chip" href="mailto:eri.tung421@gmail.com">
+            <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+            eri.tung421@gmail.com
+          </a>
+          <a class="contact-chip" href="tel:0983755899">
+            <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 2.98 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z"/></svg>
+            0983-755-899
+          </a>
+        </div>
       </div>
 
       <div class="hero-role">Project Planner &nbsp;·&nbsp; Digital Creative</div>
 
-      <p class="hero-bio">近 3 年專案企劃經驗，策劃多組數位廣告素材上線與活動網頁規劃。具備時程控管與跨部門溝通能力，並能運用自動化工具提高內部工作流程效率。</p>
+      <!-- 2-col: bio left / stats + tags right -->
+      <div class="hero-body-grid">
+        <div class="hero-bio-col">
+          <div class="hero-bio">
+            <p>Hi，我是 Eri，現職為<span class="bio-hl">數位廣告專案企劃</span>。</p>
+            <p>累積 <span class="bio-hl">350+ 專案執行</span>與 <span class="bio-hl">200+ 品牌合作</span>，擁有數位行銷、品牌企劃與視覺整合經驗，曾參與美妝、食品、快消、3C、娛樂等多類品牌專案，包含 <span class="bio-hl">Meiji、ASUS、Dyson、寶可夢、麥當勞</span>等品牌合作案件。</p>
+            <p>目前工作內容涵蓋<span class="bio-hl">數位廣告企劃、提案發想、網站 UI 規劃、專案時程控管</span>，以及設計與工程間的跨部門溝通協作。除了企劃能力外，也具備 <span class="bio-hl">Photoshop、After Effects</span> 等視覺製作能力，能透過動態 Demo 與視覺化提案提升專案溝通效率。</p>
+            <p>喜歡從創意發想到實際落地的過程，也樂於持續學習新工具與新技術，包含將 <span class="bio-hl">AI 應用於流程優化</span>與日常工作協作。期待未來能在品牌與數位內容領域中，持續累積兼具創意與執行力的作品。</p>
+          </div>
+        </div>
 
-      <div class="hero-stats">
-        <div class="stat-item"><span class="stat-n">3</span><span class="stat-l">年經驗</span></div>
-        <div class="stat-item"><span class="stat-n">350+</span><span class="stat-l">專案執行</span></div>
-        <div class="stat-item"><span class="stat-n">200+</span><span class="stat-l">品牌合作</span></div>
-      </div>
-
-      <div class="hero-strengths" aria-label="核心優勢">
-        <span class="strength-tag">效率</span>
-        <span class="strength-tag">溝通</span>
-        <span class="strength-tag">團隊合作</span>
-        <span class="strength-tag">專案企劃</span>
-        <span class="strength-tag">時程控管</span>
-        <span class="strength-tag">美感設計</span>
+        <div class="hero-side-col">
+          <div class="stat-badge-row">
+            <div class="stat-badge"><span class="stat-badge-n">3</span> 年經驗</div>
+            <div class="stat-badge"><span class="stat-badge-n">350+</span> 專案執行</div>
+            <div class="stat-badge"><span class="stat-badge-n">200+</span> 品牌合作</div>
+          </div>
+          <div class="hero-strengths" aria-label="核心優勢">
+            <span class="strength-tag">效率</span>
+            <span class="strength-tag">溝通</span>
+            <span class="strength-tag">團隊合作</span>
+            <span class="strength-tag">專案企劃</span>
+            <span class="strength-tag">時程控管</span>
+            <span class="strength-tag">美感設計</span>
+          </div>
+        </div>
       </div>
 
       <div class="brand-marquee-label">精選合作品牌</div>
       <div class="brand-marquee-outer" aria-label="合作品牌跑馬燈">
         <div class="brand-marquee-track" id="brandTrack"></div>
-      </div>
-
-      <div class="hero-contacts">
-        <a class="contact-chip" href="mailto:eri.tung421@gmail.com">
-          <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="M2 7l10 7 10-7"/>
-          </svg>
-          eri.tung421@gmail.com
-        </a>
-
-        <a class="contact-chip" href="tel:0983755899">
-          <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.18 2 2 0 0 1 2.98 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z"/>
-          </svg>
-          0983-755-899
-        </a>
       </div>
     </div>
   </div>
@@ -1554,13 +2056,6 @@ body {
               社群行銷素材設計
             </div>
             <div class="tl-task-body">負責 LINE 圖文選單、社群推播圖、動態 GIF 等素材設計與 Resize，入職後首兩期達成率分別為 149% 與 146%。合作品牌橫跨教育、美容保養、流行時尚、保健食品等多元產業。</div>
-          </div>
-          <div class="tl-task">
-            <div class="tl-task-title">
-              <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-              跨國案件溝通執行
-            </div>
-            <div class="tl-task-body">承接日本案件，熟悉 Flex Message Simulator，負責行銷推播文案發想及圖文選單上架，並協助跨語言溝通與後續執行。</div>
           </div>
           </div>
         </div>
@@ -1759,6 +2254,547 @@ body {
     </div>
   </section>
 
+  <section class="section reveal" style="transition-delay:0.25s;" id="featured-proposals">
+    <div class="sec-head">
+      <div class="sec-title-wrap"><span class="sec-n">05</span><span class="sec-slash">/</span><h2 class="sec-title">Featured Proposals</h2></div>
+      <div class="sec-rule"></div>
+    </div>
+
+    <div class="carousel-intro">
+      <p class="carousel-intro-text">以下為部分互動廣告素材精選企劃，涵蓋品牌活動、電影宣傳、運動賽事等多元類型。以創意包裝強化廣告說服力，結合社群熱議、互動機制與沉浸式場景，拉近品牌與使用者距離。掃描 QR Code 或點擊連結即可預覽實際效果。</p>
+    </div>
+
+    <div class="carousel-outer">
+      <button class="carousel-nav-btn carousel-nav-prev" type="button" aria-label="上一項" id="carouselPrev">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="carousel-nav-btn carousel-nav-next" type="button" aria-label="下一項" id="carouselNext">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+
+      <div class="carousel-scroll" id="carouselTrack">
+
+        <!-- ① 專科潔顏乳 x 大耳狗 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/ad_senka.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta">
+              <span class="carousel-card-yr">2025</span>
+              <span class="carousel-card-tag">品牌廣告</span>
+            </div>
+            <div class="carousel-card-title">專科潔顏乳 × 大耳狗限量版宣傳</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">結合 IP Cinnamoroll 大耳狗的療癒萌感，利用動畫呈現泡泡的綿密與柔軟，使產品特點以具象化呈現，加深使用者對產品優勢的理解與印象。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dCi" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/dCi"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② Dyson Spot+Scrub AI -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/ad1.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta">
+              <span class="carousel-card-yr">2025</span>
+              <span class="carousel-card-tag">社群廣告</span>
+            </div>
+            <div class="carousel-card-title">Dyson — Spot+Scrub AI<br>洗地吸塵機器人</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">以「社群爆料式開箱」手法呈現：結合社群熱議、防劇透揭曉與科技感偵測視覺，把產品賣點包裝成一場被大家發現的清潔神器討論，降低廣告感、拉近與使用者距離並提高點擊意願。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/eCW" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/eCW"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② 家樂福 世足宣傳 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/ad2.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta">
+              <span class="carousel-card-yr">2024</span>
+              <span class="carousel-card-tag">賽事活動</span>
+            </div>
+            <div class="carousel-card-title">家樂福 — 世足宣傳</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">透過足球賽事情境與動態演繹，強化啤酒與賽事歡聚氛圍的連結，並帶出夏日國際啤酒節的活動亮點，加深消費者對活動的感受與印象。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/eec" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/eec"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ 索尼影業 蜘蛛人：重生日 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/ad3.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta">
+              <span class="carousel-card-yr">2024</span>
+              <span class="carousel-card-tag">電影宣傳</span>
+            </div>
+            <div class="carousel-card-title">索尼影業 — 蜘蛛人：重生日</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">與產品部合作生成 AI 影片素材，以第一人稱動態場景，將蜘蛛人穿梭城市的速度感與臨場感具象化，強化廣告的臨場感與吸睛度。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/bWP" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/bWP"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ④ TSUBAKI 思波綺 2026 瞬亮系列 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/ad1.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta">
+              <span class="carousel-card-yr">2026</span>
+              <span class="carousel-card-tag">品牌廣告</span>
+            </div>
+            <div class="carousel-card-title">TSUBAKI 思波綺 — 2026 瞬亮系列洗護髮宣傳</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">以具象化修護成分導入為創意主軸，利用科研感示意圖，更清楚區分 TSUBAKI 與競品的差異，進而提升對產品的辨識度與選購意願。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dvh" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/dvh"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑤ 華納兄弟 絕命終結站 血脈 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/ad2.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta">
+              <span class="carousel-card-yr">2025</span>
+              <span class="carousel-card-tag">電影互動</span>
+            </div>
+            <div class="carousel-card-title">華納兄弟 — 絕命終結站 血脈</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">延續預告片背景，使用者扮演接手穿環店的新店主，體驗電影中死神逼近的宿命氛圍，透過滑動互動強化電影印象並宣傳上映資訊，提升使用者參與感與討論熱度。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/bAw" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/bAw"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑥ 教育部體育署 巴黎奧運互動線上網頁提案 (single-image slider) -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+              <div class="carousel-phone-frame">
+                <div class="carousel-phone-screen">
+                  <div class="carousel-img-slider" id="parisSlider">
+
+                    <!-- 圖片 01 -->
+                    <img class="carousel-slide active" src="proj_paris_01.png" alt="巴黎奧運提案示意圖 01"
+                         onerror="this.classList.add('img-error');this.nextElementSibling.classList.add('active')">
+                    <div class="carousel-slide-ph">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#8fbedb" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                      <span>01</span>
+                    </div>
+
+                    <!-- 圖片 02 -->
+                    <img class="carousel-slide" src="proj_paris_02.png" alt="巴黎奧運提案示意圖 02"
+                         onerror="this.classList.add('img-error');this.nextElementSibling.classList.add('active')">
+                    <div class="carousel-slide-ph">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#8fbedb" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                      <span>02</span>
+                    </div>
+
+                    <!-- 圖片 03 -->
+                    <img class="carousel-slide" src="proj_paris_03.png" alt="巴黎奧運提案示意圖 03"
+                         onerror="this.classList.add('img-error');this.nextElementSibling.classList.add('active')">
+                    <div class="carousel-slide-ph">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#8fbedb" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                      <span>03</span>
+                    </div>
+
+                    <!-- 圖片 04 -->
+                    <img class="carousel-slide" src="proj_paris_04.png" alt="巴黎奧運提案示意圖 04"
+                         onerror="this.classList.add('img-error');this.nextElementSibling.classList.add('active')">
+                    <div class="carousel-slide-ph">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#8fbedb" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                      <span>04</span>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <!-- 圖片切換控制 (手機框外側下方) -->
+              <div class="paris-img-controls">
+                <button class="paris-nav-btn" type="button" id="parisPrev" aria-label="上一張">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div class="paris-dots-wrap" id="parisDots">
+                  <div class="paris-dot active" data-index="0"></div>
+                  <div class="paris-dot" data-index="1"></div>
+                  <div class="paris-dot" data-index="2"></div>
+                  <div class="paris-dot" data-index="3"></div>
+                </div>
+                <button class="paris-nav-btn" type="button" id="parisNext" aria-label="下一張">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta">
+              <span class="carousel-card-yr">2024</span>
+              <span class="carousel-card-tag">互動提案</span>
+            </div>
+            <div class="carousel-card-title">教育部體育署 — 巴黎奧運互動線上網頁提案</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">「奮鬥吧！找出自己的金牌之路」以可愛的 UGC 互動打造個人小人物以及潛能測驗作為包裝，將測驗結果頁帶入運動選手特質，促使使用者更關注運動賽事，進而一同為中華隊加油！</div>
+          </div>
+        </div>
+
+      </div><!-- /.carousel-scroll -->
+
+      <div class="carousel-dots" id="carouselDots">
+        <div class="carousel-dot active" data-index="0"></div>
+        <div class="carousel-dot" data-index="1"></div>
+        <div class="carousel-dot" data-index="2"></div>
+        <div class="carousel-dot" data-index="3"></div>
+        <div class="carousel-dot" data-index="4"></div>
+        <div class="carousel-dot" data-index="5"></div>
+        <div class="carousel-dot" data-index="6"></div>
+      </div>
+    </div><!-- /.carousel-outer -->
+  </section>
+
+  <section class="section reveal" style="transition-delay:0.28s;" id="collab-projects">
+    <div class="sec-head">
+      <div class="sec-title-wrap"><span class="sec-n">06</span><span class="sec-slash">/</span><h2 class="sec-title">Design Collaboration</h2></div>
+      <div class="sec-rule"></div>
+    </div>
+
+    <div class="carousel-intro">
+      <p class="carousel-intro-text">與設計師合作上線案件，負責前期腳本規劃、內外部門溝通協調，以及上線前視覺風格審核，確保素材品質符合品牌期待與執行標準。</p>
+    </div>
+
+    <div class="carousel-outer">
+      <button class="carousel-nav-btn carousel-nav-prev" type="button" aria-label="上一項" id="carousel2Prev">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="carousel-nav-btn carousel-nav-next" type="button" aria-label="下一項" id="carousel2Next">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+
+      <div class="carousel-scroll" id="carousel2Track">
+
+        <!-- ① PUMA 王淨 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/puma_wang.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
+            <div class="carousel-card-title">PUMA — 2024 EASY RIDER × 王淨</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">以王淨詮釋 EASY RIDER 系列的街頭個性，規劃動態素材腳本，負責前期提案溝通與上線前視覺審核。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b0f" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/b0f"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② PUMA 黃宣 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/puma_huang.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
+            <div class="carousel-card-title">PUMA — 2024 EASY RIDER × 黃宣</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">以黃宣獨特的音樂風格呼應 EASY RIDER 的自由精神，協調跨部門製作流程，確保影像調性與品牌主張一致。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dNt" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/dNt"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ PUMA E.SO -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/puma_eso.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
+            <div class="carousel-card-title">PUMA — 2024 EASY RIDER × E.SO 瘦子</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">融合 E.SO 嘻哈能量與鞋款設計語彙，規劃具節奏感的腳本走向，整合設計師視覺風格並協調內外部上線流程。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cg4" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cg4"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ④ M&M's x Marvel -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/mms_marvel.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">IP 聯名</span></div>
+            <div class="carousel-card-title">台灣瑪氏 — M&amp;M's Q2 宣傳 × Marvel 聯名</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">結合 Marvel 超級英雄 IP 與 M&amp;M's 色彩個性，協同設計師打造聯名視覺素材，負責腳本規劃與品牌雙方對接溝通。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/btH" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/btH"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑤ 采昌 抓馬戀人 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/csaction_drama.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">電影宣傳</span></div>
+            <div class="carousel-card-title">采昌 — 抓馬戀人宣傳</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">以電影敘事張力為視覺主軸，前期規劃情緒腳本走向，協調設計與客戶端雙向溝通，確保廣告素材呈現戲劇質感。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cqv" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cqv"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑥ Pocky CNY 2026 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/pocky_cny.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2026</span><span class="carousel-card-tag">節慶活動</span></div>
+            <div class="carousel-card-title">Pocky — 2026 CNY 活動</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">圍繞農曆新年喜慶氛圍規劃素材腳本，與設計師協作呈現 Pocky 的節慶歡聚感，負責視覺調性審核與上線流程協調。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/c5E" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/c5E"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑦ 寶可夢 Y25年終 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/pokemon_y25.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag">IP 活動</span></div>
+            <div class="carousel-card-title">寶可夢 — Y25 年終社群日</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">以寶可夢 25 週年為主題，規劃年終社群活動素材腳本，協調設計端視覺風格，強化粉絲情感連結與品牌話題擴散。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cNj" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cNj"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑧ 太古 復古相機 7-11 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/swire_camera.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">通路活動</span></div>
+            <div class="carousel-card-title">太古 — 復古相機活動（7-11 通路）</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">結合復古相機的懷舊美學與 7-11 通路活動，腳本規劃以情境故事感為核心，協調設計師呈現濃厚的復古氛圍與品牌溫度。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cnE" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cnE"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑨ 桂冠 湯圓 IP -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/laurel_tangyuan.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">IP 聯名</span></div>
+            <div class="carousel-card-title">桂冠 — 湯圓聯名 IP 宣傳</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">以聯名 IP 角色結合桂冠湯圓的暖心節慶意象，規劃動態素材腳本，確保 IP 授權視覺與品牌風格在廣告中有效整合。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cm4" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cm4"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑩ Biore 卸粧 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/biore_makeup.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌廣告</span></div>
+            <div class="carousel-card-title">Biore — 卸粧系列年末宣傳</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">以年末肌膚保養的季節情境切入，規劃訴求卸妝效果的動態腳本，協調設計師執行視覺素材，強化產品功效說服力。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cPv" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cPv"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑪ Nivea 極潤 10月 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/nivea_oct.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌廣告</span></div>
+            <div class="carousel-card-title">Nivea 極潤 — 無香系列 10 月宣傳</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">聚焦無香保濕訴求，以秋日肌膚保護情境規劃腳本，與設計師協同強化產品成分視覺化，提升消費者對無香系列的信任感。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cJU" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cJU"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑫ 卡迪那 中元節 -->
+        <div class="carousel-card">
+          <div class="carousel-phone-area">
+            <div class="carousel-phone-frame">
+              <div class="carousel-phone-screen">
+                <video class="carousel-phone-video" src="videos/cadina_ghost.mp4" preload="metadata" muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">節慶活動</span></div>
+            <div class="carousel-card-title">卡迪那 — 波浪薯條中元節宣傳</div>
+            <div class="carousel-card-div"></div>
+            <div class="carousel-card-desc">以中元節鬼月氛圍賦予卡迪那波浪薯條獨特話題感，規劃輕鬆幽默的腳本風格，協調設計端呈現節慶趣味與品牌個性。</div>
+            <div class="carousel-link-qr">
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b8J" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/b8J"></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.carousel2-scroll -->
+
+      <div class="carousel-dots" id="carousel2Dots">
+        <div class="carousel-dot active" data-index="0"></div>
+        <div class="carousel-dot" data-index="1"></div>
+        <div class="carousel-dot" data-index="2"></div>
+        <div class="carousel-dot" data-index="3"></div>
+        <div class="carousel-dot" data-index="4"></div>
+        <div class="carousel-dot" data-index="5"></div>
+        <div class="carousel-dot" data-index="6"></div>
+        <div class="carousel-dot" data-index="7"></div>
+        <div class="carousel-dot" data-index="8"></div>
+        <div class="carousel-dot" data-index="9"></div>
+        <div class="carousel-dot" data-index="10"></div>
+        <div class="carousel-dot" data-index="11"></div>
+      </div>
+    </div><!-- /.carousel-outer -->
+  </section>
+
   <footer class="footer reveal" style="transition-delay:0.25s;">
     <span class="footer-sig">Eri Tung</span>
     <span class="footer-yr">2026</span>
@@ -1856,7 +2892,7 @@ function animRing(){
 }
 animRing();
 
-document.querySelectorAll('a,button,label,.proj-card,.skill-tag,.strength-tag,.proj-img-wrap').forEach(el => {
+document.querySelectorAll('a,button,label,.proj-card,.skill-tag,.strength-tag,.proj-img-wrap,.carousel-card,.carousel-nav-btn,.carousel-dot,.carousel-link-btn').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
 });
@@ -1878,7 +2914,162 @@ function toggleBackTop(){
 
 window.addEventListener('scroll', toggleBackTop, { passive:true });
 backTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
-toggleBackTop();
+toggleBackTop();/* ── QR Codes ── */
+(function(){
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+  s.onload = function() {
+    document.querySelectorAll('[data-qr-url]').forEach(function(el) {
+      new QRCode(el, {
+        text: el.dataset.qrUrl,
+        width: 50,
+        height: 50,
+        colorDark: '#14345a',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    });
+  };
+  document.head.appendChild(s);
+})();
+
+/* ── Click-to-play videos ── */
+(function(){
+  document.querySelectorAll('.carousel-phone-screen').forEach(function(screen) {
+    const vid = screen.querySelector('.carousel-phone-video');
+    if (!vid) return;
+
+    // Build wrapper + overlay
+    const wrap = document.createElement('div');
+    wrap.className = 'phone-video-wrap';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'phone-play-overlay';
+    overlay.innerHTML =
+      '<div class="phone-play-btn">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>' +
+      '</div>';
+
+    screen.insertBefore(wrap, vid);
+    wrap.appendChild(vid);
+    wrap.appendChild(overlay);
+
+    // Toggle play / pause on click
+    wrap.addEventListener('click', function() {
+      if (vid.paused) {
+        vid.play();
+        overlay.classList.add('hidden');
+      } else {
+        vid.pause();
+        overlay.classList.remove('hidden');
+        overlay.querySelector('.phone-play-btn svg polygon').setAttribute('points', '5 3 19 12 5 21 5 3');
+      }
+    });
+
+    // Restore overlay when video ends (loop handles replay, but just in case)
+    vid.addEventListener('ended', function() {
+      overlay.classList.remove('hidden');
+    });
+  });
+})();
+
+/* ── Paris image slider ── */
+(function(){
+  const slider  = document.getElementById('parisSlider');
+  const prevBtn = document.getElementById('parisPrev');
+  const nextBtn = document.getElementById('parisNext');
+  const dots    = document.querySelectorAll('#parisDots .paris-dot');
+  if (!slider) return;
+
+  // Collect slide pairs: [img, ph] interleaved
+  const imgs = slider.querySelectorAll('.carousel-slide');
+  const phs  = slider.querySelectorAll('.carousel-slide-ph');
+  const total = imgs.length;
+  let cur = 0;
+
+  function goTo(i) {
+    // deactivate old
+    imgs[cur].classList.remove('active');
+    // only deactivate ph if it doesn't have img-error sibling already active
+    phs[cur].classList.remove('active');
+    dots[cur] && dots[cur].classList.remove('active');
+
+    cur = (i + total) % total;
+
+    // activate new - show img or ph depending on load state
+    if (imgs[cur].classList.contains('img-error')) {
+      phs[cur].classList.add('active');
+    } else {
+      imgs[cur].classList.add('active');
+    }
+    dots[cur] && dots[cur].classList.add('active');
+  }
+
+  prevBtn && prevBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(cur - 1); });
+  nextBtn && nextBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(cur + 1); });
+  dots.forEach(function(d) {
+    d.addEventListener('click', function(e){ e.stopPropagation(); goTo(+d.dataset.index); });
+  });
+})();
+
+/* ── Carousel (generic) ── */
+function initCarousel(trackId, prevId, nextId, dotsId) {
+  const track = document.getElementById(trackId);
+  const prev  = document.getElementById(prevId);
+  const next  = document.getElementById(nextId);
+  const dots  = document.querySelectorAll('#' + dotsId + ' .carousel-dot');
+  if (!track) return;
+
+  const CARD_W = 300 + 18;
+  let active = 0;
+  const total = track.querySelectorAll('.carousel-card').length;
+
+  function setActive(i) {
+    active = Math.max(0, Math.min(i, total - 1));
+    track.scrollTo({ left: active * CARD_W, behavior: 'smooth' });
+    dots.forEach(function(d, idx){ d.classList.toggle('active', idx === active); });
+  }
+
+  prev && prev.addEventListener('click', function(){ setActive(active - 1); });
+  next && next.addEventListener('click', function(){ setActive(active + 1); });
+  dots.forEach(function(d){ d.addEventListener('click', function(){ setActive(+d.dataset.index); }); });
+
+  track.addEventListener('scroll', function() {
+    const idx = Math.round(track.scrollLeft / CARD_W);
+    if (idx !== active) {
+      active = idx;
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === active); });
+    }
+  }, { passive: true });
+
+  let isDragging = false, startX, scrollLeft;
+  track.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+    track.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    if (track) track.style.cursor = '';
+  });
+  track.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX) * 1.2;
+  });
+}
+
+/* ── Animation performance: pause when tab hidden ── */
+document.addEventListener('visibilitychange', function() {
+  const state = document.hidden ? 'paused' : 'running';
+  document.querySelectorAll('.ink-circle, .aura-circle, .brand-marquee-track, .status-dot').forEach(function(el) {
+    el.style.animationPlayState = state;
+  });
+});
+
+initCarousel('carouselTrack',  'carouselPrev',  'carouselNext',  'carouselDots');
+initCarousel('carousel2Track', 'carousel2Prev', 'carousel2Next', 'carousel2Dots');
 </script>
 </body>
 </html>
