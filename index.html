@@ -1406,13 +1406,14 @@ body {
 /* ============ CAROUSEL / FEATURED PROPOSALS ============ */
 .carousel-intro {
   margin-bottom: 24px;
-  max-width: 620px;
 }
 .carousel-intro-text {
-  font-size: 0.93rem;
+  font-size: 1rem;
   color: var(--ink-2);
   font-weight: 300;
   line-height: 1.9;
+  overflow-wrap: break-word;
+  word-break: keep-all;
 }
 .carousel-outer {
   position: relative;
@@ -1903,8 +1904,16 @@ body {
   font-size: 0.74rem;
   color: var(--ink-3);
   line-height: 1.65;
-  padding-top: 7px;
+  padding-top: 2px;
+  padding-left: 4px;
+  margin-top: -4px;
   font-style: normal;
+  letter-spacing: 0.01em;
+}
+.carousel-card-title .card-brand,
+.proj-name .card-brand {
+  font-weight: 700;
+  color: var(--navy);
   letter-spacing: 0.01em;
 }
 
@@ -2178,7 +2187,7 @@ body {
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type">活動網頁</span></div>
-          <div class="proj-name">XPARK — 365種海生之道</div>
+          <div class="proj-name"><strong class="card-brand">XPARK</strong> — 365種海生之道</div>
           <div class="proj-div"></div>
           <div class="proj-desc-lbl">專案說明</div>
           <div class="proj-desc-text">以「海生之道」為主題介紹海洋生物趣味知識，串聯心理測驗互動網頁，打造兼具娛樂性與分享性的活動網站。負責專案時程控管、製作流程整合與跨部門溝通協調。</div>
@@ -2199,7 +2208,7 @@ body {
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type">心理測驗</span></div>
-          <div class="proj-name">XPARK — 如果在海裡重生，你會是什麼海洋生物？</div>
+          <div class="proj-name"><strong class="card-brand">XPARK</strong> — 如果在海裡重生，你會是什麼海洋生物？</div>
           <div class="proj-div"></div>
           <div class="proj-desc-lbl">專案說明</div>
           <div class="proj-desc-text">以海洋生物特性結合人格特質，透過心理測驗形式設計互動體驗，提升使用者參與度與社群分享話題性。負責與設計、製作單位跨部門溝通及品質控管。</div>
@@ -2220,7 +2229,7 @@ body {
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">資訊網頁</span></div>
-          <div class="proj-name">華信航空 APP — 全新啟動！</div>
+          <div class="proj-name"><strong class="card-brand">華信航空 APP</strong> — 全新啟動！</div>
           <div class="proj-div"></div>
           <div class="proj-desc-lbl">專案說明</div>
           <div class="proj-desc-text">規劃品牌新上架 APP 介紹與宣傳網站，負責整體視覺風格與介面架構，強化使用者操作流暢度與資訊層級清晰度，提升數位服務體驗一致性。</div>
@@ -2241,7 +2250,7 @@ body {
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">網頁互動</span></div>
-          <div class="proj-name">好來牙膏 — 角落菌糾察隊</div>
+          <div class="proj-name"><strong class="card-brand">好來牙膏</strong> — 角落菌糾察隊</div>
           <div class="proj-div"></div>
           <div class="proj-desc-lbl">專案說明</div>
           <div class="proj-desc-text">以口腔困擾「角落菌」為發想核心，透過遊戲挑戰與抽獎機制，打造兼具娛樂性與互動性的品牌活動網站，提升使用者參與度與話題擴散。</div>
@@ -2262,7 +2271,7 @@ body {
         </a>
         <div class="proj-body">
           <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">活動 / 互動</span></div>
-          <div class="proj-name">吃下 meiji 祝福連連 — 迎向100週年 99甜蜜心意再+1</div>
+          <div class="proj-name"><strong class="card-brand">吃下 meiji 祝福連連</strong> — 迎向100週年 99甜蜜心意再+1</div>
           <div class="proj-div"></div>
           <div class="proj-desc-lbl">專案說明</div>
           <div class="proj-desc-text">以 meiji 巧克力上市 100 週年為主題，結合品牌元素與互動遊戲體驗，透過限時挑戰、社群分享與抽獎機制，提升使用者參與度與活動話題擴散。負責整體創意發想、UI 規劃與跨部門整合。</div>
@@ -2305,7 +2314,7 @@ body {
               <span class="carousel-card-yr">2025</span>
               <span class="carousel-card-tag">品牌廣告</span>
             </div>
-            <div class="carousel-card-title">專科潔顏乳 × 大耳狗限量版宣傳</div>
+            <div class="carousel-card-title"><strong class="card-brand">專科</strong> —<br>大耳狗限量版潔顏乳宣傳</div>
             <div class="carousel-card-div"></div>
             <div class="carousel-card-desc">結合 IP Cinnamoroll 大耳狗的療癒萌感，利用動畫呈現泡泡的綿密與柔軟，使產品特點以具象化呈現，加深使用者對產品優勢的理解與印象。</div>
             <div class="carousel-link-qr">
@@ -2330,7 +2339,7 @@ body {
               <span class="carousel-card-yr">2025</span>
               <span class="carousel-card-tag">社群廣告</span>
             </div>
-            <div class="carousel-card-title">Dyson — Spot+Scrub AI<br>洗地吸塵機器人</div>
+            <div class="carousel-card-title"><strong class="card-brand">Dyson</strong> —<br>Spot+Scrub AI 洗地吸塵機器人</div>
             <div class="carousel-card-div"></div>
             <div class="carousel-card-desc">以「社群爆料式開箱」手法呈現：結合社群熱議、防劇透揭曉與科技感偵測視覺，把產品賣點包裝成一場被大家發現的清潔神器討論，降低廣告感、拉近與使用者距離並提高點擊意願。</div>
             <div class="carousel-link-qr">
@@ -2355,7 +2364,7 @@ body {
               <span class="carousel-card-yr">2024</span>
               <span class="carousel-card-tag">賽事活動</span>
             </div>
-            <div class="carousel-card-title">家樂福 — 世足宣傳</div>
+            <div class="carousel-card-title"><strong class="card-brand">家樂福</strong> —<br>2026 世足檔期宣傳</div>
             <div class="carousel-card-div"></div>
             <div class="carousel-card-desc">透過足球賽事情境與動態演繹，強化啤酒與賽事歡聚氛圍的連結，並帶出夏日國際啤酒節的活動亮點，加深消費者對活動的感受與印象。</div>
             <div class="carousel-link-qr">
@@ -2380,7 +2389,7 @@ body {
               <span class="carousel-card-yr">2024</span>
               <span class="carousel-card-tag">電影宣傳</span>
             </div>
-            <div class="carousel-card-title">索尼影業 — 蜘蛛人：重生日</div>
+            <div class="carousel-card-title"><strong class="card-brand">索尼影業</strong> —<br>蜘蛛人：重生日</div>
             <div class="carousel-card-div"></div>
             <div class="carousel-card-desc">與產品部合作生成 AI 影片素材，以第一人稱動態場景，將蜘蛛人穿梭城市的速度感與臨場感具象化，強化廣告的臨場感與吸睛度。</div>
             <div class="carousel-link-qr">
@@ -2405,7 +2414,7 @@ body {
               <span class="carousel-card-yr">2026</span>
               <span class="carousel-card-tag">品牌廣告</span>
             </div>
-            <div class="carousel-card-title">TSUBAKI 思波綺 — 2026 瞬亮系列洗護髮宣傳</div>
+            <div class="carousel-card-title"><strong class="card-brand">TSUBAKI 思波綺</strong> —<br>2026 瞬亮系列洗護髮宣傳</div>
             <div class="carousel-card-div"></div>
             <div class="carousel-card-desc">以具象化修護成分導入為創意主軸，利用科研感示意圖，更清楚區分 TSUBAKI 與競品的差異，進而提升對產品的辨識度與選購意願。</div>
             <div class="carousel-link-qr">
@@ -2430,7 +2439,7 @@ body {
               <span class="carousel-card-yr">2025</span>
               <span class="carousel-card-tag">電影互動</span>
             </div>
-            <div class="carousel-card-title">華納兄弟 — 絕命終結站 血脈</div>
+            <div class="carousel-card-title"><strong class="card-brand">華納兄弟</strong> —<br>絕命終結站 血脈</div>
             <div class="carousel-card-div"></div>
             <div class="carousel-card-desc">延續預告片背景，使用者扮演接手穿環店的新店主，體驗電影中死神逼近的宿命氛圍，透過滑動互動強化電影印象並宣傳上映資訊，提升使用者參與感與討論熱度。</div>
             <div class="carousel-link-qr">
@@ -2507,7 +2516,7 @@ body {
               <span class="carousel-card-yr">2024</span>
               <span class="carousel-card-tag">互動提案</span>
             </div>
-            <div class="carousel-card-title">教育部體育署 — 巴黎奧運互動線上網頁提案</div>
+            <div class="carousel-card-title"><strong class="card-brand">教育部體育署</strong> —<br>巴黎奧運互動線上網頁提案</div>
             <div class="carousel-card-div"></div>
             <div class="carousel-card-desc">「奮鬥吧！找出自己的金牌之路」以可愛的 UGC 互動打造個人小人物以及潛能測驗作為包裝，將測驗結果頁帶入運動選手特質，促使使用者更關注運動賽事，進而一同為中華隊加油！</div>
           </div>
@@ -2558,7 +2567,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
-            <div class="carousel-card-title">PUMA — 2024 EASY RIDER × 王淨</div>
+            <div class="carousel-card-title"><strong class="card-brand">PUMA</strong> —<br>2024 EASY RIDER × 王淨</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b0f" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/b0f"></div>
@@ -2578,7 +2587,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
-            <div class="carousel-card-title">PUMA — 2024 EASY RIDER × 黃宣</div>
+            <div class="carousel-card-title"><strong class="card-brand">PUMA</strong> —<br>2024 EASY RIDER × 黃宣</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dNt" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/dNt"></div>
@@ -2598,7 +2607,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
-            <div class="carousel-card-title">PUMA — 2024 EASY RIDER × E.SO 瘦子</div>
+            <div class="carousel-card-title"><strong class="card-brand">PUMA</strong> —<br>2024 EASY RIDER × E.SO 瘦子</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cg4" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cg4"></div>
@@ -2618,7 +2627,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">IP 聯名</span></div>
-            <div class="carousel-card-title">台灣瑪氏 — M&amp;M's Q2 宣傳 × Marvel 聯名</div>
+            <div class="carousel-card-title"><strong class="card-brand">台灣瑪氏</strong> —<br>M&amp;M's Q2 宣傳 × Marvel 聯名</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/btH" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/btH"></div>
@@ -2638,7 +2647,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">電影宣傳</span></div>
-            <div class="carousel-card-title">采昌 — 抓馬戀人宣傳</div>
+            <div class="carousel-card-title"><strong class="card-brand">采昌</strong> —<br>抓馬戀人宣傳</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cqv" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cqv"></div>
@@ -2658,7 +2667,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2026</span><span class="carousel-card-tag">節慶活動</span></div>
-            <div class="carousel-card-title">Pocky — 2026 CNY 活動</div>
+            <div class="carousel-card-title"><strong class="card-brand">Pocky</strong> —<br>2026 CNY 活動</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/c5E" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/c5E"></div>
@@ -2678,7 +2687,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag">IP 活動</span></div>
-            <div class="carousel-card-title">寶可夢 — Y25 年終社群日</div>
+            <div class="carousel-card-title"><strong class="card-brand">寶可夢</strong> —<br>Y25 年終社群日</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cNj" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cNj"></div>
@@ -2698,7 +2707,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">通路活動</span></div>
-            <div class="carousel-card-title">太古 — 復古相機活動（7-11 通路）</div>
+            <div class="carousel-card-title"><strong class="card-brand">太古</strong> —<br>復古相機活動（7-11 通路）</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cnE" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cnE"></div>
@@ -2718,7 +2727,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">IP 聯名</span></div>
-            <div class="carousel-card-title">桂冠 — 湯圓聯名 IP 宣傳</div>
+            <div class="carousel-card-title"><strong class="card-brand">桂冠</strong> —<br>湯圓聯名 IP 宣傳</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cm4" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cm4"></div>
@@ -2738,7 +2747,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌廣告</span></div>
-            <div class="carousel-card-title">Biore — 卸粧系列年末宣傳</div>
+            <div class="carousel-card-title"><strong class="card-brand">Biore</strong> —<br>卸粧系列年末宣傳</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cPv" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cPv"></div>
@@ -2758,7 +2767,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌廣告</span></div>
-            <div class="carousel-card-title">Nivea 極潤 — 無香系列 10 月宣傳</div>
+            <div class="carousel-card-title"><strong class="card-brand">Nivea 極潤</strong> —<br>無香系列 10 月宣傳</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cJU" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cJU"></div>
@@ -2778,7 +2787,7 @@ body {
           </div>
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">節慶活動</span></div>
-            <div class="carousel-card-title">卡迪那 — 波浪薯條中元節宣傳</div>
+            <div class="carousel-card-title"><strong class="card-brand">卡迪那</strong> —<br>波浪薯條中元節宣傳</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b8J" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/b8J"></div>
