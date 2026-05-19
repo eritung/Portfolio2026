@@ -1779,7 +1779,15 @@ body {
 }
 
 @media (max-width: 640px) {
-  .carousel-card { flex: 0 0 272px; }
+  .carousel-card {
+    flex: 0 0 calc(100vw - 48px);
+    scroll-snap-align: center;
+  }
+  .carousel-scroll {
+    scroll-padding-left: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
   .carousel-phone-frame { width: 140px; height: 284px; }
   .carousel-phone-area { min-height: 278px; }
   .carousel-nav-btn { display: none; }
@@ -2536,8 +2544,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
             <div class="carousel-card-title">PUMA — 2024 EASY RIDER × 王淨</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">以王淨詮釋 EASY RIDER 系列的街頭個性，規劃動態素材腳本，負責前期提案溝通與上線前視覺審核。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b0f" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/b0f"></div>
@@ -2557,8 +2563,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
             <div class="carousel-card-title">PUMA — 2024 EASY RIDER × 黃宣</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">以黃宣獨特的音樂風格呼應 EASY RIDER 的自由精神，協調跨部門製作流程，確保影像調性與品牌主張一致。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dNt" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/dNt"></div>
@@ -2578,8 +2582,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
             <div class="carousel-card-title">PUMA — 2024 EASY RIDER × E.SO 瘦子</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">融合 E.SO 嘻哈能量與鞋款設計語彙，規劃具節奏感的腳本走向，整合設計師視覺風格並協調內外部上線流程。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cg4" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cg4"></div>
@@ -2599,8 +2601,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">IP 聯名</span></div>
             <div class="carousel-card-title">台灣瑪氏 — M&amp;M's Q2 宣傳 × Marvel 聯名</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">結合 Marvel 超級英雄 IP 與 M&amp;M's 色彩個性，協同設計師打造聯名視覺素材，負責腳本規劃與品牌雙方對接溝通。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/btH" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/btH"></div>
@@ -2620,8 +2620,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">電影宣傳</span></div>
             <div class="carousel-card-title">采昌 — 抓馬戀人宣傳</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">以電影敘事張力為視覺主軸，前期規劃情緒腳本走向，協調設計與客戶端雙向溝通，確保廣告素材呈現戲劇質感。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cqv" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cqv"></div>
@@ -2641,8 +2639,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2026</span><span class="carousel-card-tag">節慶活動</span></div>
             <div class="carousel-card-title">Pocky — 2026 CNY 活動</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">圍繞農曆新年喜慶氛圍規劃素材腳本，與設計師協作呈現 Pocky 的節慶歡聚感，負責視覺調性審核與上線流程協調。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/c5E" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/c5E"></div>
@@ -2662,8 +2658,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag">IP 活動</span></div>
             <div class="carousel-card-title">寶可夢 — Y25 年終社群日</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">以寶可夢 25 週年為主題，規劃年終社群活動素材腳本，協調設計端視覺風格，強化粉絲情感連結與品牌話題擴散。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cNj" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cNj"></div>
@@ -2683,8 +2677,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">通路活動</span></div>
             <div class="carousel-card-title">太古 — 復古相機活動（7-11 通路）</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">結合復古相機的懷舊美學與 7-11 通路活動，腳本規劃以情境故事感為核心，協調設計師呈現濃厚的復古氛圍與品牌溫度。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cnE" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cnE"></div>
@@ -2704,8 +2696,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">IP 聯名</span></div>
             <div class="carousel-card-title">桂冠 — 湯圓聯名 IP 宣傳</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">以聯名 IP 角色結合桂冠湯圓的暖心節慶意象，規劃動態素材腳本，確保 IP 授權視覺與品牌風格在廣告中有效整合。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cm4" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cm4"></div>
@@ -2725,8 +2715,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌廣告</span></div>
             <div class="carousel-card-title">Biore — 卸粧系列年末宣傳</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">以年末肌膚保養的季節情境切入，規劃訴求卸妝效果的動態腳本，協調設計師執行視覺素材，強化產品功效說服力。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cPv" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cPv"></div>
@@ -2746,8 +2734,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌廣告</span></div>
             <div class="carousel-card-title">Nivea 極潤 — 無香系列 10 月宣傳</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">聚焦無香保濕訴求，以秋日肌膚保護情境規劃腳本，與設計師協同強化產品成分視覺化，提升消費者對無香系列的信任感。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cJU" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cJU"></div>
@@ -2767,8 +2753,6 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">節慶活動</span></div>
             <div class="carousel-card-title">卡迪那 — 波浪薯條中元節宣傳</div>
-            <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">以中元節鬼月氛圍賦予卡迪那波浪薯條獨特話題感，規劃輕鬆幽默的腳本風格，協調設計端呈現節慶趣味與品牌個性。</div>
             <div class="carousel-link-qr">
               <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b8J" target="_blank" rel="noopener">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/b8J"></div>
