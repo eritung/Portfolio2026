@@ -185,7 +185,11 @@ body.cursor-active #cursor-ring {
   color: var(--ink-2);
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 body {
   font-family: var(--sans);
@@ -193,6 +197,7 @@ body {
   color: var(--ink);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
@@ -2441,7 +2446,7 @@ body {
           <div class="carousel-phone-area">
             <div class="carousel-phone-frame">
               <div class="carousel-phone-screen">
-                <video class="carousel-phone-video" src="videos/ad2.mp4" preload="metadata" muted loop playsinline></video>
+                <video class="carousel-phone-video" src="videos/warner_final_dest.mp4" preload="metadata" muted loop playsinline></video>
               </div>
             </div>
           </div>
