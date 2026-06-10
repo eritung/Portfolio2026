@@ -1934,10 +1934,60 @@ body {
   letter-spacing: 0.01em;
 }
 
+/* ── Lang Toggle ── */
+.lang-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.82);
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(20,52,90,0.09);
+  overflow: hidden;
+  padding: 3px;
+  gap: 1px;
+}
+
+.lang-btn {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--ink-2);
+  background: transparent;
+  border: none;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.lang-btn.active {
+  background: var(--navy);
+  color: #fff;
+}
+
+.lang-btn:not(.active):hover {
+  background: var(--wash);
+  color: var(--navy);
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- Language Toggle -->
+<div class="lang-toggle" role="group" aria-label="Language">
+  <button class="lang-btn active" id="btnZH" onclick="setLang('zh')">中文</button>
+  <button class="lang-btn" id="btnJA" onclick="setLang('ja')">日本語</button>
+</div>
 
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
@@ -1967,7 +2017,7 @@ body {
     </div>
 
     <div class="hero-text-main">
-      <div class="hero-over">Information - </div>
+      <div class="hero-over" data-i18n="hero-over">Information - </div>
 
       <div class="hero-name-row">
         <div class="name-pair">
@@ -1986,37 +2036,37 @@ body {
         </div>
       </div>
 
-      <div class="hero-role">Project Planner &nbsp;·&nbsp; Digital Creative</div>
+      <div class="hero-role" data-i18n="hero-role">Project Planner &nbsp;·&nbsp; Digital Creative</div>
 
       <!-- 2-col: bio left / stats + tags right -->
       <div class="hero-body-grid">
         <div class="hero-bio-col">
           <div class="hero-bio">
-            <p>Hi，我是 Eri，現職為<span class="bio-hl">數位廣告專案企劃</span>。</p>
-            <p>累積 <span class="bio-hl">350+ 專案執行</span>與 <span class="bio-hl">200+ 品牌合作</span>，擁有數位行銷、品牌企劃與視覺整合經驗，曾參與美妝、食品、快消、3C、娛樂等多類品牌專案，包含 <span class="bio-hl">Meiji、ASUS、Dyson、寶可夢、麥當勞</span>等品牌合作案件。</p>
-            <p>目前工作內容涵蓋<span class="bio-hl">數位廣告企劃、提案發想、網站 UI 規劃、專案時程控管</span>，以及設計與工程間的跨部門溝通協作。除了企劃能力外，也具備 <span class="bio-hl">Photoshop、After Effects</span> 等視覺製作能力，能透過動態 Demo 與視覺化提案提升專案溝通效率。</p>
-            <p>喜歡從創意發想到實際落地的過程，也樂於持續學習新工具與新技術，包含將 <span class="bio-hl">AI 應用於流程優化</span>與日常工作協作。期待未來能在品牌與數位內容領域中，持續累積兼具創意與執行力的作品。</p>
+            <p data-i18n="hero-bio-p1">Hi，我是 Eri，現職為<span class="bio-hl">數位廣告專案企劃</span>。</p>
+            <p data-i18n="hero-bio-p2">累積 <span class="bio-hl">350+ 專案執行</span>與 <span class="bio-hl">200+ 品牌合作</span>，擁有數位行銷、品牌企劃與視覺整合經驗，曾參與美妝、食品、快消、3C、娛樂等多類品牌專案，包含 <span class="bio-hl">Meiji、ASUS、Dyson、寶可夢、麥當勞</span>等品牌合作案件。</p>
+            <p data-i18n="hero-bio-p3">目前工作內容涵蓋<span class="bio-hl">數位廣告企劃、提案發想、網站 UI 規劃、專案時程控管</span>，以及設計與工程間的跨部門溝通協作。除了企劃能力外，也具備 <span class="bio-hl">Photoshop、After Effects</span> 等視覺製作能力，能透過動態 Demo 與視覺化提案提升專案溝通效率。</p>
+            <p data-i18n="hero-bio-p4">喜歡從創意發想到實際落地的過程，也樂於持續學習新工具與新技術，包含將 <span class="bio-hl">AI 應用於流程優化</span>與日常工作協作。期待未來能在品牌與數位內容領域中，持續累積兼具創意與執行力的作品。</p>
           </div>
         </div>
 
         <div class="hero-side-col">
           <div class="stat-badge-row">
-            <div class="stat-badge"><span class="stat-badge-n">3</span> 年經驗</div>
-            <div class="stat-badge"><span class="stat-badge-n">350+</span> 專案執行</div>
-            <div class="stat-badge"><span class="stat-badge-n">200+</span> 品牌合作</div>
+            <div class="stat-badge"><span class="stat-badge-n">3</span> <span data-i18n="stat-yr">年經驗</span></div>
+            <div class="stat-badge"><span class="stat-badge-n">350+</span> <span data-i18n="stat-proj">專案執行</span></div>
+            <div class="stat-badge"><span class="stat-badge-n">200+</span> <span data-i18n="stat-brand">品牌合作</span></div>
           </div>
           <div class="hero-strengths" aria-label="核心優勢">
-            <span class="strength-tag">效率</span>
-            <span class="strength-tag">溝通</span>
-            <span class="strength-tag">團隊合作</span>
-            <span class="strength-tag">專案企劃</span>
-            <span class="strength-tag">時程控管</span>
-            <span class="strength-tag">美感設計</span>
+            <span class="strength-tag" data-i18n="str-efficiency">效率</span>
+            <span class="strength-tag" data-i18n="str-comm">溝通</span>
+            <span class="strength-tag" data-i18n="str-team">團隊合作</span>
+            <span class="strength-tag" data-i18n="str-plan">專案企劃</span>
+            <span class="strength-tag" data-i18n="str-sched">時程控管</span>
+            <span class="strength-tag" data-i18n="str-design">美感設計</span>
           </div>
         </div>
       </div>
 
-      <div class="brand-marquee-label">精選合作品牌</div>
+      <div class="brand-marquee-label" data-i18n="marquee-label">精選合作品牌</div>
       <div class="brand-marquee-outer" aria-label="合作品牌跑馬燈">
         <div class="brand-marquee-track" id="brandTrack"></div>
       </div>
@@ -2026,68 +2076,68 @@ body {
 
   <section class="section reveal" style="transition-delay:0.1s;">
     <div class="sec-head">
-      <div class="sec-title-wrap"><span class="sec-n">01</span><span class="sec-slash">/</span><h2 class="sec-title">Work Experience</h2></div>
+      <div class="sec-title-wrap"><span class="sec-n">01</span><span class="sec-slash">/</span><h2 class="sec-title" data-i18n="sec-work">Work Experience</h2></div>
       <div class="sec-rule"></div>
     </div>
 
     <div class="timeline">
       <div class="tl-item">
-        <div class="tl-left"><div class="tl-date">2023.06<br>— Now</div></div>
+        <div class="tl-left"><div class="tl-date" data-i18n="tl-date-1">2023.06<br>— Now</div></div>
 
         <div>
           <div class="tl-co">艾迪英特股份有限公司</div>
-          <div class="tl-role">專案企劃</div>
+          <div class="tl-role" data-i18n="tl-role-1">專案企劃</div>
 
           <div class="tl-tasks">
             <div class="tl-task">
               <div class="tl-task-title">
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                數位廣告提案與執行
+                <span data-i18n="task1-title">數位廣告提案與執行</span>
               </div>
-              <div class="tl-task-body">負責數位廣告提案創意發想與文案撰寫，整合客戶需求、設計產出與內部時程，確保素材如期上線並符合品牌調性。</div>
+              <div class="tl-task-body" data-i18n="task1-body">負責數位廣告提案創意發想與文案撰寫，整合客戶需求、設計產出與內部時程，確保素材如期上線並符合品牌調性。</div>
             </div>
 
             <div class="tl-task">
               <div class="tl-task-title">
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><circle cx="11" cy="11" r="3"/></svg>
-                視覺品質控管（Aesthetic Review）
+                <span data-i18n="task2-title">視覺品質控管（Aesthetic Review）</span>
               </div>
-              <div class="tl-task-body">擔任設計師與客戶間的橋樑，審核專案動畫、設計產出，提供具體視覺修改意見，確保素材符合品牌調性。</div>
+              <div class="tl-task-body" data-i18n="task2-body">擔任設計師與客戶間的橋樑，審核專案動畫、設計產出，提供具體視覺修改意見，確保素材符合品牌調性。</div>
             </div>
 
             <div class="tl-task">
               <div class="tl-task-title">
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-                靜態 / 動畫 Demo 製作
+                <span data-i18n="task3-title">靜態 / 動畫 Demo 製作</span>
               </div>
-              <div class="tl-task-body">使用 PS、AE 等軟體於提案階段，透過動態 Demo 提升提案過案率。</div>
+              <div class="tl-task-body" data-i18n="task3-body">使用 PS、AE 等軟體於提案階段，透過動態 Demo 提升提案過案率。</div>
             </div>
 
             <div class="tl-task">
               <div class="tl-task-title">
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
-                流程自動化優化
+                <span data-i18n="task4-title">流程自動化優化</span>
               </div>
-              <div class="tl-task-body">自主運用 AI 平台開發工作小工具，減少手動作業時間，提升團隊協作效率。</div>
+              <div class="tl-task-body" data-i18n="task4-body">自主運用 AI 平台開發工作小工具，減少手動作業時間，提升團隊協作效率。</div>
             </div>
 
             <div class="tl-task">
               <div class="tl-task-title">
                 <svg class="tl-task-icon" viewBox="0 0 24 24" fill="none" stroke="var(--navy-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-                活動網頁規劃
+                <span data-i18n="task5-title">活動網頁規劃</span>
               </div>
-              <div class="tl-task-body">策劃並執行活動 Landing Page規劃，負責 UI 佈局規劃與跨部門溝通協調。</div>
+              <div class="tl-task-body" data-i18n="task5-body">策劃並執行活動 Landing Page規劃，負責 UI 佈局規劃與跨部門溝通協調。</div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-left"><div class="tl-date">2022.11<br>— 2023.04</div></div>
+        <div class="tl-left"><div class="tl-date" data-i18n="tl-date-2">2022.11<br>— 2023.04</div></div>
 
         <div>
-          <div class="tl-co">日商卓一智能科技股份有限公司</div>
-          <div class="tl-role">平面設計</div>
+          <div class="tl-co" data-i18n="tl-co-2">日商卓一智能科技股份有限公司</div>
+          <div class="tl-role" data-i18n="tl-role-2">平面設計</div>
           <div class="tl-tasks">
           <div class="tl-task">
             <div class="tl-task-title">
@@ -2096,9 +2146,9 @@ body {
                 <circle cx="8.5" cy="8.5" r="1.5"/>
                 <path d="M21 15l-5-5L5 21"/>
               </svg>
-              社群行銷素材設計
+              <span data-i18n="task6-title">社群行銷素材設計</span>
             </div>
-            <div class="tl-task-body">負責 LINE 圖文選單、社群推播圖、動態 GIF 等素材設計與 Resize，入職後首兩期達成率分別為 149% 與 146%。合作品牌橫跨教育、美容保養、流行時尚、保健食品等多元產業。</div>
+            <div class="tl-task-body" data-i18n="task6-body">負責 LINE 圖文選單、社群推播圖、動態 GIF 等素材設計與 Resize，入職後首兩期達成率分別為 149% 與 146%。合作品牌橫跨教育、美容保養、流行時尚、保健食品等多元產業。</div>
           </div>
           </div>
         </div>
@@ -2109,37 +2159,37 @@ body {
   <div class="two-col reveal" style="transition-delay:0.15s;">
     <div>
       <div class="sec-head">
-        <div class="sec-title-wrap"><span class="sec-n">02</span><span class="sec-slash">/</span><h2 class="sec-title">Education</h2></div>
+        <div class="sec-title-wrap"><span class="sec-n">02</span><span class="sec-slash">/</span><h2 class="sec-title" data-i18n="sec-edu">Education</h2></div>
         <div class="sec-rule"></div>
       </div>
 
       <div class="edu-block">
         <div class="edu-card">
-          <div class="edu-uni">中國文化大學</div>
-          <div class="edu-dept">廣告學系</div>
+          <div class="edu-uni" data-i18n="edu-uni">中國文化大學</div>
+          <div class="edu-dept" data-i18n="edu-dept">廣告學系</div>
           <div class="edu-yr">2018 — 2022</div>
-          <p class="edu-note">當屆畢業展「解迷因」主視覺設計負責人，負責視覺系統、標準字、動畫延伸與印刷執行。</p>
+          <p class="edu-note" data-i18n="edu-note">當屆畢業展「解迷因」主視覺設計負責人，負責視覺系統、標準字、動畫延伸與印刷執行。</p>
         </div>
 
         <div class="lang-card lang-section">
-          <div class="skill-g-lbl" style="margin-bottom:14px;">語言能力</div>
+          <div class="skill-g-lbl" style="margin-bottom:14px;" data-i18n="lang-lbl">語言能力</div>
 
           <div class="lang-list">
             <div class="lang-item">
-              <span class="lang-name">中文</span>
-              <span class="lang-level">母語</span>
+              <span class="lang-name" data-i18n="lang-zh">中文</span>
+              <span class="lang-level" data-i18n="lang-zh-lv">母語</span>
             </div>
 
             <div class="lang-item">
               <span class="lang-name">English</span>
               <div style="display:flex;align-items:center;gap:8px;">
-                <span class="lang-level">日常溝通・書面文件</span>
+                <span class="lang-level" data-i18n="lang-en-lv">日常溝通・書面文件</span>
                 <span class="lang-badge">TOEIC 730</span>
               </div>
             </div>
 
             <div class="lang-item">
-              <span class="lang-name">日本語</span>
+              <span class="lang-name" data-i18n="lang-ja">日本語</span>
               <span class="lang-badge">JLPT N3</span>
             </div>
           </div>
@@ -2149,22 +2199,22 @@ body {
 
     <div>
       <div class="sec-head">
-        <div class="sec-title-wrap"><span class="sec-n">03</span><span class="sec-slash">/</span><h2 class="sec-title">Skills</h2></div>
+        <div class="sec-title-wrap"><span class="sec-n">03</span><span class="sec-slash">/</span><h2 class="sec-title" data-i18n="sec-skills">Skills</h2></div>
         <div class="sec-rule"></div>
       </div>
 
       <div>
         <div class="skill-group">
-          <div class="skill-g-lbl">企劃 &amp; 溝通</div>
+          <div class="skill-g-lbl" data-i18n="skill-g1">企劃 &amp; 溝通</div>
           <div class="skill-tags">
-            <span class="skill-tag">數位專案企劃</span>
-            <span class="skill-tag">跨部門溝通</span>
-            <span class="skill-tag">創意提案</span>
-            <span class="skill-tag">視覺品質控管</span>
-            <span class="skill-tag">AI 流程優化</span>
-            <span class="skill-tag">專案管理</span>
-            <span class="skill-tag">時程控管</span>
-            <span class="skill-tag">文案撰寫</span>
+            <span class="skill-tag" data-i18n="skill-digital">數位專案企劃</span>
+            <span class="skill-tag" data-i18n="skill-cross">跨部門溝通</span>
+            <span class="skill-tag" data-i18n="skill-creative">創意提案</span>
+            <span class="skill-tag" data-i18n="skill-qa">視覺品質控管</span>
+            <span class="skill-tag" data-i18n="skill-ai">AI 流程優化</span>
+            <span class="skill-tag" data-i18n="skill-pm">專案管理</span>
+            <span class="skill-tag" data-i18n="skill-sched">時程控管</span>
+            <span class="skill-tag" data-i18n="skill-copy">文案撰寫</span>
           </div>
         </div>
 
@@ -2184,8 +2234,8 @@ body {
 
   <section class="section reveal" style="transition-delay:0.2s;">
     <div class="sec-head">
-      <div class="sec-title-wrap"><span class="sec-n">04</span><span class="sec-slash">/</span><h2 class="sec-title">Key Projects</h2></div>
-      <span class="proj-mobile-hint">※ 點擊圖片進入網頁</span>
+      <div class="sec-title-wrap"><span class="sec-n">04</span><span class="sec-slash">/</span><h2 class="sec-title" data-i18n="sec-proj">Key Projects</h2></div>
+      <span class="proj-mobile-hint" data-i18n="proj-hint">※ 點擊圖片進入網頁</span>
       <div class="sec-rule"></div>
     </div>
 
@@ -2203,11 +2253,11 @@ body {
           </div>
         </a>
         <div class="proj-body">
-          <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type">活動網頁</span></div>
+          <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type" data-i18n="proj-type-event">活動網頁</span></div>
           <div class="proj-name"><strong class="card-brand">XPARK</strong> — 365種海生之道</div>
           <div class="proj-div"></div>
-          <div class="proj-desc-lbl">專案說明</div>
-          <div class="proj-desc-text">以「海生之道」為主題介紹海洋生物趣味知識，串聯心理測驗互動網頁，打造兼具娛樂性與分享性的活動網站。負責專案時程控管、製作流程整合與跨部門溝通協調。</div>
+          <div class="proj-desc-lbl" data-i18n="proj-lbl-1">專案說明</div>
+          <div class="proj-desc-text" data-i18n="proj-desc-1">以「海生之道」為主題介紹海洋生物趣味知識，串聯心理測驗互動網頁，打造兼具娛樂性與分享性的活動網站。負責專案時程控管、製作流程整合與跨部門溝通協調。</div>
         </div>
       </div>
 
@@ -2224,11 +2274,11 @@ body {
           </div>
         </a>
         <div class="proj-body">
-          <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type">心理測驗</span></div>
+          <div class="proj-meta"><span class="proj-yr">2023</span><span class="proj-type" data-i18n="proj-type-quiz">心理測驗</span></div>
           <div class="proj-name"><strong class="card-brand">XPARK</strong> — 如果在海裡重生，你會是什麼海洋生物？</div>
           <div class="proj-div"></div>
-          <div class="proj-desc-lbl">專案說明</div>
-          <div class="proj-desc-text">以海洋生物特性結合人格特質，透過心理測驗形式設計互動體驗，提升使用者參與度與社群分享話題性。負責與設計、製作單位跨部門溝通及品質控管。</div>
+          <div class="proj-desc-lbl" data-i18n="proj-lbl-2">專案說明</div>
+          <div class="proj-desc-text" data-i18n="proj-desc-2">以海洋生物特性結合人格特質，透過心理測驗形式設計互動體驗，提升使用者參與度與社群分享話題性。負責與設計、製作單位跨部門溝通及品質控管。</div>
         </div>
       </div>
 
@@ -2245,11 +2295,11 @@ body {
           </div>
         </a>
         <div class="proj-body">
-          <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">資訊網頁</span></div>
+          <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type" data-i18n="proj-type-info">資訊網頁</span></div>
           <div class="proj-name"><strong class="card-brand">華信航空 APP</strong> — 全新啟動！</div>
           <div class="proj-div"></div>
-          <div class="proj-desc-lbl">專案說明</div>
-          <div class="proj-desc-text">規劃品牌新上架 APP 介紹與宣傳網站，負責整體視覺風格與介面架構，強化使用者操作流暢度與資訊層級清晰度，提升數位服務體驗一致性。</div>
+          <div class="proj-desc-lbl" data-i18n="proj-lbl-3">專案說明</div>
+          <div class="proj-desc-text" data-i18n="proj-desc-3">規劃品牌新上架 APP 介紹與宣傳網站，負責整體視覺風格與介面架構，強化使用者操作流暢度與資訊層級清晰度，提升數位服務體驗一致性。</div>
         </div>
       </div>
 
@@ -2266,11 +2316,11 @@ body {
           </div>
         </a>
         <div class="proj-body">
-          <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">網頁互動</span></div>
+          <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type" data-i18n="proj-type-web">網頁互動</span></div>
           <div class="proj-name"><strong class="card-brand">好來牙膏</strong> — 角落菌糾察隊</div>
           <div class="proj-div"></div>
-          <div class="proj-desc-lbl">專案說明</div>
-          <div class="proj-desc-text">以口腔困擾「角落菌」為發想核心，透過遊戲挑戰與抽獎機制，打造兼具娛樂性與互動性的品牌活動網站，提升使用者參與度與話題擴散。</div>
+          <div class="proj-desc-lbl" data-i18n="proj-lbl-4">專案說明</div>
+          <div class="proj-desc-text" data-i18n="proj-desc-4">以口腔困擾「角落菌」為發想核心，透過遊戲挑戰與抽獎機制，打造兼具娛樂性與互動性的品牌活動網站，提升使用者參與度與話題擴散。</div>
         </div>
       </div>
 
@@ -2287,11 +2337,11 @@ body {
           </div>
         </a>
         <div class="proj-body">
-          <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type">活動 / 互動</span></div>
+          <div class="proj-meta"><span class="proj-yr">2025</span><span class="proj-type" data-i18n="proj-type-event2">活動 / 互動</span></div>
           <div class="proj-name"><strong class="card-brand">吃下 meiji 祝福連連</strong> — 迎向100週年 99甜蜜心意再+1</div>
           <div class="proj-div"></div>
-          <div class="proj-desc-lbl">專案說明</div>
-          <div class="proj-desc-text">以 meiji 巧克力上市 100 週年為主題，結合品牌元素與互動遊戲體驗，透過限時挑戰、社群分享與抽獎機制，提升使用者參與度與活動話題擴散。負責整體創意發想、UI 規劃與跨部門整合。</div>
+          <div class="proj-desc-lbl" data-i18n="proj-lbl-5">專案說明</div>
+          <div class="proj-desc-text" data-i18n="proj-desc-5">以 meiji 巧克力上市 100 週年為主題，結合品牌元素與互動遊戲體驗，透過限時挑戰、社群分享與抽獎機制，提升使用者參與度與活動話題擴散。負責整體創意發想、UI 規劃與跨部門整合。</div>
         </div>
       </div>
     </div>
@@ -2299,12 +2349,12 @@ body {
 
   <section class="section reveal" style="transition-delay:0.25s;" id="featured-proposals">
     <div class="sec-head">
-      <div class="sec-title-wrap"><span class="sec-n">05</span><span class="sec-slash">/</span><h2 class="sec-title">Featured Proposals</h2></div>
+      <div class="sec-title-wrap"><span class="sec-n">05</span><span class="sec-slash">/</span><h2 class="sec-title" data-i18n="sec-proposal">Featured Proposals</h2></div>
       <div class="sec-rule"></div>
     </div>
 
     <div class="carousel-intro">
-      <p class="carousel-intro-text">以下為部分互動廣告素材精選企劃，涵蓋品牌活動、電影宣傳、運動賽事等多元類型。以創意包裝強化廣告說服力，結合社群熱議、互動機制與沉浸式場景，拉近品牌與使用者距離。掃描 QR Code 或點擊連結即可預覽實際效果。</p>
+      <p class="carousel-intro-text" data-i18n="carousel-intro">以下為部分互動廣告素材精選企劃，涵蓋品牌活動、電影宣傳、運動賽事等多元類型。以創意包裝強化廣告說服力，結合社群熱議、互動機制與沉浸式場景，拉近品牌與使用者距離。掃描 QR Code 或點擊連結即可預覽實際效果。</p>
     </div>
 
     <div class="carousel-outer">
@@ -2329,16 +2379,16 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta">
               <span class="carousel-card-yr">2025</span>
-              <span class="carousel-card-tag">品牌廣告</span>
+              <span class="carousel-card-tag" data-i18n="card-tag-brand">品牌廣告</span>
             </div>
             <div class="carousel-card-title"><strong class="card-brand">專科</strong> —<br>大耳狗限量版潔顏乳宣傳</div>
             <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">結合 IP Cinnamoroll 大耳狗的療癒萌感，利用動畫呈現泡泡的綿密與柔軟，使產品特點以具象化呈現，加深使用者對產品優勢的理解與印象。</div>
+            <div class="carousel-card-desc" data-i18n="desc-senka">結合 IP Cinnamoroll 大耳狗的療癒萌感，利用動畫呈現泡泡的綿密與柔軟，使產品特點以具象化呈現，加深使用者對產品優勢的理解與印象。</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dCi" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dCi" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/dCi"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2354,16 +2404,16 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta">
               <span class="carousel-card-yr">2026</span>
-              <span class="carousel-card-tag">品牌廣告</span>
+              <span class="carousel-card-tag" data-i18n="card-tag-brand">品牌廣告</span>
             </div>
             <div class="carousel-card-title"><strong class="card-brand">Dyson</strong> —<br>Spot+Scrub AI 洗地吸塵機器人</div>
             <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">以「社群爆料式開箱」手法呈現：結合社群熱議、防劇透揭曉與科技感偵測視覺，把產品賣點包裝成一場被大家發現的清潔神器討論，降低廣告感、拉近與使用者距離並提高點擊意願。</div>
+            <div class="carousel-card-desc" data-i18n="desc-dyson">以「社群爆料式開箱」手法呈現：結合社群熱議、防劇透揭曉與科技感偵測視覺，把產品賣點包裝成一場被大家發現的清潔神器討論，降低廣告感、拉近與使用者距離並提高點擊意願。</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/eCW" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/eCW" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/eCW"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2379,16 +2429,16 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta">
               <span class="carousel-card-yr">2026</span>
-              <span class="carousel-card-tag">賽事活動</span>
+              <span class="carousel-card-tag" data-i18n="card-tag-event">賽事活動</span>
             </div>
             <div class="carousel-card-title"><strong class="card-brand">家樂福</strong> —<br>2026 世足檔期宣傳</div>
             <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">透過足球賽事情境與動態演繹，強化啤酒與賽事歡聚氛圍的連結，並帶出夏日國際啤酒節的活動亮點，加深消費者對活動的感受與印象。</div>
+            <div class="carousel-card-desc" data-i18n="desc-carrefour">透過足球賽事情境與動態演繹，強化啤酒與賽事歡聚氛圍的連結，並帶出夏日國際啤酒節的活動亮點，加深消費者對活動的感受與印象。</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/eec" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/eec" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/eec"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2404,16 +2454,16 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta">
               <span class="carousel-card-yr">2026</span>
-              <span class="carousel-card-tag">電影宣傳</span>
+              <span class="carousel-card-tag" data-i18n="card-tag-movie">電影宣傳</span>
             </div>
             <div class="carousel-card-title"><strong class="card-brand">索尼影業</strong> —<br>蜘蛛人：重生日</div>
             <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">與產品部合作生成 AI 影片素材，以第一人稱動態場景，將蜘蛛人穿梭城市的速度感與臨場感具象化，強化廣告的臨場感與吸睛度。</div>
+            <div class="carousel-card-desc" data-i18n="desc-sony">與產品部合作生成 AI 影片素材，以第一人稱動態場景，將蜘蛛人穿梭城市的速度感與臨場感具象化，強化廣告的臨場感與吸睛度。</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/bWP" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/bWP" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/bWP"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2429,16 +2479,16 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta">
               <span class="carousel-card-yr">2025</span>
-              <span class="carousel-card-tag">品牌廣告</span>
+              <span class="carousel-card-tag" data-i18n="card-tag-brand">品牌廣告</span>
             </div>
             <div class="carousel-card-title"><strong class="card-brand">TSUBAKI 思波綺</strong> —<br>2026 瞬亮系列洗護髮宣傳</div>
             <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">以具象化修護成分導入為創意主軸，利用科研感示意圖，更清楚區分 TSUBAKI 與競品的差異，進而提升對產品的辨識度與選購意願。</div>
+            <div class="carousel-card-desc" data-i18n="desc-tsubaki">以具象化修護成分導入為創意主軸，利用科研感示意圖，更清楚區分 TSUBAKI 與競品的差異，進而提升對產品的辨識度與選購意願。</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dvh" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dvh" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/dvh"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2454,16 +2504,16 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta">
               <span class="carousel-card-yr">2025</span>
-              <span class="carousel-card-tag">電影互動</span>
+              <span class="carousel-card-tag" data-i18n="card-tag-movie2">電影互動</span>
             </div>
             <div class="carousel-card-title"><strong class="card-brand">華納兄弟</strong> —<br>絕命終結站 血脈</div>
             <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">延續預告片背景，使用者扮演接手穿環店的新店主，體驗電影中死神逼近的宿命氛圍，透過滑動互動強化電影印象並宣傳上映資訊，提升使用者參與感與討論熱度。</div>
+            <div class="carousel-card-desc" data-i18n="desc-warner">延續預告片背景，使用者扮演接手穿環店的新店主，體驗電影中死神逼近的宿命氛圍，透過滑動互動強化電影印象並宣傳上映資訊，提升使用者參與感與討論熱度。</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/bAw" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/bAw" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/bAw"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2531,11 +2581,11 @@ body {
           <div class="carousel-card-body">
             <div class="carousel-card-meta">
               <span class="carousel-card-yr">2024</span>
-              <span class="carousel-card-tag">互動提案</span>
+              <span class="carousel-card-tag" data-i18n="card-tag-interact">互動提案</span>
             </div>
             <div class="carousel-card-title"><strong class="card-brand">教育部體育署</strong> —<br>巴黎奧運互動線上網頁提案</div>
             <div class="carousel-card-div"></div>
-            <div class="carousel-card-desc">「奮鬥吧！找出自己的金牌之路」以可愛的 UGC 互動打造個人小人物以及潛能測驗作為包裝，將測驗結果頁帶入運動選手特質，促使使用者更關注運動賽事，進而一同為中華隊加油！</div>
+            <div class="carousel-card-desc" data-i18n="desc-paris">「奮鬥吧！找出自己的金牌之路」以可愛的 UGC 互動打造個人小人物以及潛能測驗作為包裝，將測驗結果頁帶入運動選手特質，促使使用者更關注運動賽事，進而一同為中華隊加油！</div>
           </div>
         </div>
 
@@ -2555,12 +2605,12 @@ body {
 
   <section class="section reveal" style="transition-delay:0.28s;" id="collab-projects">
     <div class="sec-head">
-      <div class="sec-title-wrap"><span class="sec-n">06</span><span class="sec-slash">/</span><h2 class="sec-title">Design Collaboration</h2></div>
+      <div class="sec-title-wrap"><span class="sec-n">06</span><span class="sec-slash">/</span><h2 class="sec-title" data-i18n="sec-collab">Design Collaboration</h2></div>
       <div class="sec-rule"></div>
     </div>
 
     <div class="carousel-intro">
-      <p class="carousel-intro-text">與設計師合作上線案件，負責前期腳本規劃、內外部門溝通協調，以及上線前視覺風格審核，確保素材品質符合品牌期待與執行標準。</p>
+      <p class="carousel-intro-text" data-i18n="collab-intro">與設計師合作上線案件，負責前期腳本規劃、內外部門溝通協調，以及上線前視覺風格審核，確保素材品質符合品牌期待與執行標準。</p>
     </div>
 
     <div class="carousel-outer">
@@ -2583,13 +2633,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag" data-i18n="card-tag-collab">品牌合作</span></div>
             <div class="carousel-card-title"><strong class="card-brand">PUMA</strong> —<br>2024 EASY RIDER × 王淨</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b0f" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b0f" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/b0f"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2603,13 +2653,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag" data-i18n="card-tag-collab">品牌合作</span></div>
             <div class="carousel-card-title"><strong class="card-brand">PUMA</strong> —<br>2024 EASY RIDER × 黃宣</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dNt" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/dNt" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/dNt"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2623,13 +2673,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">品牌合作</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag" data-i18n="card-tag-collab">品牌合作</span></div>
             <div class="carousel-card-title"><strong class="card-brand">PUMA</strong> —<br>2024 EASY RIDER × E.SO 瘦子</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cg4" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cg4" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cg4"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2643,13 +2693,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">IP 聯名</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag" data-i18n="card-tag-ip">IP 聯名</span></div>
             <div class="carousel-card-title"><strong class="card-brand">台灣瑪氏</strong> —<br>M&amp;M's Q2 宣傳 × Marvel 聯名</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/btH" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/btH" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/btH"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2663,13 +2713,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2026</span><span class="carousel-card-tag">電影宣傳</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2026</span><span class="carousel-card-tag" data-i18n="card-tag-movie">電影宣傳</span></div>
             <div class="carousel-card-title"><strong class="card-brand">采昌</strong> —<br>抓馬戀人宣傳</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cqv" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cqv" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cqv"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2683,13 +2733,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2026</span><span class="carousel-card-tag">節慶活動</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2026</span><span class="carousel-card-tag" data-i18n="card-tag-festival">節慶活動</span></div>
             <div class="carousel-card-title"><strong class="card-brand">Pocky</strong> —<br>2026 CNY 活動</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/c5E" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/c5E" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/c5E"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2703,13 +2753,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag">IP 活動</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag" data-i18n="card-tag-ip2">IP 活動</span></div>
             <div class="carousel-card-title"><strong class="card-brand">寶可夢</strong> —<br>Y25 年終社群日</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cNj" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cNj" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cNj"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2723,13 +2773,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag">通路活動</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2024</span><span class="carousel-card-tag" data-i18n="card-tag-channel">通路活動</span></div>
             <div class="carousel-card-title"><strong class="card-brand">太古</strong> —<br>復古相機活動（7-11 通路）</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cnE" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cnE" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cnE"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2743,13 +2793,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag">IP 聯名</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag" data-i18n="card-tag-ip">IP 聯名</span></div>
             <div class="carousel-card-title"><strong class="card-brand">桂冠</strong> —<br>湯圓聯名 IP 宣傳</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cm4" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cm4" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cm4"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2763,13 +2813,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag">品牌廣告</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag" data-i18n="card-tag-brand">品牌廣告</span></div>
             <div class="carousel-card-title"><strong class="card-brand">Biore</strong> —<br>卸粧系列年末宣傳</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cPv" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cPv" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cPv"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2783,13 +2833,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag">品牌廣告</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag" data-i18n="card-tag-brand">品牌廣告</span></div>
             <div class="carousel-card-title"><strong class="card-brand">Nivea 極潤</strong> —<br>無香系列 10 月宣傳</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cJU" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/cJU" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/cJU"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -2803,13 +2853,13 @@ body {
             </div>
           </div>
           <div class="carousel-card-body">
-            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag">節慶活動</span></div>
+            <div class="carousel-card-meta"><span class="carousel-card-yr">2025</span><span class="carousel-card-tag" data-i18n="card-tag-festival">節慶活動</span></div>
             <div class="carousel-card-title"><strong class="card-brand">卡迪那</strong> —<br>波浪薯條中元節宣傳</div>
             <div class="carousel-link-qr">
-              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b8J" target="_blank" rel="noopener">點擊查看 ▸</a>
+              <a class="carousel-link-btn" href="https://demo2.now-tracking.com/b8J" target="_blank" rel="noopener" data-i18n="click-view">點擊查看 ▸</a>
               <div class="carousel-qr-box" data-qr-url="https://demo2.now-tracking.com/b8J"></div>
             </div>
-            <p class="carousel-demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
+            <p class="carousel-demo-note" data-i18n="demo-note">進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。</p>
           </div>
         </div>
 
@@ -3107,6 +3157,160 @@ document.addEventListener('visibilitychange', function() {
 
 initCarousel('carouselTrack',  'carouselPrev',  'carouselNext',  'carouselDots');
 initCarousel('carousel2Track', 'carousel2Prev', 'carousel2Next', 'carousel2Dots');
+
+/* ── Language Switch ── */
+const translations = {
+  // hero
+  'hero-over':            { zh: 'Information -', ja: 'プロフィール -' },
+  'hero-role':            { zh: 'Project Planner\u00a0·\u00a0Digital Creative', ja: 'プロジェクトプランナー\u00a0·\u00a0デジタルクリエイティブ' },
+  'hero-bio-p1':          { zh: 'Hi，我是 Eri，現職為<span class="bio-hl">數位廣告專案企劃</span>。',
+                            ja: 'こんにちは、Eri です。現在は<span class="bio-hl">デジタル広告プロジェクトプランナー</span>として活動しています。' },
+  'hero-bio-p2':          { zh: '累積 <span class="bio-hl">350+ 專案執行</span>與 <span class="bio-hl">200+ 品牌合作</span>，擁有數位行銷、品牌企劃與視覺整合經驗，曾參與美妝、食品、快消、3C、娛樂等多類品牌專案，包含 <span class="bio-hl">Meiji、ASUS、Dyson、寶可夢、麥當勞</span>等品牌合作案件。',
+                            ja: '<span class="bio-hl">350件以上のプロジェクト実績</span>と<span class="bio-hl">200以上のブランドとの協業</span>を積み上げ、デジタルマーケティング・ブランド企画・ビジュアル統合の経験を持つ。美容、食品、日用品、3C、エンターテインメントなど多様な分野の案件に携わり、<span class="bio-hl">Meiji・ASUS・Dyson・ポケモン・マクドナルド</span>などとのコラボ実績あり。' },
+  'hero-bio-p3':          { zh: '目前工作內容涵蓋<span class="bio-hl">數位廣告企劃、提案發想、網站 UI 規劃、專案時程控管</span>，以及設計與工程間的跨部門溝通協作。除了企劃能力外，也具備 <span class="bio-hl">Photoshop、After Effects</span> 等視覺製作能力，能透過動態 Demo 與視覺化提案提升專案溝通效率。',
+                            ja: '現在の業務は<span class="bio-hl">デジタル広告企画・提案立案・WebサイトUI設計・スケジュール管理</span>と、デザインとエンジニアリング部門間のクロスファンクショナルなコミュニケーションを担当。企画力に加え、<span class="bio-hl">Photoshop・After Effects</span>などを用いたビジュアル制作スキルも保有し、モーションデモにより提案の説得力を高める。' },
+  'hero-bio-p4':          { zh: '喜歡從創意發想到實際落地的過程，也樂於持續學習新工具與新技術，包含將 <span class="bio-hl">AI 應用於流程優化</span>與日常工作協作。期待未來能在品牌與數位內容領域中，持續累積兼具創意與執行力的作品。',
+                            ja: 'アイデアの発想から実際の制作・納品まで一貫して関わることが好きで、新しいツールや技術の習得にも積極的。特に<span class="bio-hl">AIを活用したワークフロー最適化</span>に力を入れている。今後もブランドやデジタルコンテンツ分野で、創造性と実行力を兼ね備えた作品を積み重ねていきたい。' },
+  'stat-yr':              { zh: '年經驗', ja: '年の経験' },
+  'stat-proj':            { zh: '專案執行', ja: 'プロジェクト実績' },
+  'stat-brand':           { zh: '品牌合作', ja: 'ブランド協業' },
+  'str-efficiency':       { zh: '效率', ja: '効率' },
+  'str-comm':             { zh: '溝通', ja: 'コミュニケーション' },
+  'str-team':             { zh: '團隊合作', ja: 'チームワーク' },
+  'str-plan':             { zh: '專案企劃', ja: 'プロジェクト企画' },
+  'str-sched':            { zh: '時程控管', ja: 'スケジュール管理' },
+  'str-design':           { zh: '美感設計', ja: 'ビジュアルデザイン' },
+  'marquee-label':        { zh: '精選合作品牌', ja: '主要取引ブランド' },
+  // work exp
+  'sec-work':             { zh: 'Work Experience', ja: '職務経歴' },
+  'tl-date-1':            { zh: '2023.06<br>— Now', ja: '2023.06<br>— 現在' },
+  'tl-role-1':            { zh: '專案企劃', ja: 'プロジェクトプランナー' },
+  'task1-title':          { zh: '數位廣告提案與執行', ja: 'デジタル広告の企画・実行' },
+  'task1-body':           { zh: '負責數位廣告提案創意發想與文案撰寫，整合客戶需求、設計產出與內部時程，確保素材如期上線並符合品牌調性。',
+                            ja: 'デジタル広告の企画立案とコピーライティングを担当。クライアントニーズ・デザイン成果物・社内スケジュールを統合し、素材のブランドトーン準拠と期日通りの納品を実現。' },
+  'task2-title':          { zh: '視覺品質控管（Aesthetic Review）', ja: 'ビジュアル品質管理（Aesthetic Review）' },
+  'task2-body':           { zh: '擔任設計師與客戶間的橋樑，審核專案動畫、設計產出，提供具體視覺修改意見，確保素材符合品牌調性。',
+                            ja: 'デザイナーとクライアントの橋渡しとして、アニメーションや各種デザイン成果物のレビューを実施。具体的な修正フィードバックを提供し、ブランドトーンへの適合を担保。' },
+  'task3-title':          { zh: '靜態 / 動畫 Demo 製作', ja: '静止画 / アニメーション Demo 制作' },
+  'task3-body':           { zh: '使用 PS、AE 等軟體於提案階段，透過動態 Demo 提升提案過案率。',
+                            ja: 'PS・AEなどを活用し、提案段階でのモーションデモ制作によりクライアント承認率を向上。' },
+  'task4-title':          { zh: '流程自動化優化', ja: 'プロセス自動化・効率化' },
+  'task4-body':           { zh: '自主運用 AI 平台開發工作小工具，減少手動作業時間，提升團隊協作效率。',
+                            ja: 'AIプラットフォームを活用して業務ツールを自主開発し、手作業を削減・チームの協働効率を向上。' },
+  'task5-title':          { zh: '活動網頁規劃', ja: 'イベントLPの企画' },
+  'task5-body':           { zh: '策劃並執行活動 Landing Page規劃，負責 UI 佈局規劃與跨部門溝通協調。',
+                            ja: 'イベント用ランディングページの企画・実行を担当。UIレイアウト設計と部門横断のコミュニケーション調整を主導。' },
+  'tl-date-2':            { zh: '2022.11<br>— 2023.04', ja: '2022.11<br>— 2023.04' },
+  'tl-co-2':              { zh: '日商卓一智能科技股份有限公司', ja: '株式会社OneAI' },
+  'tl-role-2':            { zh: '平面設計', ja: 'グラフィックデザイナー（アルバイト）' },
+  'task6-title':          { zh: '社群行銷素材設計', ja: 'SNSマーケティング素材デザイン' },
+  'task6-body':           { zh: '負責 LINE 圖文選單、社群推播圖、動態 GIF 等素材設計與 Resize，入職後首兩期達成率分別為 149% 與 146%。合作品牌橫跨教育、美容保養、流行時尚、保健食品等多元產業。',
+                            ja: 'LINEリッチメニュー・SNS投稿画像・アニメーションGIFなどの素材デザインとリサイズを担当。入社後最初の2期における達成率はそれぞれ149%・146%。教育・美容・ファッション・健康食品など多様な業界のブランドに対応。' },
+  // education
+  'sec-edu':              { zh: 'Education', ja: '学歴' },
+  'edu-uni':              { zh: '中國文化大學', ja: '中国文化大学' },
+  'edu-dept':             { zh: '廣告學系', ja: '広告学科' },
+  'edu-note':             { zh: '當屆畢業展「解迷因」主視覺設計負責人，負責視覺系統、標準字、動畫延伸與印刷執行。',
+                            ja: '卒業展示「解迷因」のメインビジュアルを担当。ビジュアルシステム・ロゴタイプ・アニメーション展開・印刷物の実施まで一手に手がけた。' },
+  'lang-lbl':             { zh: '語言能力', ja: '言語能力' },
+  'lang-zh':              { zh: '中文', ja: '中国語' },
+  'lang-zh-lv':           { zh: '母語', ja: 'ネイティブ' },
+  'lang-en-lv':           { zh: '日常溝通・書面文件', ja: '日常会話・文書作成' },
+  'lang-ja':              { zh: '日本語', ja: '日本語' },
+  // skills
+  'sec-skills':           { zh: 'Skills', ja: 'スキル' },
+  'skill-g1':             { zh: '企劃 & 溝通', ja: '企画 & コミュニケーション' },
+  'skill-digital':        { zh: '數位專案企劃', ja: 'デジタルプロジェクト企画' },
+  'skill-cross':          { zh: '跨部門溝通', ja: '部門横断コミュニケーション' },
+  'skill-creative':       { zh: '創意提案', ja: 'クリエイティブ提案' },
+  'skill-qa':             { zh: '視覺品質控管', ja: 'ビジュアル品質管理' },
+  'skill-ai':             { zh: 'AI 流程優化', ja: 'AIプロセス最適化' },
+  'skill-pm':             { zh: '專案管理', ja: 'プロジェクト管理' },
+  'skill-sched':          { zh: '時程控管', ja: 'スケジュール管理' },
+  'skill-copy':           { zh: '文案撰寫', ja: 'コピーライティング' },
+  // key projects
+  'sec-proj':             { zh: 'Key Projects', ja: '主要プロジェクト' },
+  'proj-hint':            { zh: '※ 點擊圖片進入網頁', ja: '※ 画像をクリックしてサイトへ' },
+  'proj-lbl-1':           { zh: '專案說明', ja: 'プロジェクト概要' },
+  'proj-desc-1':          { zh: '以「海生之道」為主題介紹海洋生物趣味知識，串聯心理測驗互動網頁，打造兼具娛樂性與分享性的活動網站。負責專案時程控管、製作流程整合與跨部門溝通協調。',
+                            ja: '「365通りの海の生き方」をテーマに海洋生物の知識を楽しく紹介し、性格診断インタラクションを組み合わせた、エンタメ性と拡散性を兼ね備えたイベントサイトを制作。スケジュール管理・制作フロー統合・部門間調整を担当。' },
+  'proj-type-quiz':       { zh: '心理測驗', ja: '性格診断' },
+  'proj-lbl-2':           { zh: '專案說明', ja: 'プロジェクト概要' },
+  'proj-desc-2':          { zh: '以海洋生物特性結合人格特質，透過心理測驗形式設計互動體驗，提升使用者參與度與社群分享話題性。負責與設計、製作單位跨部門溝通及品質控管。',
+                            ja: '海洋生物の特性と人格特質を掛け合わせ、診断形式のインタラクティブ体験を設計。ユーザー参加率とSNS拡散力を高めた。デザイン・制作部門との連携とQCを担当。' },
+  'proj-type-info':       { zh: '資訊網頁', ja: '情報サイト' },
+  'proj-lbl-3':           { zh: '專案說明', ja: 'プロジェクト概要' },
+  'proj-desc-3':          { zh: '規劃品牌新上架 APP 介紹與宣傳網站，負責整體視覺風格與介面架構，強化使用者操作流暢度與資訊層級清晰度，提升數位服務體驗一致性。',
+                            ja: 'ブランドの新規APP紹介・プロモーションサイトを企画。全体のビジュアルトーンとUI構造を設計し、操作性の向上と情報階層の明確化、デジタルサービス体験の一貫性向上を実現。' },
+  'proj-type-web':        { zh: '網頁互動', ja: 'Webインタラクション' },
+  'proj-lbl-4':           { zh: '專案說明', ja: 'プロジェクト概要' },
+  'proj-desc-4':          { zh: '以口腔困擾「角落菌」為發想核心，透過遊戲挑戰與抽獎機制，打造兼具娛樂性與互動性的品牌活動網站，提升使用者參與度與話題擴散。',
+                            ja: '口腔トラブル「隅っこ菌」を発想の核心に、ゲームチャレンジと抽選機能を組み合わせたブランドイベントサイトを構築。ユーザー参加率と話題の拡散を促進。' },
+  'proj-type-event':      { zh: '活動網頁', ja: 'イベントサイト' },
+  'proj-type-event2':     { zh: '活動 / 互動', ja: 'イベント / インタラクション' },
+  'proj-lbl-5':           { zh: '專案說明', ja: 'プロジェクト概要' },
+  'proj-desc-5':          { zh: '以 meiji 巧克力上市 100 週年為主題，結合品牌元素與互動遊戲體驗，透過限時挑戰、社群分享與抽獎機制，提升使用者參與度與活動話題擴散。負責整體創意發想、UI 規劃與跨部門整合。',
+                            ja: 'meiji チョコレート発売100周年をテーマに、ブランド要素とインタラクティブゲーム体験を融合。時間制チャレンジ・SNS拡散・抽選機能によりユーザー参加と話題化を促進。全体のクリエイティブ立案・UI企画・部門横断統合を担当。' },
+  // featured proposals
+  'sec-proposal':         { zh: 'Featured Proposals', ja: '提案事例' },
+  'carousel-intro':       { zh: '以下為部分互動廣告素材精選企劃，涵蓋品牌活動、電影宣傳、運動賽事等多元類型。以創意包裝強化廣告說服力，結合社群熱議、互動機制與沉浸式場景，拉近品牌與使用者距離。掃描 QR Code 或點擊連結即可預覽實際效果。',
+                            ja: '以下はブランドイベント・映画プロモーション・スポーツ競技など多様なジャンルにわたるインタラクティブ広告素材の精選企画です。SNSバズ・インタラクション・没入型シナリオを組み合わせてブランドとユーザーの距離を縮めています。QRコードをスキャンするかリンクをクリックしてプレビューをご覧ください。' },
+  'card-tag-brand':       { zh: '品牌廣告', ja: 'ブランド広告' },
+  'card-tag-event':       { zh: '賽事活動', ja: 'スポーツイベント' },
+  'card-tag-movie':       { zh: '電影宣傳', ja: '映画プロモーション' },
+  'card-tag-movie2':      { zh: '電影互動', ja: '映画インタラクション' },
+  'card-tag-ip':          { zh: 'IP 聯名', ja: 'IPコラボ' },
+  'card-tag-interact':    { zh: '互動提案', ja: 'インタラクティブ企画' },
+  'card-tag-channel':     { zh: '通路活動', ja: '流通チャネルイベント' },
+  'card-tag-festival':    { zh: '節慶活動', ja: '季節イベント' },
+  'card-tag-collab':      { zh: '品牌合作', ja: 'ブランドコラボ' },
+  'card-tag-ip2':         { zh: 'IP 活動', ja: 'IPイベント' },
+  'click-view':           { zh: '點擊查看 ▸', ja: '詳細を見る ▸' },
+  'demo-note':            { zh: '進入 demo 頁後，請下滑網頁以開啟動畫<br>※ 部分動畫需要 1–3 秒載入，謝謝耐心等待。',
+                            ja: 'demoページに入ったら、下スクロールでアニメーションが始まります<br>※ 一部のアニメーションは読み込みに1〜3秒かかります。' },
+  // design collab
+  'sec-collab':           { zh: 'Design Collaboration', ja: 'デザインコラボレーション' },
+  'collab-intro':         { zh: '與設計師合作上線案件，負責前期腳本規劃、內外部門溝通協調，以及上線前視覺風格審核，確保素材品質符合品牌期待與執行標準。',
+                            ja: 'デザイナーと協力して本番公開した案件です。事前スクリプト企画・社内外部門調整、および公開前のビジュアルスタイル審査を担当し、素材品質がブランド基準を満たすことを確保しました。' },
+  // card descriptions (sec 05)
+  'desc-senka':           { zh: '結合 IP Cinnamoroll 大耳狗的療癒萌感，利用動畫呈現泡泡的綿密與柔軟，使產品特點以具象化呈現，加深使用者對產品優勢的理解與印象。',
+                            ja: 'シナモロールのIPが持つ癒し感と組み合わせ、アニメーションで泡のきめ細やかさを具象化。製品の特長を視覚的に伝え、ユーザーの印象に残るクリエイティブを実現。' },
+  'desc-dyson':           { zh: '以「社群爆料式開箱」手法呈現：結合社群熱議、防劇透揭曉與科技感偵測視覺，把產品賣點包裝成一場被大家發現的清潔神器討論，降低廣告感、拉近與使用者距離並提高點擊意願。',
+                            ja: '「SNSリーク式アンボクシング」の手法で、話題の盛り上がり・スポイラー解禁・ハイテクな検知ビジュアルを組み合わせ、製品のセールスポイントを自然発生的な議論として演出。広告感を抑えつつユーザーとの距離を縮め、クリック率を向上。' },
+  'desc-carrefour':       { zh: '透過足球賽事情境與動態演繹，強化啤酒與賽事歡聚氛圍的連結，並帶出夏日國際啤酒節的活動亮點，加深消費者對活動的感受與印象。',
+                            ja: 'サッカー観戦の臨場感あふれるシナリオとモーション表現で、ビールと試合の高揚感を結びつけ、夏の国際ビールフェスのハイライトを印象的に伝える。' },
+  'desc-sony':            { zh: '與產品部合作生成 AI 影片素材，以第一人稱動態場景，將蜘蛛人穿梭城市的速度感與臨場感具象化，強化廣告的臨場感與吸睛度。',
+                            ja: '製品チームと連携してAI映像素材を生成。一人称視点のモーションシーンでスパイダーマンが都市を駆け抜ける疾走感と臨場感を具象化し、広告のインパクトを高めた。' },
+  'desc-tsubaki':         { zh: '以具象化修護成分導入為創意主軸，利用科研感示意圖，更清楚區分 TSUBAKI 與競品的差異，進而提升對產品的辨識度與選購意願。',
+                            ja: '補修成分の浸透プロセスを視覚化することをクリエイティブの軸に、サイエンス感あふれる図解でTSUBAKIと競合品の違いを明確化。製品認知と購入意向を向上。' },
+  'desc-warner':          { zh: '延續預告片背景，使用者扮演接手穿環店的新店主，體驗電影中死神逼近的宿命氛圍，透過滑動互動強化電影印象並宣傳上映資訊，提升使用者參與感與討論熱度。',
+                            ja: '予告編の世界観を踏襲し、ユーザーがピアススタジオの新オーナーとして死神の脅威を体験。スワイプインタラクションで映画の印象を強化し公開情報を訴求、参加感と話題性を生み出した。' },
+  'desc-paris':           { zh: '「奮鬥吧！找出自己的金牌之路」以可愛的 UGC 互動打造個人小人物以及潛能測驗作為包裝，將測驗結果頁帶入運動選手特質，促使使用者更關注運動賽事，進而一同為中華隊加油！',
+                            ja: '「頑張れ！自分の金メダルへの道を見つけよう」をテーマに、UGCインタラクションで個性豊かなキャラクターを作成し、ポテンシャル診断で選手の資質と結びつけ。ユーザーがスポーツ競技に関心を持ち、チャイナチームを応援するきっかけを提供。' },
+  // footer
+  'back-top-label':       { zh: '回到最上方', ja: 'トップへ戻る' },
+};
+
+let currentLang = 'zh';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btnZH').classList.toggle('active', lang === 'zh');
+  document.getElementById('btnJA').classList.toggle('active', lang === 'ja');
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'ja';
+
+  // apply all translations via data-i18n keys
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (translations[key] && translations[key][lang] !== undefined) {
+      el.innerHTML = translations[key][lang];
+    }
+  });
+
+  // aria labels
+  var backTopBtn = document.querySelector('.back-to-top');
+  if (backTopBtn) backTopBtn.setAttribute('aria-label', translations['back-top-label'][lang]);
+}
 </script>
 </body>
 </html>
